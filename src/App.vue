@@ -28,7 +28,7 @@
               <router-link class="nav-link ps-4 py-2" to="/users"
                 >👥 Usuarios</router-link
               >
-              <router-link class="nav-link ps-4 py-2" to="/customers"
+              <router-link class="nav-link ps-4 py-2" to="/clients"
                 >👤 Clientes</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/employees"
