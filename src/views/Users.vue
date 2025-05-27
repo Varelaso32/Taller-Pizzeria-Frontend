@@ -2,11 +2,12 @@
   <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="h3 text-danger">
-        <font-awesome-icon icon="users" class="me-2" /> Listado de Usuarios
+        <font-awesome-icon icon="users" class="me-2" />
+        {{ $t("users.title") }}
       </h1>
       <button @click="newUser" class="btn btn-danger d-flex align-items-center">
         <font-awesome-icon icon="plus" class="me-2" />
-        Nuevo Usuario
+        {{ $t("users.new") }}
       </button>
     </div>
 
@@ -15,10 +16,10 @@
         <thead class="table-dark text-white">
           <tr>
             <th>#</th>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Rol</th>
-            <th class="text-center">Acciones</th>
+            <th>{{ $t("users.name") }}</th>
+            <th>{{ $t("users.email") }}</th>
+            <th>{{ $t("users.role") }}</th>
+            <th class="text-center">{{ $t("users.actions") }}</th>
           </tr>
         </thead>
         <tbody>
@@ -44,7 +45,7 @@
           </tr>
           <tr v-if="users.length === 0">
             <td colspan="5" class="text-center py-4 text-muted">
-              No hay usuarios registrados.
+              {{ $t("users.noUsers") }}
             </td>
           </tr>
         </tbody>

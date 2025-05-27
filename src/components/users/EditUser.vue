@@ -1,63 +1,97 @@
 <template>
   <div class="container text-start">
-    <h1 class="text-danger fw-bold">Editar Usuario</h1>
+    <h1 class="text-danger fw-bold">{{ $t("editUser.title") }}</h1>
     <div class="card">
-      <div class="card-header fw-bold">Datos del Usuario</div>
+      <div class="card-header fw-bold">{{ $t("editUser.header") }}</div>
       <div class="card-body">
         <form @submit.prevent="updateUser">
           <!-- Nombre -->
           <div class="mb-3">
-            <label for="name" class="form-label">Nombre:</label>
+            <label for="name" class="form-label">{{
+              $t("editUser.name")
+            }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="user" />
               </span>
-              <input type="text" id="name" v-model="user.name" class="form-control" required />
+              <input
+                type="text"
+                id="name"
+                v-model="user.name"
+                class="form-control"
+                required
+              />
             </div>
           </div>
 
           <!-- Correo -->
           <div class="mb-3">
-            <label for="email" class="form-label">Correo Electrónico:</label>
+            <label for="email" class="form-label">{{
+              $t("editUser.email")
+            }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="envelope" />
               </span>
-              <input type="email" id="email" v-model="user.email" class="form-control" required />
+              <input
+                type="email"
+                id="email"
+                v-model="user.email"
+                class="form-control"
+                required
+              />
             </div>
           </div>
 
           <!-- Contraseña -->
           <div class="mb-3">
-            <label for="password" class="form-label">Nueva Contraseña (opcional):</label>
+            <label for="password" class="form-label">{{
+              $t("editUser.password")
+            }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="lock" />
               </span>
-              <input type="password" id="password" v-model="user.password" class="form-control" />
+              <input
+                type="password"
+                id="password"
+                v-model="user.password"
+                class="form-control"
+              />
             </div>
           </div>
 
           <!-- Rol -->
           <div class="mb-3">
-            <label for="role" class="form-label">Rol:</label>
+            <label for="role" class="form-label">{{
+              $t("editUser.role")
+            }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="user-tag" />
               </span>
-              <select id="role" v-model="user.role" class="form-select" required>
-                <option value="cliente">Cliente</option>
-                <option value="empleado">Empleado</option>
+              <select
+                id="role"
+                v-model="user.role"
+                class="form-select"
+                required
+              >
+                <option value="cliente">{{ $t("editUser.cliente") }}</option>
+                <option value="empleado">{{ $t("editUser.empleado") }}</option>
               </select>
             </div>
           </div>
 
           <!-- Botones -->
-          <button type="submit" class="btn text-white" style="background-color: #c1121f">
-            Guardar
+          <button
+            type="submit"
+            class="btn text-white"
+            style="background-color: #c1121f"
+          >
+            {{ $t("editUser.save") }}
           </button>
           <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            Cancelar
+            {{ $t("editUser.cancel") }}
           </button>
         </form>
       </div>
@@ -95,7 +129,10 @@ export default {
       if (!payload.password) delete payload.password;
 
       try {
-        const res = await axios.put(`http://127.0.0.1:8000/api/users/${this.user.id}`, payload);
+        const res = await axios.put(
+          `http://127.0.0.1:8000/api/users/${this.user.id}`,
+          payload
+        );
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -109,7 +146,8 @@ export default {
         Swal.fire({
           icon: "error",
           title: "Error",
-          text: error.response?.data?.msg || "No se pudo actualizar el usuario.",
+          text:
+            error.response?.data?.msg || "No se pudo actualizar el usuario.",
         });
       }
     },
