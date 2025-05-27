@@ -1,9 +1,23 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+
+// Usuarios
 import Users from "../views/Users.vue";
 import NewUser from "@/components/users/NewUser.vue";
 import EditUser from "@/components/users/EditUser.vue";
 import LoginView from "../views/LoginView.vue";
+
+// Clientes
+import Clients from "../views/Clients.vue";
+import NewClient from "@/components/clients/NewClient.vue";
+import EditClient from "@/components/clients/EditClient.vue";
+
+// Empleados
+// Employees
+import Employees from "../views/Employees.vue";
+import NewEmploye from "@/components/employees/NewEmploye.vue";
+import EditEmploye from "@/components/employees/EditEmploye.vue";
+
 
 const routes = [
   {
@@ -11,7 +25,6 @@ const routes = [
     name: "home",
     component: HomeView,
   },
-
   {
     path: "/users",
     name: "Users",
@@ -28,6 +41,43 @@ const routes = [
     name: "EditarUsuario",
     component: EditUser,
   },
+
+  // Rutas de Clientes
+  {
+    path: "/clients",
+    name: "Clients",
+    component: Clients,
+  },
+  {
+    path: "/clients/new",
+    name: "NuevoCliente",
+    component: NewClient,
+  },
+  {
+    path: "/clients/:id/edit",
+    name: "EditarCliente",
+    component: EditClient,
+  },
+
+  // Rutas de Empleados
+  {
+    path: "/employees",
+    name: "Employes",
+    component: Employees,
+  },
+  {
+    path: "/employees/new",
+    name: "NuevoEmpleado",
+    component: NewEmploye,
+  },
+  {
+    path: "/employees/:id/edit",
+    name: "EditarEmpleado",
+    component: EditEmploye,
+  },
+
+
+  // Ruta About
   {
     path: '/login',
     name: 'login',
@@ -36,9 +86,6 @@ const routes = [
   {
     path: "/about",
     name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
