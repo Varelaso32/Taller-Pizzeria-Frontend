@@ -1,194 +1,169 @@
 <template>
-  <div id="app" class="d-flex flex-column flex-md-row">
-    <!-- Sidebar tipo acordeón -->
-    <nav class="sidebar bg-danger text-white p-3">
-      <h4 class="fw-bold text-white mb-4">🍕 Pizzería</h4>
+  <div id="app">
+    <div v-if="isLoggedIn" class="d-flex flex-column flex-md-row">
+      <!-- Sidebar tipo acordeón -->
+      <nav class="sidebar bg-danger text-white p-3 d-flex flex-column justify-content-between">
+        <div>
+          <h4 class="fw-bold text-white mb-4">🍕 Pizzería</h4>
 
-      <div class="accordion" id="sidebarAccordion">
-        <!-- Gestión General -->
-        <div class="accordion-item bg-danger border-0">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed bg-danger text-white"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#gestionGeneral"
-              aria-expanded="false"
-              aria-controls="gestionGeneral"
-            >
-              🧾 Gestión General
-            </button>
-          </h2>
-          <div
-            id="gestionGeneral"
-            class="accordion-collapse collapse"
-            data-bs-parent="#sidebarAccordion"
-          >
-            <div class="accordion-body p-0">
-              <router-link class="nav-link ps-4 py-2" to="/users"
-                >👥 Usuarios</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/customers"
-                >👤 Clientes</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/employees"
-                >🧑‍💼 Empleados</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/suppliers"
-                >🚚 Proveedores</router-link
-              >
+          <div class="accordion" id="sidebarAccordion">
+            <!-- Gestión General -->
+            <div class="accordion-item bg-danger border-0">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed bg-danger text-white"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#gestionGeneral"
+                >
+                  🧾 Gestión General
+                </button>
+              </h2>
+              <div id="gestionGeneral" class="accordion-collapse collapse">
+                <div class="accordion-body p-0">
+                  <router-link class="nav-link ps-4 py-2" to="/users">👥 Usuarios</router-link>
+                  <router-link class="nav-link ps-4 py-2" to="/customers">👤 Clientes</router-link>
+                  <router-link class="nav-link ps-4 py-2" to="/employees">🧑‍💼 Empleados</router-link>
+                  <router-link class="nav-link ps-4 py-2" to="/suppliers">🚚 Proveedores</router-link>
+                </div>
+              </div>
+            </div>
+
+            <!-- Productos -->
+            <div class="accordion-item bg-danger border-0">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed bg-danger text-white"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#productos"
+                >
+                  🍕 Productos
+                </button>
+              </h2>
+              <div id="productos" class="accordion-collapse collapse">
+                <div class="accordion-body p-0">
+                  <router-link class="nav-link ps-4 py-2" to="/categories">📂 Categorías</router-link>
+                  <router-link class="nav-link ps-4 py-2" to="/products">🍕 Productos</router-link>
+                  <router-link class="nav-link ps-4 py-2" to="/ingredients">🌶️ Ingredientes</router-link>
+                  <router-link class="nav-link ps-4 py-2" to="/raw-materials">🧂 Materias Primas</router-link>
+                  <router-link class="nav-link ps-4 py-2" to="/pizza-sizes">📏 Tamaños</router-link>
+                </div>
+              </div>
+            </div>
+
+            <!-- Relaciones -->
+            <div class="accordion-item bg-danger border-0">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed bg-danger text-white"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#relaciones"
+                >
+                  🔁 Relaciones
+                </button>
+              </h2>
+              <div id="relaciones" class="accordion-collapse collapse">
+                <div class="accordion-body p-0">
+                  <router-link class="nav-link ps-4 py-2" to="/pizza-ingredients">🍽️ Ingred. por Pizza</router-link>
+                  <router-link class="nav-link ps-4 py-2" to="/pizza-raw-materials">⚙️ Mat. por Pizza</router-link>
+                </div>
+              </div>
+            </div>
+
+            <!-- Operaciones -->
+            <div class="accordion-item bg-danger border-0">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed bg-danger text-white"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#operaciones"
+                >
+                  📦 Operaciones
+                </button>
+              </h2>
+              <div id="operaciones" class="accordion-collapse collapse">
+                <div class="accordion-body p-0">
+                  <router-link class="nav-link ps-4 py-2" to="/orders">📦 Órdenes</router-link>
+                  <router-link class="nav-link ps-4 py-2" to="/order-pizzas">🍕 Orden Pizzas</router-link>
+                  <router-link class="nav-link ps-4 py-2" to="/order-extras">➕ Extras</router-link>
+                  <router-link class="nav-link ps-4 py-2" to="/purchases">🧾 Compras</router-link>
+                  <router-link class="nav-link ps-4 py-2" to="/pay-modes">💳 Modos de Pago</router-link>
+                </div>
+              </div>
+            </div>
+
+            <!-- Acerca -->
+            <div class="accordion-item bg-danger border-0">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed bg-danger text-white"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#otros"
+                >
+                  ℹ️ Otros
+                </button>
+              </h2>
+              <div id="otros" class="accordion-collapse collapse">
+                <div class="accordion-body p-0">
+                  <router-link class="nav-link ps-4 py-2" to="/">🏠 Inicio</router-link>
+                  <router-link class="nav-link ps-4 py-2" to="/about">ℹ️ Acerca</router-link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Productos -->
-        <div class="accordion-item bg-danger border-0">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed bg-danger text-white"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#productos"
-              aria-expanded="false"
-              aria-controls="productos"
-            >
-              🍕 Productos
-            </button>
-          </h2>
-          <div
-            id="productos"
-            class="accordion-collapse collapse"
-            data-bs-parent="#sidebarAccordion"
-          >
-            <div class="accordion-body p-0">
-              <router-link class="nav-link ps-4 py-2" to="/categories"
-                >📂 Categorías</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/products"
-                >🍕 Productos</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/ingredients"
-                >🌶️ Ingredientes</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/raw-materials"
-                >🧂 Materias Primas</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/pizza-sizes"
-                >📏 Tamaños</router-link
-              >
-            </div>
-          </div>
+        <!-- Botón de Logout -->
+        <div>
+          <button class="btn btn-dark w-100 mt-3" @click="logout">🔒 Cerrar sesión</button>
         </div>
+      </nav>
 
-        <!-- Relaciones -->
-        <div class="accordion-item bg-danger border-0">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed bg-danger text-white"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#relaciones"
-              aria-expanded="false"
-              aria-controls="relaciones"
-            >
-              🔁 Relaciones
-            </button>
-          </h2>
-          <div
-            id="relaciones"
-            class="accordion-collapse collapse"
-            data-bs-parent="#sidebarAccordion"
-          >
-            <div class="accordion-body p-0">
-              <router-link class="nav-link ps-4 py-2" to="/pizza-ingredients"
-                >🍽️ Ingred. por Pizza</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/pizza-raw-materials"
-                >⚙️ Mat. por Pizza</router-link
-              >
-            </div>
-          </div>
-        </div>
+      <!-- Contenido principal -->
+      <main class="main-content flex-grow-1 p-4">
+        <router-view />
+      </main>
+    </div>
 
-        <!-- Operaciones -->
-        <div class="accordion-item bg-danger border-0">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed bg-danger text-white"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#operaciones"
-              aria-expanded="false"
-              aria-controls="operaciones"
-            >
-              📦 Operaciones
-            </button>
-          </h2>
-          <div
-            id="operaciones"
-            class="accordion-collapse collapse"
-            data-bs-parent="#sidebarAccordion"
-          >
-            <div class="accordion-body p-0">
-              <router-link class="nav-link ps-4 py-2" to="/orders"
-                >📦 Órdenes</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/order-pizzas"
-                >🍕 Orden Pizzas</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/order-extras"
-                >➕ Extras</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/purchases"
-                >🧾 Compras</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/pay-modes"
-                >💳 Modos de Pago</router-link
-              >
-            </div>
-          </div>
-        </div>
-
-        <!-- Acerca -->
-        <div class="accordion-item bg-danger border-0">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed bg-danger text-white"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#otros"
-              aria-expanded="false"
-              aria-controls="otros"
-            >
-              ℹ️ Otros
-            </button>
-          </h2>
-          <div
-            id="otros"
-            class="accordion-collapse collapse"
-            data-bs-parent="#sidebarAccordion"
-          >
-            <div class="accordion-body p-0">
-              <router-link class="nav-link ps-4 py-2" to="/"
-                >🏠 Inicio</router-link
-              >
-            </div>
-            <div class="accordion-body p-0">
-              <router-link class="nav-link ps-4 py-2" to="/about"
-                >ℹ️ Acerca</router-link
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Contenido principal -->
-    <main class="main-content flex-grow-1 p-4">
+    <!-- Si no está logueado -->
+    <div v-else>
       <router-view />
-    </main>
+    </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  data() {
+    return {
+      isLoggedIn: false
+    };
+  },
+  created() {
+    this.checkAuth();
+  },
+  watch: {
+    $route() {
+      this.checkAuth();
+    }
+  },
+  methods: {
+    checkAuth() {
+      this.isLoggedIn = !!localStorage.getItem('user');
+    },
+    logout() {
+      localStorage.removeItem('user');
+      this.isLoggedIn = false;
+      this.$router.push('/login');
+    }
+  }
+};
+</script>
 
 <style scoped>
 .sidebar {
