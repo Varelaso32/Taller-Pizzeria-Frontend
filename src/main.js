@@ -21,7 +21,7 @@ import {
   faBoxes,
   faTags,
   faLock,
-  faUserTag
+  faUserTag,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -29,6 +29,18 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
+import { createI18n } from "vue-i18n";
+import i18nEs from "./i18n-es";
+import i18nEn from "./i18n-en";
+
+const i18n = createI18n({
+    messages: {
+    es: i18nEs,
+    en: i18nEn,
+  },
+  fallbackFormat: "en",
+  locale:navigator.language.startsWith("es") ? "es" : "en",
+});
 
 library.add(
   faUser,
@@ -55,4 +67,5 @@ library.add(
 createApp(App)
   .component("font-awesome-icon", FontAwesomeIcon)
   .use(router)
+  .use(i18n)
   .mount("#app");

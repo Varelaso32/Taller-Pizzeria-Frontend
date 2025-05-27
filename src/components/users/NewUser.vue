@@ -1,13 +1,15 @@
 <template>
   <div class="container text-start">
-    <h1 class="text-danger fw-bold">Nuevo Usuario</h1>
+    <h1 class="text-danger fw-bold">{{ $t("newUser.title") }}</h1>
     <div class="card">
-      <div class="card-header fw-bold">Datos del Usuario</div>
+      <div class="card-header fw-bold">{{ $t("newUser.header") }}</div>
       <div class="card-body">
         <form @submit.prevent="saveUser">
           <!-- Nombre -->
           <div class="mb-3">
-            <label for="name" class="form-label">Nombre:</label>
+            <label for="name" class="form-label">{{
+              $t("newUser.name")
+            }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="user" />
@@ -24,7 +26,9 @@
 
           <!-- Correo -->
           <div class="mb-3">
-            <label for="email" class="form-label">Correo Electrónico:</label>
+            <label for="email" class="form-label">{{
+              $t("newUser.email")
+            }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="envelope" />
@@ -41,7 +45,9 @@
 
           <!-- Contraseña -->
           <div class="mb-3">
-            <label for="password" class="form-label">Contraseña:</label>
+            <label for="password" class="form-label">{{
+              $t("newUser.password")
+            }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="lock" />
@@ -58,7 +64,9 @@
 
           <!-- Rol -->
           <div class="mb-3">
-            <label for="role" class="form-label">Rol:</label>
+            <label for="role" class="form-label">{{
+              $t("newUser.role")
+            }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="user-tag" />
@@ -69,8 +77,8 @@
                 class="form-select"
                 required
               >
-                <option value="cliente">Cliente</option>
-                <option value="empleado">Empleado</option>
+                <option value="cliente">{{ $t("roles.client") }}</option>
+                <option value="empleado">{{ $t("roles.employee") }}</option>
               </select>
             </div>
           </div>
@@ -81,10 +89,10 @@
             class="btn text-white"
             style="background-color: #c1121f"
           >
-            Guardar
+            {{ $t("buttons.save") }}
           </button>
           <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            Cancelar
+            {{ $t("buttons.cancel") }}
           </button>
         </form>
       </div>
