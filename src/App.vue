@@ -34,11 +34,11 @@
               <router-link class="nav-link ps-4 py-2" to="/employees"
                 >🧑‍💼 Empleados</router-link
               >
-              <router-link class="nav-link ps-4 py-2" to="/branchs"
-                > Prueba Aqui</router-link
-              >
               <router-link class="nav-link ps-4 py-2" to="/suppliers"
                 >🚚 Proveedores</router-link
+              >
+              <router-link class="nav-link ps-4 py-2" to="/ingredients"
+                > Prueba Aqui</router-link
               >
             </div>
           </div>

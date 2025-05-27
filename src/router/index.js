@@ -17,11 +17,14 @@ import EditClient from "@/components/clients/EditClient.vue";
 import Employees from "../views/Employees.vue";
 import NewEmploye from "@/components/employees/NewEmploye.vue";
 import EditEmploye from "@/components/employees/EditEmploye.vue";
-import BranchsView from "@/views/BranchsView.vue";
-import NewBranchs from "@/components/branchs/NewBranchs.vue";
-
+import IngredientsView from "@/views/IngredientsView.vue";
 
 const routes = [
+  {
+    path: "/ingredients",
+    name: "Ingredients",
+    component: IngredientsView,
+  },
   {
     path: "/",
     name: "home",
@@ -78,17 +81,6 @@ const routes = [
     component: EditEmploye,
   },
   //////////////jose
-  {
-    path: "/branchs",
-    name: "Branchs",
-    component: BranchsView,
-  },
-
-  {
-    path: "/branchs/new",
-    name: "BranchsEdit",
-    component: NewBranchs,
-  },
 
   // Ruta About
   {
