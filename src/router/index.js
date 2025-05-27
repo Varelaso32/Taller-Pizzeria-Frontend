@@ -17,6 +17,8 @@ import EditClient from "@/components/clients/EditClient.vue";
 import Employees from "../views/Employees.vue";
 import NewEmploye from "@/components/employees/NewEmploye.vue";
 import EditEmploye from "@/components/employees/EditEmploye.vue";
+import BranchsView from "@/views/BranchsView.vue";
+import NewBranchs from "@/components/branchs/NewBranchs.vue";
 
 
 const routes = [
@@ -29,7 +31,7 @@ const routes = [
     path: "/users",
     name: "Users",
     component: Users,
-    meta: { requiresAdmin: true }
+    meta: { requiresAdmin: true },
   },
   {
     path: "/users/new",
@@ -75,13 +77,24 @@ const routes = [
     name: "EditarEmpleado",
     component: EditEmploye,
   },
+  //////////////jose
+  {
+    path: "/branchs",
+    name: "Branchs",
+    component: BranchsView,
+  },
 
+  {
+    path: "/branchs/new",
+    name: "BranchsEdit",
+    component: NewBranchs,
+  },
 
   // Ruta About
   {
-    path: '/login',
-    name: 'login',
-    component: LoginView
+    path: "/login",
+    name: "login",
+    component: LoginView,
   },
   {
     path: "/about",
@@ -97,27 +110,26 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem("user"));
   const isAuthenticated = !!user;
 
   // Rutas públicas (login, etc)
-  const publicPages = ['login', 'about'];
+  const publicPages = ["login", "about"];
   const authRequired = !publicPages.includes(to.name);
 
   if (authRequired && !isAuthenticated) {
-    return next({ name: 'login' });
+    return next({ name: "login" });
   }
 
   // Ejemplo rol (si tienes rol en user)
   if (to.meta.requiresAdmin && (!user || !user.isAdmin)) {
-    return next({ name: 'home' }); // o página "no autorizado"
+    return next({ name: "home" }); // o página "no autorizado"
   }
 
-  if (to.name === 'login' && isAuthenticated) {
-    return next({ name: 'home' });
+  if (to.name === "login" && isAuthenticated) {
+    return next({ name: "home" });
   }
 
   next();
 });
 export default router;
-     

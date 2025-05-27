@@ -1,15 +1,13 @@
 <template>
   <div class="container text-start">
-    <h1 class="text-danger fw-bold">{{ $t("branches.newTitle") }}</h1>
+    <h1 class="text-danger fw-bold mb-4">Editar Sucursal</h1>
     <div class="card">
-      <div class="card-header fw-bold">{{ $t("branches.header") }}</div>
+      <div class="card-header fw-bold">Datos de la Sucursal</div>
       <div class="card-body">
-        <form @submit.prevent="saveBranch">
+        <form @submit.prevent="updateBranch">
           <!-- Nombre -->
           <div class="mb-3">
-            <label for="name" class="form-label">{{
-              $t("branches.name")
-            }}</label>
+            <label for="name" class="form-label">Nombre:</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="building" />
@@ -26,9 +24,7 @@
 
           <!-- Dirección -->
           <div class="mb-3">
-            <label for="address" class="form-label">{{
-              $t("branches.address")
-            }}</label>
+            <label for="address" class="form-label">Dirección:</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="map-marker-alt" />
@@ -48,13 +44,11 @@
             type="submit"
             class="btn text-white"
             style="background-color: #c1121f"
-            :disabled="loading"
           >
-            <span v-if="loading" class="spinner-border spinner-border-sm me-1"></span>
-            {{ loading ? $t("buttons.saving") : $t("buttons.save") }}
+            Guardar Cambios
           </button>
           <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            {{ $t("buttons.cancel") }}
+            Cancelar
           </button>
         </form>
       </div>
@@ -65,53 +59,69 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 export default {
-  name: "NewBranch",
+  name: "EditarBranch",
+  components: {
+    FontAwesomeIcon,
+  },
   data() {
     return {
       branch: {
         name: "",
-        address: ""
+        address: "",
       },
-      loading: false
     };
   },
+  created() {
+    this.fetchBranch();
+  },
   methods: {
+    async fetchBranch() {
+      const id = this.$route.params.id;
+      try {
+        const res = await axios.get(`http://127.0.0.1:8000/api/branches/${id}`);
+        this.branch = res.data;
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "No se pudo cargar la sucursal.",
+        });
+        this.$router.push({ name: "Branches" });
+      }
+    },
     cancel() {
       this.$router.push({ name: "Branches" });
     },
-    async saveBranch() {
-      this.loading = true;
-      
+    async updateBranch() {
+      const id = this.$route.params.id;
       try {
-        const response = await axios.post("/api/branches", this.branch);
-        
+        await axios.put(
+          `http://127.0.0.1:8000/api/branches/${id}`,
+          this.branch
+        );
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: this.$t("branches.createdSuccess"),
+          title: "Sucursal actualizada correctamente",
           showConfirmButton: false,
           timer: 2000,
         });
         this.$router.push({ name: "Branches" });
       } catch (error) {
-        console.error("Error creating branch:", error);
-        
-        let errorMsg = this.$t("branches.createError");
+        let msg = "No se pudo actualizar la sucursal.";
         if (error.response?.data?.msg) {
-          errorMsg = error.response.data.msg;
+          msg = error.response.data.msg;
         }
-        
         Swal.fire({
           icon: "error",
-          title: this.$t("errors.title"),
-          text: errorMsg,
+          title: "Error",
+          text: msg,
         });
-      } finally {
-        this.loading = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>
