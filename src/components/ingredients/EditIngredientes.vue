@@ -1,15 +1,13 @@
 <template>
   <div class="container text-start">
-    <h1 class="text-danger fw-bold">{{ $t("ingredients.editTitle") }}</h1>
+    <h1 class="text-danger fw-bold">Editar Ingrediente</h1>
     <div class="card">
-      <div class="card-header fw-bold">{{ $t("ingredients.header") }}</div>
+      <div class="card-header fw-bold">Formulario de Edición</div>
       <div class="card-body">
         <form @submit.prevent="updateIngredient">
-          <!-- Nombre del Ingrediente -->
+          <!-- Nombre -->
           <div class="mb-3">
-            <label for="name" class="form-label">{{
-              $t("ingredients.name")
-            }}</label>
+            <label for="name" class="form-label">Nombre</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="tags" />
@@ -19,12 +17,8 @@
                 id="name"
                 v-model="ingredient.name"
                 class="form-control"
-                :class="{ 'is-invalid': errors.name }"
                 required
               />
-            </div>
-            <div v-if="errors.name" class="invalid-feedback d-block">
-              {{ errors.name[0] }}
             </div>
           </div>
 
@@ -33,13 +27,11 @@
             type="submit"
             class="btn text-white"
             style="background-color: #c1121f"
-            :disabled="loading"
           >
-            <span v-if="loading" class="spinner-border spinner-border-sm me-1"></span>
-            {{ loading ? $t("buttons.updating") : $t("buttons.update") }}
+            Guardar Cambios
           </button>
           <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            {{ $t("buttons.cancel") }}
+            Cancelar
           </button>
         </form>
       </div>
@@ -50,75 +42,65 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 export default {
   name: "EditIngredient",
+  components: {
+    FontAwesomeIcon,
+  },
   data() {
     return {
       ingredient: {
         id: null,
-        name: ""
+        name: "",
       },
-      errors: {},
-      loading: false
+      apiUrl: "http://127.0.0.1:8000/api/ingredients",
     };
   },
   methods: {
     cancel() {
       this.$router.push({ name: "Ingredients" });
     },
-    async fetchIngredient() {
-      try {
-        const ingredientId = this.$route.params.id;
-        const response = await axios.get(`/api/ingredients/${ingredientId}`);
-        this.ingredient = response.data;
-      } catch (error) {
-        Swal.fire({
-          icon: "error",
-          title: this.$t("errors.title"),
-          text: this.$t("ingredients.loadError"),
-        }).then(() => {
-          this.$router.push({ name: "Ingredients" });
-        });
-        console.error("Error fetching ingredient:", error);
-      }
-    },
     async updateIngredient() {
-      this.loading = true;
-      this.errors = {};
-      
       try {
-        const response = await axios.put(
-          `/api/ingredients/${this.ingredient.id}`,
-          this.ingredient
-        );
-        
+        const res = await axios.put(`${this.apiUrl}/${this.ingredient.id}`, {
+          name: this.ingredient.name,
+        });
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: this.$t("ingredients.updatedSuccess"),
+          title: "Ingrediente actualizado correctamente",
           showConfirmButton: false,
           timer: 2000,
         });
         this.$router.push({ name: "Ingredients" });
       } catch (error) {
-        if (error.response?.status === 400) {
-          this.errors = error.response.data.errors || {};
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: this.$t("errors.title"),
-            text: this.$t("ingredients.updateError"),
-          });
-          console.error("Error updating ingredient:", error);
-        }
-      } finally {
-        this.loading = false;
+        console.error("Error al actualizar ingrediente:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text:
+            error.response?.data?.msg ||
+            "No se pudo actualizar el ingrediente.",
+        });
       }
-    }
+    },
   },
   mounted() {
-    this.fetchIngredient();
-  }
+    const id = this.$route.params.id;
+    axios
+      .get(`${this.apiUrl}/${id}`)
+      .then((response) => {
+        this.ingredient = { ...response.data };
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "No se pudo cargar el ingrediente.",
+        });
+      });
+  },
 };
 </script>
