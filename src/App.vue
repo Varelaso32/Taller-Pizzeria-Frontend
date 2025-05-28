@@ -37,8 +37,8 @@
               <router-link class="nav-link ps-4 py-2" to="/suppliers"
                 >🚚 Proveedores</router-link
               >
-              <router-link class="nav-link ps-4 py-2" to="/orders"
-                > Prueba Aqui</router-link
+              <router-link class="nav-link ps-4 py-2" to="/pizza-sizes">
+                Prueba Aqui</router-link
               >
             </div>
           </div>
@@ -76,7 +76,7 @@
               <router-link class="nav-link ps-4 py-2" to="/raw-materials"
                 >🧂 Materias Primas</router-link
               >
-              <router-link class="nav-link ps-4 py-2" to="/pizza-sizes"
+              <router-link class="nav-link ps-4 py-2" to="/pizza-sizes/id"
                 >📏 Tamaños</router-link
               >
             </div>
