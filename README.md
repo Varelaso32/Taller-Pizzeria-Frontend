@@ -46,6 +46,10 @@ import RawMaterialsView from "@/views/RawMaterialsView.vue";
 import EditRawMaterials from "@/components/rawMaterials/EditRawMaterials.vue";
 import NewRawMaterials from "@/components/rawMaterials/NewRawMaterials.vue";
 
+import SuppliersView from "@/views/SuppliersView.vue";
+import NewSupliders from "@/components/supliders/NewSupliders.vue";
+import EditSupliders from "@/components/supliders/EditSupliders.vue";
+
 
 
 
@@ -163,6 +167,22 @@ import NewRawMaterials from "@/components/rawMaterials/NewRawMaterials.vue";
     path: '/RawMaterials/edit',
     name: 'EditRawMaterials',
     component: EditRawMaterials
+  },
+
+    {
+    path: "/supliders",
+    name: "Supliders",
+    component: SuppliersView,
+  },
+  {
+    path: "/supliders/new",
+    name: "NewSuppliers",
+    component: NewSupliders,
+  },
+  {
+    path: "/supliders/:id/edit",
+    name: "EditSuppliers",
+    component: EditSupliders,
   },
 
   

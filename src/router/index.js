@@ -18,26 +18,10 @@ import Employees from "../views/Employees.vue";
 import NewEmploye from "@/components/employees/NewEmploye.vue";
 import EditEmploye from "@/components/employees/EditEmploye.vue";
 
-import SuppliersView from "@/views/SuppliersView.vue";
-import NewSupliders from "@/components/supliders/NewSupliders.vue";
-import EditSupliders from "@/components/supliders/EditSupliders.vue";
+
 
 const routes = [
-  {
-    path: "/supliders",
-    name: "Supliders",
-    component: SuppliersView,
-  },
-  {
-    path: "/supliders/new",
-    name: "NewSuppliers",
-    component: NewSupliders,
-  },
-  {
-    path: "/supliders/:id/edit",
-    name: "EditSuppliers",
-    component: EditSupliders,
-  },
+
 
   {
     path: "/",
