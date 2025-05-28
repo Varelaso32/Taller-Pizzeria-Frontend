@@ -1,67 +1,76 @@
 <template>
-  <div class="login-container container mt-5">
+  <div class="container mt-5" style="max-width: 400px;">
     <h2 class="text-center mb-4">Iniciar Sesión</h2>
-    <form @submit.prevent="handleLogin">
+
+    <form @submit.prevent="login">
       <div class="mb-3">
-        <label for="username" class="form-label">Correo:</label>
+        <label for="email" class="form-label">Correo electrónico</label>
         <input
-          id="username"
-          v-model="username"
-          required
+          type="email"
+          id="email"
           class="form-control"
-          autocomplete="username"
+          v-model="email"
+          required
         />
       </div>
+
       <div class="mb-3">
-        <label for="password" class="form-label">Contraseña:</label>
+        <label for="password" class="form-label">Contraseña</label>
         <input
-          id="password"
           type="password"
+          id="password"
+          class="form-control"
           v-model="password"
           required
-          class="form-control"
-          autocomplete="current-password"
         />
       </div>
+
+      <div v-if="error" class="alert alert-danger">
+        {{ error }}
+      </div>
+
       <button type="submit" class="btn btn-danger w-100">Entrar</button>
     </form>
-    <p v-if="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</p>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+<script>
+export default {
+  name: 'LoginView',
+  data() {
+    return {
+      email: '',
+      password: '',
+      error: ''
+    };
+  },
+  methods: {
+    login() {
+      // ✅ Credenciales fijas de prueba
+      const validUser = {
+        email: 'admin@example.com',
+        password: '1234'
+      };
 
-const router = useRouter()
-const username = ref('')
-const password = ref('')
-const errorMessage = ref('')
+      if (this.email === validUser.email && this.password === validUser.password) {
+        // Guardar sesión
+        localStorage.setItem('user', JSON.stringify({ email: this.email }));
 
-const validUser = {
-  username: 'admin@example.com',
-  password: '1234'
-}
-
-function handleLogin() {
-  if (username.value === validUser.username && password.value === validUser.password) {
-    localStorage.setItem('user', JSON.stringify({ username: username.value }))
-    errorMessage.value = ''
-    router.push({ name: 'home' })
-  } else {
-    errorMessage.value = 'Usuario o contraseña incorrectos'
+        // Redirigir
+        this.$router.push('/');
+      } else {
+        this.error = 'Correo o contraseña incorrectos';
+      }
+    }
   }
-}
+};
 </script>
 
 <style scoped>
-.login-container {
-  max-width: 400px;
-  margin: 100px auto;
-  padding: 2rem;
+.container {
   background: #fff;
+  padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 </style>
- 
