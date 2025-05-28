@@ -149,7 +149,7 @@ const routes = [
     component: NewIngredientes,
   },
   {
-    path: "/ingredients/edit",
+    path: "/ingredients/:id/edit",
     name: "Edit Ingredients",
     component: EditIngredientes,
   },
