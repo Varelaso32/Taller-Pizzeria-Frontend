@@ -1,18 +1,14 @@
 <template>
-  <div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="h3 text-danger">
-        <font-awesome-icon icon="plus" class="me-2" />
-        Nuevo Ingrediente Extra
-      </h1>
-      <button class="btn btn-danger" @click="cancel" :disabled="loading">
-        <font-awesome-icon icon="arrow-left" class="me-2" />
-        Volver
-      </button>
-    </div>
-    <div class="card shadow-sm rounded">
+  <div class="container text-start py-4">
+    <h1 class="h3 text-danger fw-bold mb-4">
+      <font-awesome-icon class="me-2" />
+      Nuevo Ingrediente Extra por Orden
+    </h1>
+    <div class="card shadow rounded">
+      <div class="card-header fw-bold">Formulario de Registro</div>
       <div class="card-body">
         <form @submit.prevent="createOrderExtra">
+          <!-- Dropdown de Orden -->
           <div class="mb-3">
             <label for="order_id" class="form-label">Orden</label>
             <select
@@ -23,13 +19,16 @@
             >
               <option value="" disabled>Selecciona una orden</option>
               <option v-for="order in orders" :key="order.id" :value="order.id">
-                {{ order.id }}
+                {{ order.id }} - Cliente:
+                {{ order.client_name || order.id }}
               </option>
             </select>
           </div>
+
+          <!-- Dropdown de Ingrediente Extra -->
           <div class="mb-3">
             <label for="extra_ingredient_id" class="form-label"
-              >Ingrediente extra</label
+              >Ingrediente Extra</label
             >
             <select
               id="extra_ingredient_id"
@@ -43,6 +42,8 @@
               </option>
             </select>
           </div>
+
+          <!-- Cantidad -->
           <div class="mb-3">
             <label for="quantity" class="form-label">Cantidad</label>
             <input
@@ -50,21 +51,23 @@
               id="quantity"
               v-model="orderExtra.quantity"
               class="form-control"
-              min="1"
               required
             />
           </div>
-          <div class="d-flex justify-content-end">
+
+          <!-- Botones -->
+          <div class="d-flex justify-content-start mt-4">
             <button
               type="submit"
-              class="btn btn-primary me-2"
+              class="btn text-white me-2"
+              style="background-color: #c1121f"
               :disabled="loading"
             >
               <span
                 v-if="loading"
                 class="spinner-border spinner-border-sm me-1"
               ></span>
-              Guardar
+              {{ loading ? "Guardando..." : "Guardar" }}
             </button>
             <button
               type="button"
@@ -84,15 +87,19 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 export default {
   name: "NewOrderExtra",
+  components: {
+    FontAwesomeIcon,
+  },
   data() {
     return {
       orderExtra: {
         order_id: "",
         extra_ingredient_id: "",
-        quantity: 1,
+        quantity:"",
       },
       orders: [],
       extras: [],
@@ -106,7 +113,7 @@ export default {
   methods: {
     async fetchOrders() {
       try {
-        const res = await axios.get("/api/orders");
+        const res = await axios.get("http://127.0.0.1:8000/api/orders");
         this.orders = res.data;
       } catch {
         this.orders = [];
@@ -114,7 +121,9 @@ export default {
     },
     async fetchExtras() {
       try {
-        const res = await axios.get("/api/extra-ingredients");
+        const res = await axios.get(
+          "http://127.0.0.1:8000/api/extra_ingredients"
+        );
         this.extras = res.data;
       } catch {
         this.extras = [];
@@ -126,7 +135,10 @@ export default {
     async createOrderExtra() {
       this.loading = true;
       try {
-        await axios.post("/api/order-extra-ingredients", this.orderExtra);
+        await axios.post(
+          "http://127.0.0.1:8000/api/order_extra_ingredients",
+          this.orderExtra
+        );
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -134,7 +146,7 @@ export default {
           showConfirmButton: false,
           timer: 2000,
         });
-        this.$router.push({ name: "Order_extraView" }); // Ajusta el nombre según tu router
+        this.$router.push({ name: "Order_extra" });
       } catch (error) {
         let errorMsg = "No se pudo crear el ingrediente extra.";
         if (error.response?.data?.msg) {
