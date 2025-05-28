@@ -1,13 +1,22 @@
 <template>
-  <div class="container text-start">
-    <h1 class="text-danger fw-bold">{{ $t("orders.editTitle") }}</h1>
-    <div class="card">
-      <div class="card-header fw-bold">{{ $t("orders.header") }}</div>
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="h3 text-danger fw-bold">
+        <font-awesome-icon icon="edit" class="me-2" />
+        Editar Orden
+      </h1>
+      <button class="btn btn-secondary" @click="cancel" :disabled="loading">
+        <font-awesome-icon icon="arrow-left" class="me-2" />
+        Volver
+      </button>
+    </div>
+    <div class="card shadow-sm rounded">
+      <div class="card-header fw-bold">Datos de la Orden</div>
       <div class="card-body">
         <form @submit.prevent="updateOrder">
           <!-- Cliente -->
           <div class="mb-3">
-            <label for="client_id" class="form-label">{{ $t("orders.client") }}</label>
+            <label for="client_id" class="form-label">Cliente</label>
             <input
               type="number"
               id="client_id"
@@ -18,7 +27,7 @@
           </div>
           <!-- Sucursal -->
           <div class="mb-3">
-            <label for="branch_id" class="form-label">{{ $t("orders.branch") }}</label>
+            <label for="branch_id" class="form-label">Sucursal</label>
             <input
               type="number"
               id="branch_id"
@@ -29,7 +38,7 @@
           </div>
           <!-- Total -->
           <div class="mb-3">
-            <label for="total_price" class="form-label">{{ $t("orders.total") }}</label>
+            <label for="total_price" class="form-label">Total</label>
             <input
               type="number"
               id="total_price"
@@ -41,25 +50,39 @@
           </div>
           <!-- Estado -->
           <div class="mb-3">
-            <label for="status" class="form-label">{{ $t("orders.status") }}</label>
-            <select id="status" v-model="order.status" class="form-select" required>
-              <option value="pendiente">{{ $t("orders.status_pending") }}</option>
-              <option value="en_preparacion">{{ $t("orders.status_preparing") }}</option>
-              <option value="listo">{{ $t("orders.status_ready") }}</option>
-              <option value="entregado">{{ $t("orders.status_delivered") }}</option>
+            <label for="status" class="form-label">Estado</label>
+            <select
+              id="status"
+              v-model="order.status"
+              class="form-select"
+              required
+            >
+              <option value="pendiente">Pendiente</option>
+              <option value="en_preparacion">En preparación</option>
+              <option value="listo">Listo</option>
+              <option value="entregado">Entregado</option>
             </select>
           </div>
           <!-- Tipo de entrega -->
           <div class="mb-3">
-            <label for="delivery_type" class="form-label">{{ $t("orders.delivery_type") }}</label>
-            <select id="delivery_type" v-model="order.delivery_type" class="form-select" required>
-              <option value="en_local">{{ $t("orders.delivery_local") }}</option>
-              <option value="a_domicilio">{{ $t("orders.delivery_home") }}</option>
+            <label for="delivery_type" class="form-label"
+              >Tipo de Entrega</label
+            >
+            <select
+              id="delivery_type"
+              v-model="order.delivery_type"
+              class="form-select"
+              required
+            >
+              <option value="en_local">En local</option>
+              <option value="a_domicilio">A domicilio</option>
             </select>
           </div>
           <!-- Repartidor -->
           <div class="mb-3">
-            <label for="delivery_person_id" class="form-label">{{ $t("orders.delivery_person") }}</label>
+            <label for="delivery_person_id" class="form-label"
+              >Repartidor</label
+            >
             <input
               type="number"
               id="delivery_person_id"
@@ -68,18 +91,27 @@
             />
           </div>
           <!-- Botones -->
-          <button
-            type="submit"
-            class="btn text-white"
-            style="background-color: #c1121f"
-            :disabled="loading"
-          >
-            <span v-if="loading" class="spinner-border spinner-border-sm me-1"></span>
-            {{ loading ? $t("buttons.saving") : $t("buttons.save") }}
-          </button>
-          <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            {{ $t("buttons.cancel") }}
-          </button>
+          <div class="d-flex justify-content-end">
+            <button
+              type="submit"
+              class="btn btn-danger me-2 text-white"
+              :disabled="loading"
+            >
+              <span
+                v-if="loading"
+                class="spinner-border spinner-border-sm me-1"
+              ></span>
+              Guardar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              @click="cancel"
+              :disabled="loading"
+            >
+              Cancelar
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -100,9 +132,9 @@ export default {
         total_price: "",
         status: "pendiente",
         delivery_type: "en_local",
-        delivery_person_id: ""
+        delivery_person_id: "",
       },
-      loading: false
+      loading: false,
     };
   },
   created() {
@@ -117,8 +149,8 @@ export default {
       } catch (error) {
         Swal.fire({
           icon: "error",
-          title: this.$t("errors.title"),
-          text: this.$t("orders.loadError"),
+          title: "Error",
+          text: "No se pudo cargar la orden.",
         });
         this.$router.push({ name: "Orders" });
       }
@@ -134,25 +166,25 @@ export default {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: this.$t("orders.updatedSuccess"),
+          title: "Orden actualizada correctamente",
           showConfirmButton: false,
           timer: 2000,
         });
         this.$router.push({ name: "Orders" });
       } catch (error) {
-        let errorMsg = this.$t("orders.updateError");
+        let errorMsg = "No se pudo actualizar la orden.";
         if (error.response?.data?.msg) {
           errorMsg = error.response.data.msg;
         }
         Swal.fire({
           icon: "error",
-          title: this.$t("errors.title"),
+          title: "Error",
           text: errorMsg,
         });
       } finally {
         this.loading = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>

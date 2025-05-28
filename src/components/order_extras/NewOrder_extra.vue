@@ -1,11 +1,11 @@
 <template>
   <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="h3 text-primary">
+      <h1 class="h3 text-danger">
         <font-awesome-icon icon="plus" class="me-2" />
         Nuevo Ingrediente Extra
       </h1>
-      <button class="btn btn-secondary" @click="cancel" :disabled="loading">
+      <button class="btn btn-danger" @click="cancel" :disabled="loading">
         <font-awesome-icon icon="arrow-left" class="me-2" />
         Volver
       </button>

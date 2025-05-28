@@ -37,7 +37,7 @@
               <router-link class="nav-link ps-4 py-2" to="/suppliers"
                 >🚚 Proveedores</router-link
               >
-              <router-link class="nav-link ps-4 py-2" to="/order_extra"
+              <router-link class="nav-link ps-4 py-2" to="/orders"
                 > Prueba Aqui</router-link
               >
             </div>

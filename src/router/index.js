@@ -17,13 +17,26 @@ import EditClient from "@/components/clients/EditClient.vue";
 import Employees from "../views/Employees.vue";
 import NewEmploye from "@/components/employees/NewEmploye.vue";
 import EditEmploye from "@/components/employees/EditEmploye.vue";
-
-
+import OrdersView from "@/views/OrdersView.vue";
+import EditOrder from "@/components/orders/EditOrder.vue";
+import NewOrder from "@/components/orders/NewOrder.vue";
 
 const routes = [
-
-
-
+  {
+    path: "/orders",
+    name: "Orders",
+    component: OrdersView,
+  },
+  {
+    path: "/order/new",
+    name: "NewOrder",
+    component: NewOrder,
+  },
+    {
+    path: "/orders/edit/:id",
+    name: "EditOrder",
+    component: EditOrder,
+  },
 
   {
     path: "/",
