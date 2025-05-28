@@ -42,6 +42,10 @@ import PizzaSizesView from "@/views/Pizza-sizesView.vue";
 import NewPizzaSize from "@/components/pizas-sizes/NewPizza-size.vue";
 import EditPizzaSize from "@/components/pizas-sizes/EditPizza-size.vue";
 
+import RawMaterialsView from "@/views/RawMaterialsView.vue";
+import EditRawMaterials from "@/components/rawMaterials/EditRawMaterials.vue";
+import NewRawMaterials from "@/components/rawMaterials/NewRawMaterials.vue";
+
 
 
 
@@ -143,6 +147,22 @@ import EditPizzaSize from "@/components/pizas-sizes/EditPizza-size.vue";
     path: '/pizzas/:id/edit',
     name: 'EditPizzas',
     component: EditPizzas
+  },
+
+    {
+    path: '/RawMaterials',
+    name: 'RawMaterials',
+    component : RawMaterialsView
+  },
+  {
+    path: '/RawMaterials/new',
+    name: 'NewRawMaterials',
+    component: NewRawMaterials
+  },
+    {
+    path: '/RawMaterials/edit',
+    name: 'EditRawMaterials',
+    component: EditRawMaterials
   },
 
   
