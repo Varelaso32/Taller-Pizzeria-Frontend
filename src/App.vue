@@ -78,6 +78,7 @@
             </div>
           </div>
         </div>
+      </div> <!-- Added missing closing tag for accordion -->
       </nav>
 
       <!-- Contenido principal -->
