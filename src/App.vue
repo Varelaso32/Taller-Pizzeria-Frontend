@@ -28,7 +28,7 @@
               <router-link class="nav-link ps-4 py-2" to="/users"
                 >👥 {{ $t("sidebar.users") }}</router-link
               >
-              <router-link class="nav-link ps-4 py-2" to="/customers"
+              <router-link class="nav-link ps-4 py-2" to="/clients"
                 >👤 {{ $t("sidebar.clients") }}</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/employees"
