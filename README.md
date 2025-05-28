@@ -26,6 +26,10 @@ import BranchsView from "@/views/BranchsView.vue";
 import NewBranchs from "@/components/branchs/NewBranchs.vue";
 import EditBranchs from "@/components/branchs/EditBranchs.vue";
 
+import IngredientsView from "@/views/IngredientsView.vue";
+import NewIngredientes from "@/components/ingredients/NewIngredientes.vue";
+import EditIngredientes from "@/components/ingredients/EditIngredientes.vue";
+
 
 
 
@@ -45,4 +49,21 @@ import EditBranchs from "@/components/branchs/EditBranchs.vue";
     path: "/branchs/edit",
     name: "BranchsEdit",
     component: EditBranchs,
+  },
+
+
+    {
+    path: "/ingredients",
+    name: "Ingredients",
+    component: IngredientsView,
+  },
+  {
+    path: "/ingredients/new",
+    name: "Nuew Ingredients",
+    component: NewIngredientes,
+  },
+ {
+    path: "/ingredients/edit",
+    name: "Edit Ingredients",
+    component: EditIngredientes,
   },

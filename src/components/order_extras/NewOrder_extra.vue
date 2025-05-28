@@ -1,41 +1,50 @@
 <template>
-  <div class="container text-start">
-    <h1 class="text-danger fw-bold">{{ $t("order_extras.newTitle") }}</h1>
-    <div class="card">
-      <div class="card-header fw-bold">{{ $t("order_extras.header") }}</div>
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="h3 text-primary">
+        <font-awesome-icon icon="plus" class="me-2" />
+        Nuevo Ingrediente Extra
+      </h1>
+      <button class="btn btn-secondary" @click="cancel" :disabled="loading">
+        <font-awesome-icon icon="arrow-left" class="me-2" />
+        Volver
+      </button>
+    </div>
+    <div class="card shadow-sm rounded">
       <div class="card-body">
         <form @submit.prevent="createOrderExtra">
-          <!-- Orden -->
           <div class="mb-3">
-            <label for="order_id" class="form-label">{{ $t("order_extras.order") }}</label>
+            <label for="order_id" class="form-label">Orden</label>
             <select
               id="order_id"
               v-model="orderExtra.order_id"
               class="form-select"
               required
             >
+              <option value="" disabled>Selecciona una orden</option>
               <option v-for="order in orders" :key="order.id" :value="order.id">
                 {{ order.id }}
               </option>
             </select>
           </div>
-          <!-- Extra -->
           <div class="mb-3">
-            <label for="extra_ingredient_id" class="form-label">{{ $t("order_extras.extra") }}</label>
+            <label for="extra_ingredient_id" class="form-label"
+              >Ingrediente extra</label
+            >
             <select
               id="extra_ingredient_id"
               v-model="orderExtra.extra_ingredient_id"
               class="form-select"
               required
             >
+              <option value="" disabled>Selecciona un ingrediente</option>
               <option v-for="extra in extras" :key="extra.id" :value="extra.id">
                 {{ extra.name }}
               </option>
             </select>
           </div>
-          <!-- Cantidad -->
           <div class="mb-3">
-            <label for="quantity" class="form-label">{{ $t("order_extras.quantity") }}</label>
+            <label for="quantity" class="form-label">Cantidad</label>
             <input
               type="number"
               id="quantity"
@@ -45,19 +54,27 @@
               required
             />
           </div>
-          <!-- Botones -->
-          <button
-            type="submit"
-            class="btn text-white"
-            style="background-color: #c1121f"
-            :disabled="loading"
-          >
-            <span v-if="loading" class="spinner-border spinner-border-sm me-1"></span>
-            {{ loading ? $t("buttons.saving") : $t("buttons.save") }}
-          </button>
-          <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            {{ $t("buttons.cancel") }}
-          </button>
+          <div class="d-flex justify-content-end">
+            <button
+              type="submit"
+              class="btn btn-primary me-2"
+              :disabled="loading"
+            >
+              <span
+                v-if="loading"
+                class="spinner-border spinner-border-sm me-1"
+              ></span>
+              Guardar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              @click="cancel"
+              :disabled="loading"
+            >
+              Cancelar
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -75,11 +92,11 @@ export default {
       orderExtra: {
         order_id: "",
         extra_ingredient_id: "",
-        quantity: 1
+        quantity: 1,
       },
       orders: [],
       extras: [],
-      loading: false
+      loading: false,
     };
   },
   created() {
@@ -104,7 +121,7 @@ export default {
       }
     },
     cancel() {
-      this.$router.push({ name: "OrderExtras" });
+      this.$router.push({ name: "Order_extra" });
     },
     async createOrderExtra() {
       this.loading = true;
@@ -113,25 +130,25 @@ export default {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: this.$t("order_extras.createdSuccess"),
+          title: "Ingrediente extra creado correctamente",
           showConfirmButton: false,
           timer: 2000,
         });
-        this.$router.push({ name: "OrderExtras" });
+        this.$router.push({ name: "Order_extraView" }); // Ajusta el nombre según tu router
       } catch (error) {
-        let errorMsg = this.$t("order_extras.createError");
+        let errorMsg = "No se pudo crear el ingrediente extra.";
         if (error.response?.data?.msg) {
           errorMsg = error.response.data.msg;
         }
         Swal.fire({
           icon: "error",
-          title: this.$t("errors.title"),
+          title: "Error",
           text: errorMsg,
         });
       } finally {
         this.loading = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>
