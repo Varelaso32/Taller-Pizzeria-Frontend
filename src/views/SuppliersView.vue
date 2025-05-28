@@ -2,15 +2,15 @@
   <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="h3 text-danger">
-        <font-awesome-icon icon="box-open" class="me-2" />
-        Listado de Materias Primas
+        <font-awesome-icon icon="truck" class="me-2" />
+        Listado de Proveedores
       </h1>
       <button
-        @click="newRawMaterial"
+        @click="newSupplier"
         class="btn btn-danger d-flex align-items-center"
       >
         <font-awesome-icon icon="plus" class="me-2" />
-        Nueva Materia Prima
+        Nuevo Proveedor
       </button>
     </div>
 
@@ -20,39 +20,37 @@
           <tr>
             <th>#</th>
             <th>Nombre</th>
-            <th>Unidad</th>
-            <th>Stock Actual</th>
+            <th>Contacto</th>
             <th>Creado</th>
             <th>Actualizado</th>
             <th class="text-center">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(material, index) in rawMaterials" :key="material.id">
+          <tr v-for="(supplier, index) in suppliers" :key="supplier.id">
             <th scope="row">{{ index + 1 }}</th>
-            <td>{{ material.name }}</td>
-            <td>{{ material.unit }}</td>
-            <td>{{ material.current_stock }}</td>
-            <td>{{ formatDate(material.created_at) }}</td>
-            <td>{{ formatDate(material.updated_at) }}</td>
+            <td>{{ supplier.name }}</td>
+            <td>{{ supplier.contact_info }}</td>
+            <td>{{ formatDate(supplier.created_at) }}</td>
+            <td>{{ formatDate(supplier.updated_at) }}</td>
             <td class="text-center">
               <button
-                @click="editRawMaterial(material.id)"
+                @click="editSupplier(supplier.id)"
                 class="btn btn-sm btn-warning me-2"
               >
                 <font-awesome-icon icon="pencil" />
               </button>
               <button
-                @click="deleteRawMaterial(material.id)"
+                @click="deleteSupplier(supplier.id)"
                 class="btn btn-sm btn-danger"
               >
                 <font-awesome-icon icon="trash" />
               </button>
             </td>
           </tr>
-          <tr v-if="rawMaterials.length === 0">
-            <td colspan="7" class="text-center py-4 text-muted">
-              No hay materias primas registradas.
+          <tr v-if="suppliers.length === 0">
+            <td colspan="6" class="text-center py-4 text-muted">
+              No hay proveedores registrados.
             </td>
           </tr>
         </tbody>
@@ -66,36 +64,36 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export default {
-  name: "RawMaterialsView",
+  name: "SuppliersView",
   data() {
     return {
-      rawMaterials: [],
+      suppliers: [],
     };
   },
   methods: {
-    fetchRawMaterials() {
+    fetchSuppliers() {
       axios
-        .get("http://127.0.0.1:8000/api/raw-materials")
+        .get("http://127.0.0.1:8000/api/suppliers")
         .then((response) => {
-          this.rawMaterials = response.data;
+          this.suppliers = response.data;
         })
         .catch((error) => {
-          console.error("Error al cargar las materias primas:", error);
+          console.error("Error al cargar los proveedores:", error);
         });
     },
     formatDate(date) {
       if (!date) return "";
       return new Date(date).toLocaleString();
     },
-    newRawMaterial() {
-      this.$router.push({ name: "NewRawMaterials" });
+    newSupplier() {
+      this.$router.push({ name: "NewSuppliers" });
     },
-    editRawMaterial(id) {
-      this.$router.push({ name: "EditRawMaterials", params: { id: `${id}` } });
+    editSupplier(id) {
+      this.$router.push({ name: "EditSuppliers", params: { id: `${id}` } });
     },
-    deleteRawMaterial(id) {
+    deleteSupplier(id) {
       Swal.fire({
-        title: `¿Deseas eliminar la materia prima con ID ${id}?`,
+        title: `¿Deseas eliminar el proveedor con ID ${id}?`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Eliminar",
@@ -104,29 +102,25 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete(`http://127.0.0.1:8000/api/raw-materials/${id}`)
+            .delete(`http://127.0.0.1:8000/api/suppliers/${id}`)
             .then(() => {
               Swal.fire(
                 "¡Eliminado!",
-                "La materia prima ha sido eliminada.",
+                "El proveedor ha sido eliminado.",
                 "success"
               );
-              this.fetchRawMaterials();
+              this.fetchSuppliers();
             })
             .catch((error) => {
-              console.error("Error al eliminar materia prima:", error);
-              Swal.fire(
-                "Error",
-                "No se pudo eliminar la materia prima.",
-                "error"
-              );
+              console.error("Error al eliminar proveedor:", error);
+              Swal.fire("Error", "No se pudo eliminar el proveedor.", "error");
             });
         }
       });
     },
   },
   mounted() {
-    this.fetchRawMaterials();
+    this.fetchSuppliers();
   },
 };
 </script>
