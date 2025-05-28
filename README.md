@@ -30,6 +30,10 @@ import IngredientsView from "@/views/IngredientsView.vue";
 import NewIngredientes from "@/components/ingredients/NewIngredientes.vue";
 import EditIngredientes from "@/components/ingredients/EditIngredientes.vue";
 
+import Order_extraView from "@/views/Order_extraView.vue";
+import EditOrder_extra from "@/components/order_extras/EditOrder_extra.vue";
+import NewOrder_extra from "@/components/order_extras/NewOrder_extra.vue";
+
 
 
 
@@ -67,3 +71,21 @@ import EditIngredientes from "@/components/ingredients/EditIngredientes.vue";
     name: "Edit Ingredients",
     component: EditIngredientes,
   },
+
+
+    {
+    path: "/order_extra",
+    name: "Order_extra",
+    component: Order_extraView,
+  },
+   {
+    path: "/order_extra/new",
+    name: "Order_extraNew",
+    component: NewOrder_extra,
+  },
+     {
+    path: "/order_extra/edit/:id",
+    name: "Order_extraEdit",
+    component: EditOrder_extra,
+  },
+
