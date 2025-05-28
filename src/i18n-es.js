@@ -313,7 +313,31 @@ export default {
   load_error: "No se pudo cargar el empleado.",
   create_error: "No se pudo crear el empleado.",
   update_error: "No se pudo actualizar el empleado."
-}
+},
+ingredients: {
+  title: "Ingredientes",
+  new: "Nuevo Ingrediente",
+  edit: "Editar Ingrediente",
+  form_register_title: "Formulario de Registro",
+  form_edit_title: "Formulario de Edición",
+  name: "Nombre",
+  actions: "Acciones",
+  no_ingredients: "No hay ingredientes registrados.",
+  save: "Guardar",
+  saving: "Guardando...",
+  cancel: "Cancelar",
+  created_success: "Ingrediente creado correctamente",
+  updated_success: "Ingrediente actualizado correctamente",
+  deleted_success: "El ingrediente ha sido eliminado.",
+  delete_confirm_title: "¿Deseas eliminar el ingrediente con ID {id}?",
+  delete_confirm_button: "Eliminar",
+  delete_cancel_button: "Cancelar",
+  delete_error: "Error eliminando ingrediente.",
+  load_error: "No se pudo cargar el ingrediente.",
+  create_error: "No se pudo crear el ingrediente.",
+  update_error: "No se pudo actualizar el ingrediente.",
+  save_changes: "Guardar Cambios"
+},
   
 
 

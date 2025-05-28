@@ -301,6 +301,30 @@ export default {
   load_error: "Could not load the employee.",
   create_error: "Could not create the employee.",
   update_error: "Could not update the employee."
-}
+},
+ingredients: {
+  title: "Ingredients",
+  new: "New Ingredient",
+  edit: "Edit Ingredient",
+  form_register_title: "Registration Form",
+  form_edit_title: "Edit Form",
+  name: "Name",
+  actions: "Actions",
+  no_ingredients: "No ingredients registered.",
+  save: "Save",
+  saving: "Saving...",
+  cancel: "Cancel",
+  created_success: "Ingredient created successfully",
+  updated_success: "Ingredient updated successfully",
+  deleted_success: "Ingredient has been deleted.",
+  delete_confirm_title: "Do you want to delete the ingredient with ID {id}?",
+  delete_confirm_button: "Delete",
+  delete_cancel_button: "Cancel",
+  delete_error: "Error deleting ingredient.",
+  load_error: "Could not load the ingredient.",
+  create_error: "Could not create the ingredient.",
+  update_error: "Could not update the ingredient.",
+  save_changes: "Save Changes"
+},
   
 };
