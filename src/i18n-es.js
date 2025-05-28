@@ -93,6 +93,7 @@ export default {
     saving: "Guardando...",
     update: "Actualizar",
     cancel: "Cancelar",
+    create: "Crear", 
   },
   sidebar: {
     title: "Pizzería",
@@ -118,4 +119,23 @@ export default {
     home: "Inicio",
     about: "Acerca",
   },
+  suppliers: {
+    title: "Proveedores",
+    new: "Agregar Proveedor",
+    edit: "Editar Proveedor",
+    delete: "Eliminar Proveedor",
+    confirmDelete: "¿Está seguro de que desea eliminar este proveedor?",
+    name: "Nombre",
+    contact: "Contacto",
+    phone: "Teléfono",
+    email: "Correo electrónico",
+    address: "Dirección",
+    created: "Creado",
+    updated: "Actualizado",
+    save: "Guardar",
+    cancel: "Cancelar",
+    actions: "Acciones",
+    noSuppliers: "No hay proveedores disponibles.",
+  },
+
 };
