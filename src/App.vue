@@ -2,7 +2,7 @@
   <div id="app" class="d-flex flex-column flex-md-row">
     <!-- Sidebar tipo acordeón -->
     <nav class="sidebar bg-danger text-white p-3">
-      <h4 class="fw-bold text-white mb-4">🍕 Pizzería</h4>
+      <h4 class="fw-bold text-white mb-4">🍕 {{ $t("sidebar.title") }}</h4>
 
       <div class="accordion" id="sidebarAccordion">
         <!-- Gestión General -->
@@ -16,7 +16,7 @@
               aria-expanded="false"
               aria-controls="gestionGeneral"
             >
-              🧾 Gestión General
+              🧾 {{ $t("sidebar.general") }}
             </button>
           </h2>
           <div
@@ -26,16 +26,16 @@
           >
             <div class="accordion-body p-0">
               <router-link class="nav-link ps-4 py-2" to="/users"
-                >👥 Usuarios</router-link
+                >👥 {{ $t("sidebar.users") }}</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/customers"
-                >👤 Clientes</router-link
+                >👤 {{ $t("sidebar.clients") }}</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/employees"
-                >🧑‍💼 Empleados</router-link
+                >🧑‍💼 {{ $t("sidebar.employees") }}</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/supliders"
-                >🚚 Proveedores</router-link
+                >🚚 {{ $t("sidebar.suppliers") }}</router-link
               >
             </div>
           </div>
@@ -52,7 +52,7 @@
               aria-expanded="false"
               aria-controls="productos"
             >
-              🍕 Productos
+              🍕 {{ $t("sidebar.products") }}
             </button>
           </h2>
           <div
@@ -62,16 +62,16 @@
           >
             <div class="accordion-body p-0">
               <router-link class="nav-link ps-4 py-2" to="/pizzas"
-                >🍕 Pizzas</router-link
+                >🍕 {{ $t("sidebar.pizzas") }}</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/pizza-sizes"
-                >📏 Pizza Size</router-link
+                >📏 {{ $t("sidebar.pizzaSizes") }}</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/ingredients"
-                >🌶️ Ingredientes</router-link
+                >🌶️ {{ $t("sidebar.ingredients") }}</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/RawMaterials"
-                >🧂 Materias Primas</router-link
+                >🧂 {{ $t("sidebar.rawMaterials") }}</router-link
               >
             </div>
           </div>
@@ -88,7 +88,7 @@
               aria-expanded="false"
               aria-controls="relaciones"
             >
-              🔁 Relaciones
+              🔁 {{ $t("sidebar.relations") }}
             </button>
           </h2>
           <div
@@ -98,10 +98,10 @@
           >
             <div class="accordion-body p-0">
               <router-link class="nav-link ps-4 py-2" to="/pizza-ingredients"
-                >🍽️ Ingred. por Pizza</router-link
+                >🍽️ {{ $t("sidebar.pizzaIngredients") }}</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/pizza-raw-materials"
-                >⚙️ Mat. por Pizza</router-link
+                >⚙️ {{ $t("sidebar.pizzaRawMaterials") }}</router-link
               >
             </div>
           </div>
@@ -118,7 +118,7 @@
               aria-expanded="false"
               aria-controls="operaciones"
             >
-              📦 Operaciones
+              📦 {{ $t("sidebar.operations") }}
             </button>
           </h2>
           <div
@@ -128,19 +128,16 @@
           >
             <div class="accordion-body p-0">
               <router-link class="nav-link ps-4 py-2" to="/orders"
-                >📦 Órdenes</router-link
+                >📦 {{ $t("sidebar.orders") }}</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/order-pizzas"
-                >🍕 Orden Pizzas</router-link
+                >🍕 {{ $t("sidebar.orderPizzas") }}</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/order-extras"
-                >➕ Extras</router-link
+                >➕ {{ $t("sidebar.extras") }}</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/purchases"
-                >🧾 Compras</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/pay-modes"
-                >💳 Modos de Pago</router-link
+                >🧾 {{ $t("sidebar.purchases") }}</router-link
               >
             </div>
           </div>
@@ -157,7 +154,7 @@
               aria-expanded="false"
               aria-controls="otros"
             >
-              ℹ️ Otros
+              ℹ️ {{ $t("sidebar.other") }}
             </button>
           </h2>
           <div
@@ -167,15 +164,26 @@
           >
             <div class="accordion-body p-0">
               <router-link class="nav-link ps-4 py-2" to="/"
-                >🏠 Inicio</router-link
+                >🏠 {{ $t("sidebar.home") }}</router-link
               >
-            </div>
-            <div class="accordion-body p-0">
               <router-link class="nav-link ps-4 py-2" to="/about"
-                >ℹ️ Acerca</router-link
+                >ℹ️ {{ $t("sidebar.about") }}</router-link
               >
             </div>
           </div>
+        </div>
+
+        <!-- Botones de idioma -->
+        <div class="mt-4 text-center">
+          <button
+            @click="$i18n.locale = 'es'"
+            class="btn btn-light btn-sm me-2"
+          >
+            🇪🇸 ES
+          </button>
+          <button @click="$i18n.locale = 'en'" class="btn btn-light btn-sm">
+            🇺🇸 EN
+          </button>
         </div>
       </div>
     </nav>
