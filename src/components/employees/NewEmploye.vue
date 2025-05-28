@@ -19,11 +19,7 @@
                 required
               >
                 <option value="" disabled>Seleccione un usuario</option>
-                <option
-                  v-for="user in users"
-                  :key="user.id"
-                  :value="user.id"
-                >
+                <option v-for="user in users" :key="user.id" :value="user.id">
                   {{ user.name }} ({{ user.email }})
                 </option>
               </select>
@@ -84,6 +80,13 @@
           </div>
 
           <!-- Botones -->
+
+          <router-link
+            class="btn btn-warning btn-sm"
+            :to="{ name: 'EditarBranch', params: { id: branch.id } }"
+          >
+            Editar
+          </router-link>
           <button
             type="submit"
             class="btn text-white"

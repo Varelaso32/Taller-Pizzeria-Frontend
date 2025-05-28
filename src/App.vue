@@ -37,6 +37,9 @@
               <router-link class="nav-link ps-4 py-2" to="/suppliers"
                 >🚚 Proveedores</router-link
               >
+              <router-link class="nav-link ps-4 py-2" to="/order_extra"
+                > Prueba Aqui</router-link
+              >
             </div>
           </div>
         </div>
@@ -220,4 +223,3 @@
   min-height: 100vh;
 }
 </style>
- 
