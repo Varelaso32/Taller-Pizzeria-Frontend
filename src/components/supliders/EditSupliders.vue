@@ -1,11 +1,11 @@
 <template>
   <div class="container py-4">
     <div class="card shadow-sm rounded">
-      <div class="card-header fw-bold">Editar Proveedor</div>
+      <div class="card-header fw-bold">{{ $t("suppliers.edit") }}</div>
       <div class="card-body">
         <form v-if="form" @submit.prevent="updateSupplier">
           <div class="mb-3">
-            <label for="name" class="form-label">Nombre</label>
+            <label for="name" class="form-label">{{ $t("suppliers.name") }}</label>
             <input
               type="text"
               id="name"
@@ -16,7 +16,7 @@
             />
           </div>
           <div class="mb-3">
-            <label for="contact_info" class="form-label">Contacto</label>
+            <label for="contact_info" class="form-label">{{ $t("suppliers.contact") }}</label>
             <input
               type="text"
               id="contact_info"
@@ -26,13 +26,13 @@
               maxlength="255"
             />
           </div>
-          <button type="submit" class="btn btn-danger me-2">Guardar</button>
+          <button type="submit" class="btn btn-danger me-2">{{ $t("buttons.save") }}</button>
           <button type="button" class="btn btn-secondary" @click="cancelEdit">
-            Cancelar
+            {{ $t("buttons.cancel") }}
           </button>
         </form>
         <div v-else>
-          <p>Cargando datos...</p>
+          <p>{{ $t("loading") }}</p>
         </div>
       </div>
     </div>
@@ -62,7 +62,7 @@ export default {
           this.form = response.data;
         })
         .catch(() => {
-          Swal.fire("Error", "No se pudo cargar el proveedor.", "error");
+          Swal.fire(this.$t("alerts.error"), this.$t("suppliers.load_error"), "error");
           this.$router.push({ name: "Supliders" });
         });
     },
@@ -72,17 +72,17 @@ export default {
         .put(`http://127.0.0.1:8000/api/suppliers/${id}`, this.form)
         .then(() => {
           Swal.fire(
-            "Actualizado",
-            "El proveedor ha sido actualizado correctamente.",
+            this.$t("alerts.updated"),
+            this.$t("suppliers.updated_success"),
             "success"
           );
           this.$router.push({ name: "Supliders" });
         })
         .catch((error) => {
           if (error.response && error.response.status === 400) {
-            Swal.fire("Error", error.response.data.msg, "error");
+            Swal.fire(this.$t("alerts.error"), error.response.data.msg, "error");
           } else {
-            Swal.fire("Error", "No se pudo actualizar el proveedor.", "error");
+            Swal.fire(this.$t("alerts.error"), this.$t("suppliers.update_error"), "error");
           }
         });
     },

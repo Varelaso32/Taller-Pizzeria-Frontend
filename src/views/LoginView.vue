@@ -1,67 +1,70 @@
 <template>
-  <div class="login-container container mt-5">
-    <h2 class="text-center mb-4">Iniciar Sesión</h2>
-    <form @submit.prevent="handleLogin">
-      <div class="mb-3">
-        <label for="username" class="form-label">Correo:</label>
-        <input
-          id="username"
-          v-model="username"
-          required
-          class="form-control"
-          autocomplete="username"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Contraseña:</label>
-        <input
-          id="password"
-          type="password"
-          v-model="password"
-          required
-          class="form-control"
-          autocomplete="current-password"
-        />
-      </div>
-      <button type="submit" class="btn btn-danger w-100">Entrar</button>
-    </form>
-    <p v-if="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</p>
+  <div class="login-wrapper">
+    <div class="container" style="max-width: 400px;">
+      <h2 class="text-center mb-4">Iniciar Sesión</h2>
+
+      <form @submit.prevent="login">
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo electrónico</label>
+          <input type="email" id="email" class="form-control" v-model="email" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input type="password" id="password" class="form-control" v-model="password" required />
+        </div>
+
+        <div v-if="error" class="alert alert-danger">
+          {{ error }}
+        </div>
+
+        <button type="submit" class="btn btn-danger w-100">Entrar</button>
+      </form>
+    </div>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+<script>
+export default {
+  name: 'LoginView',
+  data() {
+    return {
+      email: '',
+      password: '',
+      error: ''
+    };
+  },
+  methods: {
+    login() {
+      const validUser = {
+        email: 'admin@example.com',
+        password: '1234'
+      };
 
-const router = useRouter()
-const username = ref('')
-const password = ref('')
-const errorMessage = ref('')
-
-const validUser = {
-  username: 'admin@example.com',
-  password: '1234'
-}
-
-function handleLogin() {
-  if (username.value === validUser.username && password.value === validUser.password) {
-    localStorage.setItem('user', JSON.stringify({ username: username.value }))
-    errorMessage.value = ''
-    router.push({ name: 'home' })
-  } else {
-    errorMessage.value = 'Usuario o contraseña incorrectos'
+      if (this.email === validUser.email && this.password === validUser.password) {
+        localStorage.setItem('user', JSON.stringify({ email: this.email }));
+        this.$router.push('/');
+      } else {
+        this.error = 'Correo o contraseña incorrectos';
+      }
+    }
   }
-}
+};
 </script>
 
 <style scoped>
-.login-container {
-  max-width: 400px;
-  margin: 100px auto;
-  padding: 2rem;
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.container {
   background: #fff;
+  padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 </style>
- 
