@@ -44,20 +44,21 @@ export default {
   },
   methods: {
     createPizza() {
-      axios
-        .post("http://127.0.0.1:8000/api/pizzas", this.form)
-        .then(() => {
-          Swal.fire(this.$t("alerts.created"), this.$t("pizzas.createdSuccess"), "success");
-          this.$router.push({ name: "Pizzas" });
-        })
-        .catch((error) => {
-          if (error.response && error.response.status === 400) {
-            Swal.fire(this.$t("alerts.error"), this.$t("pizzas.errorNameInvalid"), "error");
-          } else {
-            Swal.fire(this.$t("alerts.error"), this.$t("pizzas.createError"), "error");
-          }
-        });
-    },
+  const vm = this;
+  axios
+    .post("http://127.0.0.1:8000/api/pizzas", this.form)
+    .then(() => {
+      Swal.fire(vm.$t("alerts.created"), vm.$t("pizzas.createdSuccess"), "success");
+      vm.$router.push({ name: "Pizzas" });
+    })
+    .catch((error) => {
+      if (error.response && error.response.status === 400) {
+        Swal.fire(vm.$t("alerts.error"), vm.$t("pizzas.errorNameInvalid"), "error");
+      } else {
+        Swal.fire(vm.$t("alerts.error"), vm.$t("pizzas.createError"), "error");
+      }
+    });
+},
     cancelCreate() {
       this.$router.push({ name: "Pizzas" });
     },
