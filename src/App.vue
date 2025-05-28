@@ -65,16 +65,13 @@
                 >🍕 Pizzas</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/pizza-sizes"
-                >🍕 Pizza Size</router-link
+                >📏 Pizza Size</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/ingredients"
                 >🌶️ Ingredientes</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/RawMaterials"
                 >🧂 Materias Primas</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/pizza-sizes/id"
-                >📏 Tamaños</router-link
               >
             </div>
           </div>
