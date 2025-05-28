@@ -15,10 +15,18 @@
           </h2>
           <div id="gestionGeneral" class="accordion-collapse collapse" data-bs-parent="#sidebarAccordion">
             <div class="accordion-body p-0">
-              <router-link class="nav-link ps-4 py-2" to="/users">👥 {{ $t("sidebar.users") }}</router-link>
-              <router-link class="nav-link ps-4 py-2" to="/customers">👤 {{ $t("sidebar.clients") }}</router-link>
-              <router-link class="nav-link ps-4 py-2" to="/employees">🧑‍💼 {{ $t("sidebar.employees") }}</router-link>
-              <router-link class="nav-link ps-4 py-2" to="/supliders">🚚 {{ $t("sidebar.suppliers") }}</router-link>
+              <router-link class="nav-link ps-4 py-2" to="/users"
+                >👥 {{ $t("sidebar.users") }}</router-link
+              >
+              <router-link class="nav-link ps-4 py-2" to="/clients"
+                >👤 {{ $t("sidebar.clients") }}</router-link
+              >
+              <router-link class="nav-link ps-4 py-2" to="/employees"
+                >🧑‍💼 {{ $t("sidebar.employees") }}</router-link
+              >
+              <router-link class="nav-link ps-4 py-2" to="/supliders"
+                >🚚 {{ $t("sidebar.suppliers") }}</router-link
+              >
             </div>
           </div>
         </div>
@@ -26,9 +34,15 @@
         <!-- Productos -->
         <div class="accordion-item bg-danger border-0">
           <h2 class="accordion-header">
-            <button class="accordion-button collapsed bg-danger text-white" type="button" data-bs-toggle="collapse"
-              data-bs-target="#productos" aria-expanded="false" aria-controls="productos">
-              🍕 {{ $t("sidebar.products") }}
+            <button
+              class="accordion-button collapsed bg-danger text-white"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#productos"
+              aria-expanded="false"
+              aria-controls="productos"
+            >
+              💰 {{ $t("sidebar.products") }}
             </button>
           </h2>
           <div id="productos" class="accordion-collapse collapse" data-bs-parent="#sidebarAccordion">
