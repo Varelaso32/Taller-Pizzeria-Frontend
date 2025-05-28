@@ -1,20 +1,20 @@
 <template>
   <div class="container text-start">
-    <h1 class="text-danger fw-bold">Editar Pedido</h1>
+    <h1 class="text-danger fw-bold">{{ $t("orders.editOrderTitle") }}</h1>
     <div class="card">
-      <div class="card-header fw-bold">Formulario de Pedido</div>
+      <div class="card-header fw-bold">{{ $t("orders.orderForm") }}</div>
       <div class="card-body">
         <form @submit.prevent="updateOrder">
           <!-- Cliente -->
           <div class="mb-3" v-if="clients.length">
-            <label for="client_id" class="form-label">Cliente</label>
+            <label for="client_id" class="form-label">{{ $t("orders.client") }}</label>
             <select
               id="client_id"
               v-model="order.client_id"
               class="form-select"
               required
             >
-              <option disabled value="">Seleccione un cliente</option>
+              <option disabled value="">{{ $t("orders.selectClient") }}</option>
               <option
                 v-for="client in clients"
                 :key="client.id"
@@ -27,14 +27,14 @@
 
           <!-- Sucursal -->
           <div class="mb-3" v-if="branches.length">
-            <label for="branch_id" class="form-label">Sucursal</label>
+            <label for="branch_id" class="form-label">{{ $t("orders.branch") }}</label>
             <select
               id="branch_id"
               v-model="order.branch_id"
               class="form-select"
               required
             >
-              <option disabled value="">Seleccione una sucursal</option>
+              <option disabled value="">{{ $t("orders.selectBranch") }}</option>
               <option
                 v-for="branch in branches"
                 :key="branch.id"
@@ -47,15 +47,15 @@
 
           <!-- Repartidor -->
           <div class="mb-3" v-if="deliveryPersons.length">
-            <label for="delivery_person_id" class="form-label"
-              >Repartidor</label
-            >
+            <label for="delivery_person_id" class="form-label">
+              {{ $t("orders.deliveryPerson") }}
+            </label>
             <select
               id="delivery_person_id"
               v-model="order.delivery_person_id"
               class="form-select"
             >
-              <option value="">Sin repartidor</option>
+              <option value="">{{ $t("orders.noDeliveryPerson") }}</option>
               <option
                 v-for="employee in deliveryPersons"
                 :key="employee.id"
@@ -68,9 +68,7 @@
 
           <!-- Precio Total -->
           <div class="mb-3">
-            <label for="total_price" class="form-label"
-              >Precio Total (COP)</label
-            >
+            <label for="total_price" class="form-label">{{ $t("orders.totalLabel") }} (COP)</label>
             <input
               type="number"
               id="total_price"
@@ -83,33 +81,31 @@
 
           <!-- Estado -->
           <div class="mb-3">
-            <label for="status" class="form-label">Estado</label>
+            <label for="status" class="form-label">{{ $t("orders.status") }}</label>
             <select
               id="status"
               v-model="order.status"
               class="form-select"
               required
             >
-              <option value="pendiente">Pendiente</option>
-              <option value="en_preparacion">En preparación</option>
-              <option value="listo">Listo</option>
-              <option value="entregado">Entregado</option>
+              <option value="pendiente">{{ $t("orders.statusPending") }}</option>
+              <option value="en_preparacion">{{ $t("orders.statusPreparing") }}</option>
+              <option value="listo">{{ $t("orders.statusReady") }}</option>
+              <option value="entregado">{{ $t("orders.statusDelivered") }}</option>
             </select>
           </div>
 
           <!-- Tipo de Entrega -->
           <div class="mb-3">
-            <label for="delivery_type" class="form-label"
-              >Tipo de Entrega</label
-            >
+            <label for="delivery_type" class="form-label">{{ $t("orders.deliveryType") }}</label>
             <select
               id="delivery_type"
               v-model="order.delivery_type"
               class="form-select"
               required
             >
-              <option value="en_local">En local</option>
-              <option value="a_domicilio">A domicilio</option>
+              <option value="en_local">{{ $t("orders.deliveryLocal") }}</option>
+              <option value="a_domicilio">{{ $t("orders.deliveryHome") }}</option>
             </select>
           </div>
 
@@ -119,10 +115,10 @@
             class="btn text-white"
             style="background-color: #c1121f"
           >
-            Guardar
+            {{ $t("orders.save") }}
           </button>
           <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            Cancelar
+            {{ $t("orders.cancel") }}
           </button>
         </form>
       </div>
