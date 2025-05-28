@@ -1,37 +1,27 @@
 <template>
   <div class="container py-4">
-    <h1 class="text-danger fw-bold mb-4">Nueva Pizza</h1>
+    <h1 class="text-danger fw-bold mb-4">{{ $t("pizzas.newTitle") }}</h1>
     <div class="card shadow-sm rounded">
-      <div class="card-header fw-bold">Datos de la Pizza</div>
+      <div class="card-header fw-bold">{{ $t("pizzas.dataTitle") }}</div>
       <div class="card-body">
         <form @submit.prevent="createPizza">
-          <!-- Nombre de la Pizza -->
           <div class="mb-3">
-            <label for="name" class="form-label">Nombre de la Pizza</label>
+            <label for="name" class="form-label">{{ $t("pizzas.name") }}</label>
             <input
               type="text"
               id="name"
               v-model="form.name"
               class="form-control"
               required
-              placeholder="Ingrese el nombre de la pizza"
+              :placeholder="$t('pizzas.namePlaceholder')"
             />
           </div>
 
-          <!-- Botones -->
-          <button
-            type="submit"
-            class="btn text-white"
-            style="background-color: #c1121f"
-          >
-            Crear
+          <button type="submit" class="btn btn-danger">
+            {{ $t("buttons.create") }}
           </button>
-          <button
-            type="button"
-            class="btn btn-secondary ms-2"
-            @click="cancelCreate"
-          >
-            Cancelar
+          <button type="button" class="btn btn-secondary ms-2" @click="cancelCreate">
+            {{ $t("buttons.cancel") }}
           </button>
         </form>
       </div>
@@ -57,22 +47,14 @@ export default {
       axios
         .post("http://127.0.0.1:8000/api/pizzas", this.form)
         .then(() => {
-          Swal.fire(
-            "Creado",
-            "La pizza ha sido creada correctamente.",
-            "success"
-          );
+          Swal.fire(this.$t("alerts.created"), this.$t("pizzas.createdSuccess"), "success");
           this.$router.push({ name: "Pizzas" });
         })
         .catch((error) => {
           if (error.response && error.response.status === 400) {
-            Swal.fire(
-              "Error",
-              "El nombre ya está en uso o es inválido.",
-              "error"
-            );
+            Swal.fire(this.$t("alerts.error"), this.$t("pizzas.errorNameInvalid"), "error");
           } else {
-            Swal.fire("Error", "Error al crear la pizza.", "error");
+            Swal.fire(this.$t("alerts.error"), this.$t("pizzas.createError"), "error");
           }
         });
     },

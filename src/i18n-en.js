@@ -150,7 +150,32 @@ export default {
     updatedSuccess: "Raw material updated successfully.",
     updateError: "Error updating raw material.",
   },
-  
+  pizzas: {
+    title: "Pizza List",
+    new: "New Pizza",
+    newTitle: "New Pizza",
+    editTitle: "Edit Pizza",
+    dataTitle: "Pizza Data",
+    name: "Pizza Name",
+    namePlaceholder: "Enter the pizza name",
+    created: "Created",
+    updated: "Updated",
+    actions: "Actions",
+    noPizzas: "No pizzas registered.",
+    errorLoad: "Error loading pizza.",
+    deleteTitle: "Delete pizza with ID {id}?",
+    deleteConfirm: "Delete",
+    deleteCancel: "Cancel",
+    deleted: "Deleted",
+    deletedMsg: "The pizza has been deleted.",
+    deleteError: "Error deleting pizza.",
+    createdSuccess: "Pizza created successfully.",
+    createError: "Error creating pizza.",
+    updatedSuccess: "Pizza updated successfully.",
+    updateError: "Error updating pizza.",
+    errorNameInvalid: "The name is already in use or invalid.",
+    loadError: "Pizza not found",
+  },
   
   
 };

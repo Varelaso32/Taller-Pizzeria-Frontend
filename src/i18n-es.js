@@ -162,7 +162,32 @@ export default {
     updatedSuccess: "Materia prima actualizada correctamente.",
     updateError: "Error al actualizar la materia prima.",
   },
-  
+  pizzas: {
+    title: "Listado de Pizzas",
+    new: "Nueva Pizza",
+    newTitle: "Nueva Pizza",
+    editTitle: "Editar Pizza",
+    dataTitle: "Datos de la Pizza",
+    name: "Nombre de la Pizza",
+    namePlaceholder: "Ingrese el nombre de la pizza",
+    created: "Creado",
+    updated: "Actualizado",
+    actions: "Acciones",
+    noPizzas: "No hay pizzas registradas.",
+    errorLoad: "Error al cargar la pizza.",
+    deleteTitle: "¿Deseas eliminar la pizza con ID {id}?",
+    deleteConfirm: "Eliminar",
+    deleteCancel: "Cancelar",
+    deleted: "¡Eliminado!",
+    deletedMsg: "La pizza ha sido eliminada.",
+    deleteError: "Error al eliminar la pizza.",
+    createdSuccess: "La pizza ha sido creada correctamente.",
+    createError: "Error al crear la pizza.",
+    updatedSuccess: "La pizza se ha actualizado correctamente.",
+    updateError: "Error al actualizar la pizza.",
+    errorNameInvalid: "El nombre ya está en uso o es inválido.",
+    loadError: "Pizza no encontrada",
+  },
 
 
 };
