@@ -269,5 +269,38 @@ export default {
     update_error: "Could not update the client.",
     form_title: "Client Information"
   },
+  employees: {
+    user_associated: "Usuario asociado",
+  select_position: "Selecciona una posición",
+  positions: {
+    cashier: "Cajero",
+    admin: "Administrador",
+    cook: "Cocinero",
+    messenger: "Mensajero"
+  },
+  list_title: "Employees List",
+  new_employee: "New Employee",
+  edit_employee: "Edit Employee",
+  name: "Name",
+  email: "Email",
+  role: "Role",
+  position: "Position",
+  identification_number: "Identification Number",
+  salary: "Salary",
+  hire_date: "Hire Date",
+  actions: "Actions",
+  no_employees: "No employees registered.",
+  select_user: "Select a user",
+  save: "Save",
+  cancel: "Cancel",
+  form_title: "Employee Data",
+  delete_confirm: "Do you want to delete the employee with ID {id}?",
+  deleted_title: "Employee Deleted",
+  deleted_message: "The employee was deleted successfully.",
+  delete_error: "Could not delete the employee.",
+  load_error: "Could not load the employee.",
+  create_error: "Could not create the employee.",
+  update_error: "Could not update the employee."
+}
   
 };

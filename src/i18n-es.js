@@ -281,6 +281,40 @@ export default {
     update_error: "No se pudo actualizar el cliente.",
     form_title: "Datos del Cliente"
   },
+  employees: {
+    user_associated: "User Associated",
+  select_position: "Select a position",
+  positions: {
+    cashier: "Cashier",
+    admin: "Administrator",
+    cook: "Cook",
+    messenger: "Messenger"
+  },
+  list_title: "Listado de Empleados",
+  new_employee: "Nuevo Empleado",
+  edit_employee: "Editar Empleado",
+  name: "Nombre",
+  email: "Email",
+  role: "Rol",
+  position: "Cargo",
+  identification_number: "Número de identificación",
+  salary: "Salario",
+  hire_date: "Fecha de contratación",
+  actions: "Acciones",
+  no_employees: "No hay empleados registrados.",
+  select_user: "Selecciona un usuario",
+  save: "Guardar",
+  cancel: "Cancelar",
+  form_title: "Datos del Empleado",
+  delete_confirm: "¿Deseas eliminar el empleado con ID {id}?",
+  deleted_title: "Empleado eliminado",
+  deleted_message: "El empleado ha sido eliminado correctamente.",
+  delete_error: "No se pudo eliminar el empleado.",
+  load_error: "No se pudo cargar el empleado.",
+  create_error: "No se pudo crear el empleado.",
+  update_error: "No se pudo actualizar el empleado."
+}
+  
 
 
 
