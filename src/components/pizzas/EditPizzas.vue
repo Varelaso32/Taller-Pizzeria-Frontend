@@ -1,22 +1,41 @@
 <template>
   <div class="container py-4">
-    <h2 class="mb-4">Editar Pizza</h2>
-    <form @submit.prevent="updatePizza" class="bg-white p-4 rounded shadow-sm">
-      <div class="mb-3">
-        <label for="name" class="form-label">Nombre de la Pizza</label>
-        <input
-          type="text"
-          id="name"
-          v-model="form.name"
-          class="form-control"
-          required
-        />
+    <h1 class="text-danger fw-bold mb-4">Editar Pizza</h1>
+    <div class="card shadow-sm rounded">
+      <div class="card-header fw-bold">Datos de la Pizza</div>
+      <div class="card-body">
+        <form @submit.prevent="updatePizza">
+          <!-- Nombre -->
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre de la Pizza</label>
+            <input
+              type="text"
+              id="name"
+              v-model="form.name"
+              class="form-control"
+              required
+              placeholder="Ingrese el nuevo nombre de la pizza"
+            />
+          </div>
+
+          <!-- Botones -->
+          <button
+            type="submit"
+            class="btn text-white"
+            style="background-color: #c1121f"
+          >
+            Actualizar
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary ms-2"
+            @click="cancelEdit"
+          >
+            Cancelar
+          </button>
+        </form>
       </div>
-      <button type="submit" class="btn btn-warning me-2">Actualizar</button>
-      <button type="button" class="btn btn-secondary" @click="cancelEdit">
-        Cancelar
-      </button>
-    </form>
+    </div>
   </div>
 </template>
 

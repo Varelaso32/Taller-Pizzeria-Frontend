@@ -34,11 +34,8 @@
               <router-link class="nav-link ps-4 py-2" to="/employees"
                 >🧑‍💼 Empleados</router-link
               >
-              <router-link class="nav-link ps-4 py-2" to="/suppliers"
+              <router-link class="nav-link ps-4 py-2" to="/supliders"
                 >🚚 Proveedores</router-link
-              >
-              <router-link class="nav-link ps-4 py-2" to="/supliders">
-                Prueba Aqui</router-link
               >
             </div>
           </div>
@@ -64,16 +61,16 @@
             data-bs-parent="#sidebarAccordion"
           >
             <div class="accordion-body p-0">
-              <router-link class="nav-link ps-4 py-2" to="/categories"
-                >📂 Categorías</router-link
+              <router-link class="nav-link ps-4 py-2" to="/pizzas"
+                >🍕 Pizzas</router-link
               >
-              <router-link class="nav-link ps-4 py-2" to="/products"
-                >🍕 Productos</router-link
+              <router-link class="nav-link ps-4 py-2" to="/pizza-sizes"
+                >🍕 Pizza Size</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/ingredients"
                 >🌶️ Ingredientes</router-link
               >
-              <router-link class="nav-link ps-4 py-2" to="/raw-materials"
+              <router-link class="nav-link ps-4 py-2" to="/RawMaterials"
                 >🧂 Materias Primas</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/pizza-sizes/id"

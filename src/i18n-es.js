@@ -76,4 +76,22 @@ export default {
     userCreateError: "No se pudo crear el usuario.",
     error: "Error",
   },
+  pizza_size: {
+    title_new: "Nuevo Tamaño de Pizza",
+    title_edit: "Editar Tamaño de Pizza",
+    header_form: "Datos del Tamaño",
+    pizza: "Pizza",
+    size: "Tamaño",
+    price: "Precio (COP)",
+    createdSuccess: "Tamaño de pizza creado correctamente.",
+    updatedSuccess: "Tamaño de pizza actualizado correctamente.",
+    createError: "No se pudo crear el tamaño de pizza.",
+    updateError: "No se pudo actualizar el tamaño de pizza.",
+  },
+  buttons: {
+    save: "Guardar",
+    saving: "Guardando...",
+    update: "Actualizar",
+    cancel: "Cancelar",
+  },
 };

@@ -29,13 +29,18 @@
           <!-- Cargo -->
           <div class="mb-3">
             <label for="position" class="form-label">Cargo:</label>
-            <input
-              type="text"
+            <select
               id="position"
               v-model="employee.position"
-              class="form-control"
+              class="form-select"
               required
-            />
+            >
+              <option value="" disabled>Seleccione un cargo</option>
+              <option value="cajero">Cajero</option>
+              <option value="administrador">Administrador</option>
+              <option value="cocinero">Cocinero</option>
+              <option value="mensajero">Mensajero</option>
+            </select>
           </div>
 
           <!-- Número de Identificación -->
@@ -80,13 +85,6 @@
           </div>
 
           <!-- Botones -->
-
-          <router-link
-            class="btn btn-warning btn-sm"
-            :to="{ name: 'EditarBranch', params: { id: branch.id } }"
-          >
-            Editar
-          </router-link>
           <button
             type="submit"
             class="btn text-white"
