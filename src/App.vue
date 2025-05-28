@@ -1,20 +1,20 @@
 <template>
   <div id="app" class="d-flex flex-column flex-md-row">
-    <!-- Sidebar -->
-    <nav class="sidebar p-3">
-      <!-- Encabezado -->
+    <!-- Sidebar tipo acordeón -->
+    <nav class="sidebar bg-danger text-white p-3">
       <h4 class="fw-bold text-white mb-4">🍕 {{ $t("sidebar.title") }}</h4>
 
-      <!-- Menú acordeón -->
       <div class="accordion" id="sidebarAccordion">
         <!-- Gestión General -->
-        <div class="accordion-item bg-transparent border-0">
+        <div class="accordion-item bg-danger border-0">
           <h2 class="accordion-header">
             <button
-              class="accordion-button collapsed bg-transparent text-white"
+              class="accordion-button collapsed bg-danger text-white"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#gestionGeneral"
+              aria-expanded="false"
+              aria-controls="gestionGeneral"
             >
               🧾 {{ $t("sidebar.general") }}
             </button>
@@ -25,16 +25,16 @@
             data-bs-parent="#sidebarAccordion"
           >
             <div class="accordion-body p-0">
-              <router-link class="nav-link" to="/users"
+              <router-link class="nav-link ps-4 py-2" to="/users"
                 >👥 {{ $t("sidebar.users") }}</router-link
               >
-              <router-link class="nav-link" to="/customers"
-                >👤 {{ $t("sidebar.customers") }}</router-link
+              <router-link class="nav-link ps-4 py-2" to="/clients"
+                >👤 {{ $t("sidebar.clients") }}</router-link
               >
-              <router-link class="nav-link" to="/employees"
+              <router-link class="nav-link ps-4 py-2" to="/employees"
                 >🧑‍💼 {{ $t("sidebar.employees") }}</router-link
               >
-              <router-link class="nav-link" to="/suppliers"
+              <router-link class="nav-link ps-4 py-2" to="/supliders"
                 >🚚 {{ $t("sidebar.suppliers") }}</router-link
               >
             </div>
@@ -42,15 +42,17 @@
         </div>
 
         <!-- Productos -->
-        <div class="accordion-item bg-transparent border-0">
+        <div class="accordion-item bg-danger border-0">
           <h2 class="accordion-header">
             <button
-              class="accordion-button collapsed bg-transparent text-white"
+              class="accordion-button collapsed bg-danger text-white"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#productos"
+              aria-expanded="false"
+              aria-controls="productos"
             >
-              🍕 {{ $t("sidebar.products") }}
+              💰 {{ $t("sidebar.products") }}
             </button>
           </h2>
           <div
@@ -59,33 +61,32 @@
             data-bs-parent="#sidebarAccordion"
           >
             <div class="accordion-body p-0">
-              <router-link class="nav-link" to="/categories"
-                >📂 {{ $t("sidebar.categories") }}</router-link
-              >
-              <router-link class="nav-link" to="/products"
+              <router-link class="nav-link ps-4 py-2" to="/pizzas"
                 >🍕 {{ $t("sidebar.pizzas") }}</router-link
               >
-              <router-link class="nav-link" to="/ingredients"
+              <router-link class="nav-link ps-4 py-2" to="/pizza-sizes"
+                >📏 {{ $t("sidebar.pizzaSizes") }}</router-link
+              >
+              <router-link class="nav-link ps-4 py-2" to="/ingredients"
                 >🌶️ {{ $t("sidebar.ingredients") }}</router-link
               >
-              <router-link class="nav-link" to="/raw-materials"
+              <router-link class="nav-link ps-4 py-2" to="/RawMaterials"
                 >🧂 {{ $t("sidebar.rawMaterials") }}</router-link
-              >
-              <router-link class="nav-link" to="/pizza-sizes"
-                >📏 {{ $t("sidebar.sizes") }}</router-link
               >
             </div>
           </div>
         </div>
 
         <!-- Relaciones -->
-        <div class="accordion-item bg-transparent border-0">
+        <div class="accordion-item bg-danger border-0">
           <h2 class="accordion-header">
             <button
-              class="accordion-button collapsed bg-transparent text-white"
+              class="accordion-button collapsed bg-danger text-white"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#relaciones"
+              aria-expanded="false"
+              aria-controls="relaciones"
             >
               🔁 {{ $t("sidebar.relations") }}
             </button>
@@ -96,10 +97,10 @@
             data-bs-parent="#sidebarAccordion"
           >
             <div class="accordion-body p-0">
-              <router-link class="nav-link" to="/pizza-ingredients"
+              <router-link class="nav-link ps-4 py-2" to="/pizza-ingredients"
                 >🍽️ {{ $t("sidebar.pizzaIngredients") }}</router-link
               >
-              <router-link class="nav-link" to="/pizza-raw-materials"
+              <router-link class="nav-link ps-4 py-2" to="/pizza-raw-materials"
                 >⚙️ {{ $t("sidebar.pizzaRawMaterials") }}</router-link
               >
             </div>
@@ -107,13 +108,15 @@
         </div>
 
         <!-- Operaciones -->
-        <div class="accordion-item bg-transparent border-0">
+        <div class="accordion-item bg-danger border-0">
           <h2 class="accordion-header">
             <button
-              class="accordion-button collapsed bg-transparent text-white"
+              class="accordion-button collapsed bg-danger text-white"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#operaciones"
+              aria-expanded="false"
+              aria-controls="operaciones"
             >
               📦 {{ $t("sidebar.operations") }}
             </button>
@@ -124,33 +127,32 @@
             data-bs-parent="#sidebarAccordion"
           >
             <div class="accordion-body p-0">
-              <router-link class="nav-link" to="/orders"
+              <router-link class="nav-link ps-4 py-2" to="/orders"
                 >📦 {{ $t("sidebar.orders") }}</router-link
               >
-              <router-link class="nav-link" to="/order-pizzas"
+              <router-link class="nav-link ps-4 py-2" to="/order-pizzas"
                 >🍕 {{ $t("sidebar.orderPizzas") }}</router-link
               >
-              <router-link class="nav-link" to="/order-extras"
-                >➕ {{ $t("sidebar.orderExtras") }}</router-link
+              <router-link class="nav-link ps-4 py-2" to="/order-extras"
+                >➕ {{ $t("sidebar.extras") }}</router-link
               >
-              <router-link class="nav-link" to="/purchases"
+              <router-link class="nav-link ps-4 py-2" to="/purchases"
                 >🧾 {{ $t("sidebar.purchases") }}</router-link
-              >
-              <router-link class="nav-link" to="/pay-modes"
-                >💳 {{ $t("sidebar.payModes") }}</router-link
               >
             </div>
           </div>
         </div>
 
-        <!-- Otros -->
-        <div class="accordion-item bg-transparent border-0">
+        <!-- Acerca -->
+        <div class="accordion-item bg-danger border-0">
           <h2 class="accordion-header">
             <button
-              class="accordion-button collapsed bg-transparent text-white"
+              class="accordion-button collapsed bg-danger text-white"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#otros"
+              aria-expanded="false"
+              aria-controls="otros"
             >
               ℹ️ {{ $t("sidebar.other") }}
             </button>
@@ -161,31 +163,28 @@
             data-bs-parent="#sidebarAccordion"
           >
             <div class="accordion-body p-0">
-              <router-link class="nav-link" to="/">{{
-                $t("sidebar.home")
-              }}</router-link>
-              <router-link class="nav-link" to="/about">{{
-                $t("sidebar.about")
-              }}</router-link>
+              <router-link class="nav-link ps-4 py-2" to="/"
+                >🏠 {{ $t("sidebar.home") }}</router-link
+              >
+              <router-link class="nav-link ps-4 py-2" to="/about"
+                >ℹ️ {{ $t("sidebar.about") }}</router-link
+              >
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Botones de idioma -->
-      <div class="lang-switcher mt-auto d-flex gap-2 pt-4">
-        <button
-          @click="$i18n.locale = 'es'"
-          class="btn btn-outline-light btn-sm w-100"
-        >
-          🇪🇸 ES
-        </button>
-        <button
-          @click="$i18n.locale = 'en'"
-          class="btn btn-outline-light btn-sm w-100"
-        >
-          🇬🇧 EN
-        </button>
+        <!-- Botones de idioma -->
+        <div class="mt-4 text-center">
+          <button
+            @click="$i18n.locale = 'es'"
+            class="btn btn-light btn-sm me-2"
+          >
+            🇪🇸 ES
+          </button>
+          <button @click="$i18n.locale = 'en'" class="btn btn-light btn-sm">
+            🇺🇸 EN
+          </button>
+        </div>
       </div>
     </nav>
 
@@ -198,70 +197,28 @@
 
 <style scoped>
 .sidebar {
-  width: 260px;
+  width: 250px;
   min-height: 100vh;
-  background-color: #f44336; /* rojo suave */
-  display: flex;
-  flex-direction: column;
 }
-
-.accordion-button {
-  background-color: transparent;
-  color: #ffffff;
-  font-weight: 600;
-  transition: background-color 0.2s;
-  border: none;
-}
-
-.accordion-button:not(.collapsed) {
-  background-color: #c1121f; /* rojo fuerte */
+.nav-link {
   color: #fff;
-}
-
-.accordion-body {
-  background-color: #ffebee; /* submenú: rojo muy claro */
-}
-
-.accordion-body .nav-link {
-  color: #212529;
-  padding: 8px 16px;
-  display: block;
   text-decoration: none;
-  font-weight: 500;
-  transition: background-color 0.2s;
 }
-
-.accordion-body .nav-link:hover {
-  background-color: #c1121f;
-  color: #fff;
-  border-radius: 6px;
+.nav-link:hover {
+  background-color: #9b0d19;
+  border-radius: 5px;
 }
-
 .nav-link.router-link-exact-active {
-  background-color: #a60f1a;
+  background-color: #000000;
   color: #ffffff !important;
-  border-radius: 6px;
+  border-radius: 5px;
 }
-
-.lang-switcher {
-  padding: 1rem;
-  border-top: 1px solid #ffcccc;
+.accordion-button:focus {
+  box-shadow: none;
 }
-
-.lang-switcher button {
-  font-weight: bold;
-  font-size: 0.85rem;
-  border-radius: 6px;
-  background-color: #ffffff;
-  color: #c1121f;
-  border: 1px solid #c1121f;
+.accordion-button:not(.collapsed) {
+  background-color: #a40f1b;
 }
-
-.lang-switcher button:hover {
-  background-color: #c1121f;
-  color: white;
-}
-
 .main-content {
   background-color: #ffffff;
   color: #000000;

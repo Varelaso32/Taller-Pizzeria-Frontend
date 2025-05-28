@@ -19,11 +19,7 @@
                 required
               >
                 <option value="" disabled>Seleccione un usuario</option>
-                <option
-                  v-for="user in users"
-                  :key="user.id"
-                  :value="user.id"
-                >
+                <option v-for="user in users" :key="user.id" :value="user.id">
                   {{ user.name }} ({{ user.email }})
                 </option>
               </select>
@@ -33,13 +29,18 @@
           <!-- Cargo -->
           <div class="mb-3">
             <label for="position" class="form-label">Cargo:</label>
-            <input
-              type="text"
+            <select
               id="position"
               v-model="employee.position"
-              class="form-control"
+              class="form-select"
               required
-            />
+            >
+              <option value="" disabled>Seleccione un cargo</option>
+              <option value="cajero">Cajero</option>
+              <option value="administrador">Administrador</option>
+              <option value="cocinero">Cocinero</option>
+              <option value="mensajero">Mensajero</option>
+            </select>
           </div>
 
           <!-- Número de Identificación -->
