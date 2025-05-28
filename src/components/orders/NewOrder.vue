@@ -1,6 +1,6 @@
 <template>
   <div class="container text-start">
-    <h1 class="text-danger fw-bold">{{ $t("orders.newTitle") }}</h1>
+    <h1 class="text-danger fw-bold">{{ $t("listado orders") }}</h1>
     <div class="card">
       <div class="card-header fw-bold">{{ $t("orders.header") }}</div>
       <div class="card-body">

@@ -34,6 +34,10 @@ import Order_extraView from "@/views/Order_extraView.vue";
 import EditOrder_extra from "@/components/order_extras/EditOrder_extra.vue";
 import NewOrder_extra from "@/components/order_extras/NewOrder_extra.vue";
 
+import OrdersView from "@/views/OrdersView.vue";
+import EditOrder from "@/components/orders/EditOrder.vue";
+import NewOrder from "@/components/orders/NewOrder.vue";
+
 
 
 
@@ -87,5 +91,22 @@ import NewOrder_extra from "@/components/order_extras/NewOrder_extra.vue";
     path: "/order_extra/edit/:id",
     name: "Order_extraEdit",
     component: EditOrder_extra,
+  },
+
+
+    {
+    path: "/orders",
+    name: "Orders",
+    component: OrdersView,
+  },
+  {
+    path: "/order/new",
+    name: "NewOrder",
+    component: NewOrder,
+  },
+    {
+    path: "/orders/edit/:id",
+    name: "EditOrder",
+    component: EditOrder,
   },
 
