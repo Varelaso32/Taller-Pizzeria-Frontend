@@ -76,6 +76,13 @@ export default {
     userCreateError: "No se pudo crear el usuario.",
     error: "Error",
   },
+  logout: "Cerrar sesión",
+  logoutConfirmTitle: "¿Cerrar sesión?",
+  logoutConfirmText: "¿Estás seguro de que deseas cerrar sesión?",
+  logoutConfirmButton: "Sí, cerrar sesión",
+  logoutSuccessTitle: "Sesión cerrada",
+  logoutSuccessText: "Has cerrado sesión correctamente.",
+  cancelButton: "Cancelar",
   pizza_size: {
     title_new: "Nuevo Tamaño de Pizza",
     title_edit: "Editar Tamaño de Pizza",

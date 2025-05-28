@@ -78,6 +78,13 @@ export default {
     userCreateError: "Could not create user.",
     error: "Error",
   },
+  logout: "Log out",
+  logoutConfirmTitle: "Log out?",
+  logoutConfirmText: "Are you sure you want to log out?",
+  logoutConfirmButton: "Yes, log out",
+  logoutSuccessTitle: "Logged out",
+  logoutSuccessText: "You have been logged out successfully.",
+  cancelButton: "Cancel",
   sidebar: {
     title: "Pizzeria",
     general: "General Management",
