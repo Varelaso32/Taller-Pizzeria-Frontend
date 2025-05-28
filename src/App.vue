@@ -52,7 +52,7 @@
               aria-expanded="false"
               aria-controls="productos"
             >
-              🍕 {{ $t("sidebar.products") }}
+              💰 {{ $t("sidebar.products") }}
             </button>
           </h2>
           <div
