@@ -19,26 +19,9 @@ import NewEmploye from "@/components/employees/NewEmploye.vue";
 import EditEmploye from "@/components/employees/EditEmploye.vue";
 
 
-import PizzasView from "@/views/PizzasView.vue";
-import EditPizzas from "@/components/pizzas/EditPizzas.vue";
-import NewPizzas from "@/components/pizzas/NewPizzas.vue";
 
 const routes = [
-  {
-    path: "/pizzas",
-    name: "Pizzas",
-    component: PizzasView,
-  },
-  {
-    path: "/pizzas/new",
-    name: "NewPizzas",
-    component: NewPizzas,
-  },
-      {
-    path: '/pizzas/:id/edit',
-    name: 'EditPizzas',
-    component: EditPizzas
-  },
+
 
   {
     path: "/",

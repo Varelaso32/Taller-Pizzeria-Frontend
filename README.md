@@ -129,5 +129,21 @@ import EditPizzaSize from "@/components/pizas-sizes/EditPizza-size.vue";
     component: NewPizzaSize
   },
 
+    {
+    path: "/pizzas",
+    name: "Pizzas",
+    component: PizzasView,
+  },
+  {
+    path: "/pizzas/new",
+    name: "NewPizzas",
+    component: NewPizzas,
+  },
+      {
+    path: '/pizzas/:id/edit',
+    name: 'EditPizzas',
+    component: EditPizzas
+  },
+
   
 
