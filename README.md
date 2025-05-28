@@ -34,6 +34,21 @@ import Order_extraView from "@/views/Order_extraView.vue";
 import EditOrder_extra from "@/components/order_extras/EditOrder_extra.vue";
 import NewOrder_extra from "@/components/order_extras/NewOrder_extra.vue";
 
+import OrdersView from "@/views/OrdersView.vue";
+import EditOrder from "@/components/orders/EditOrder.vue";
+import NewOrder from "@/components/orders/NewOrder.vue";
+
+import PizzaSizesView from "@/views/Pizza-sizesView.vue";
+import NewPizzaSize from "@/components/pizas-sizes/NewPizza-size.vue";
+import EditPizzaSize from "@/components/pizas-sizes/EditPizza-size.vue";
+
+import RawMaterialsView from "@/views/RawMaterialsView.vue";
+import EditRawMaterials from "@/components/rawMaterials/EditRawMaterials.vue";
+import NewRawMaterials from "@/components/rawMaterials/NewRawMaterials.vue";
+
+import SuppliersView from "@/views/SuppliersView.vue";
+import NewSupliders from "@/components/supliders/NewSupliders.vue";
+import EditSupliders from "@/components/supliders/EditSupliders.vue";
 
 
 
@@ -88,4 +103,87 @@ import NewOrder_extra from "@/components/order_extras/NewOrder_extra.vue";
     name: "Order_extraEdit",
     component: EditOrder_extra,
   },
+
+
+    {
+    path: "/orders",
+    name: "Orders",
+    component: OrdersView,
+  },
+  {
+    path: "/order/new",
+    name: "NewOrder",
+    component: NewOrder,
+  },
+    {
+    path: "/orders/edit/:id",
+    name: "EditOrder",
+    component: EditOrder,
+  },
+
+    {
+    path: "/pizza-sizes",
+    name: "Pizza-Sizes",
+    component: PizzaSizesView,
+  },
+  {
+    path: '/pizza-sizes/:id/edit',
+    name : 'EditPizzaSize',
+    component: EditPizzaSize
+  },
+    {
+    path: '/pizza-sizes/new',
+    name : 'NewPizzaSize',
+    component: NewPizzaSize
+  },
+
+    {
+    path: "/pizzas",
+    name: "Pizzas",
+    component: PizzasView,
+  },
+  {
+    path: "/pizzas/new",
+    name: "NewPizzas",
+    component: NewPizzas,
+  },
+      {
+    path: '/pizzas/:id/edit',
+    name: 'EditPizzas',
+    component: EditPizzas
+  },
+
+    {
+    path: '/RawMaterials',
+    name: 'RawMaterials',
+    component : RawMaterialsView
+  },
+  {
+    path: '/RawMaterials/new',
+    name: 'NewRawMaterials',
+    component: NewRawMaterials
+  },
+    {
+    path: '/RawMaterials/edit',
+    name: 'EditRawMaterials',
+    component: EditRawMaterials
+  },
+
+    {
+    path: "/supliders",
+    name: "Supliders",
+    component: SuppliersView,
+  },
+  {
+    path: "/supliders/new",
+    name: "NewSuppliers",
+    component: NewSupliders,
+  },
+  {
+    path: "/supliders/:id/edit",
+    name: "EditSuppliers",
+    component: EditSupliders,
+  },
+
+  
 

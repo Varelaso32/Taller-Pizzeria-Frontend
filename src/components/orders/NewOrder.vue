@@ -1,10 +1,10 @@
 <template>
   <div class="container text-start">
-    <h1 class="text-danger fw-bold">{{ $t("orders.editTitle") }}</h1>
+    <h1 class="text-danger fw-bold">{{ $t("listado orders") }}</h1>
     <div class="card">
       <div class="card-header fw-bold">{{ $t("orders.header") }}</div>
       <div class="card-body">
-        <form @submit.prevent="updateOrder">
+        <form @submit.prevent="createOrder">
           <!-- Cliente -->
           <div class="mb-3">
             <label for="client_id" class="form-label">{{ $t("orders.client") }}</label>
@@ -91,7 +91,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export default {
-  name: "EditOrder",
+  name: "NewOrder",
   data() {
     return {
       order: {
@@ -105,42 +105,24 @@ export default {
       loading: false
     };
   },
-  created() {
-    this.fetchOrder();
-  },
   methods: {
-    async fetchOrder() {
-      const id = this.$route.params.id;
-      try {
-        const response = await axios.get(`/api/orders/${id}`);
-        this.order = response.data;
-      } catch (error) {
-        Swal.fire({
-          icon: "error",
-          title: this.$t("errors.title"),
-          text: this.$t("orders.loadError"),
-        });
-        this.$router.push({ name: "Orders" });
-      }
-    },
     cancel() {
       this.$router.push({ name: "Orders" });
     },
-    async updateOrder() {
+    async createOrder() {
       this.loading = true;
-      const id = this.$route.params.id;
       try {
-        await axios.put(`/api/orders/${id}`, this.order);
+        await axios.post("/api/orders", this.order);
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: this.$t("orders.updatedSuccess"),
+          title: this.$t("orders.createdSuccess"),
           showConfirmButton: false,
           timer: 2000,
         });
         this.$router.push({ name: "Orders" });
       } catch (error) {
-        let errorMsg = this.$t("orders.updateError");
+        let errorMsg = this.$t("orders.createError");
         if (error.response?.data?.msg) {
           errorMsg = error.response.data.msg;
         }
