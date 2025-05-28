@@ -19,33 +19,26 @@ import NewEmploye from "@/components/employees/NewEmploye.vue";
 import EditEmploye from "@/components/employees/EditEmploye.vue";
 
 
-
-import PizzaSizesView from "@/views/Pizza-sizesView.vue";
-
-import NewPizzaSize from "@/components/pizas-sizes/NewPizza-size.vue";
-import EditPizzaSize from "@/components/pizas-sizes/EditPizza-size.vue";
-
-
-
-
+import PizzasView from "@/views/PizzasView.vue";
+import EditPizzas from "@/components/pizzas/EditPizzas.vue";
+import NewPizzas from "@/components/pizzas/NewPizzas.vue";
 
 const routes = [
   {
-    path: "/pizza-sizes",
-    name: "Pizza-Sizes",
-    component: PizzaSizesView,
+    path: "/pizzas",
+    name: "Pizzas",
+    component: PizzasView,
   },
   {
-    path: '/pizza-sizes/:id/edit',
-    name : 'EditPizzaSize',
-    component: EditPizzaSize
+    path: "/pizzas/new",
+    name: "NewPizzas",
+    component: NewPizzas,
   },
-    {
-    path: '/pizza-sizes/new',
-    name : 'NewPizzaSize',
-    component: NewPizzaSize
+      {
+    path: '/pizzas/:id/edit',
+    name: 'EditPizzas',
+    component: EditPizzas
   },
-
 
   {
     path: "/",
