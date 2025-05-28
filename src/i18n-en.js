@@ -71,6 +71,7 @@ export default {
     save: "Save",
     cancel: "Cancel",
     create: "Create",
+    update : "Update",
   },
   alerts: {
     userCreated: "User created successfully",
@@ -124,14 +125,32 @@ export default {
     updated_success: "Supplier has been updated successfully.",
     update_error: "Could not update the supplier.",
   },
-  alerts: {
+  rawMaterials: {
+    title: "Raw Materials",
+    new: "New Raw Material",
+    newTitle: "New Raw Material",
+    editTitle: "Edit Raw Material",
+    name: "Name",
+    unit: "Unit of Measure",
+    current_stock: "Current Stock",
     created: "Created",
     updated: "Updated",
-    error: "Error",
+    actions: "Actions",
+    noMaterials: "No raw materials registered.",
+    errorLoad: "Error loading raw materials.",
+    deleteTitle: "Delete raw material with ID {id}?",
+    deleteConfirm: "Yes, delete",
+    deleteCancel: "Cancel",
+    deleted: "Deleted",
+    deletedMsg: "Raw material deleted successfully.",
+    deleteError: "Error deleting raw material.",
+    createdSuccess: "Raw material created successfully.",
+    createError: "Error creating raw material.",
+    loadError: "Error loading raw material.",
+    updatedSuccess: "Raw material updated successfully.",
+    updateError: "Error updating raw material.",
   },
-  loading: "Loading data...",
-  buttons: {
-    save: "Save",
-    cancel: "Cancel",
-  },
+  
+  
+  
 };

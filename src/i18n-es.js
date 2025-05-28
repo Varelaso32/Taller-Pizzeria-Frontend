@@ -93,7 +93,7 @@ export default {
     saving: "Guardando...",
     update: "Actualizar",
     cancel: "Cancelar",
-    create: "Crear", 
+    create: "Crear",
   },
   sidebar: {
     title: "Pizzería",
@@ -137,5 +137,32 @@ export default {
     actions: "Acciones",
     noSuppliers: "No hay proveedores disponibles.",
   },
+  rawMaterials: {
+    title: "Materias Primas",
+    new: "Nueva Materia Prima",
+    newTitle: "Nueva Materia Prima",
+    editTitle: "Editar Materia Prima",
+    name: "Nombre",
+    unit: "Unidad de Medida",
+    current_stock: "Stock Actual",
+    created: "Creado",
+    updated: "Actualizado",
+    actions: "Acciones",
+    noMaterials: "No hay materias primas registradas.",
+    errorLoad: "Error al cargar las materias primas.",
+    deleteTitle: "¿Eliminar la materia prima con ID {id}?",
+    deleteConfirm: "Sí, eliminar",
+    deleteCancel: "Cancelar",
+    deleted: "Eliminado",
+    deletedMsg: "Materia prima eliminada correctamente.",
+    deleteError: "Error al eliminar la materia prima.",
+    createdSuccess: "Materia prima creada correctamente.",
+    createError: "Error al crear la materia prima.",
+    loadError: "Error al cargar la materia prima.",
+    updatedSuccess: "Materia prima actualizada correctamente.",
+    updateError: "Error al actualizar la materia prima.",
+  },
+  
+
 
 };

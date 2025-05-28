@@ -1,11 +1,11 @@
 <template>
   <div class="container py-4">
     <div class="card shadow-sm rounded">
-      <div class="card-header fw-bold">Nueva Materia Prima</div>
+      <div class="card-header fw-bold">{{ $t("rawMaterials.newTitle") }}</div>
       <div class="card-body">
         <form @submit.prevent="createRawMaterial">
           <div class="mb-3">
-            <label for="name" class="form-label">Nombre</label>
+            <label for="name" class="form-label">{{ $t("rawMaterials.name") }}</label>
             <input
               type="text"
               id="name"
@@ -16,7 +16,7 @@
             />
           </div>
           <div class="mb-3">
-            <label for="unit" class="form-label">Unidad</label>
+            <label for="unit" class="form-label">{{ $t("rawMaterials.unit") }}</label>
             <input
               type="text"
               id="unit"
@@ -27,7 +27,7 @@
             />
           </div>
           <div class="mb-3">
-            <label for="current_stock" class="form-label">Stock Actual</label>
+            <label for="current_stock" class="form-label">{{ $t("rawMaterials.current_stock") }}</label>
             <input
               type="number"
               id="current_stock"
@@ -37,9 +37,9 @@
               required
             />
           </div>
-          <button type="submit" class="btn btn-danger me-2">Crear</button>
+          <button type="submit" class="btn btn-danger me-2">{{ $t("buttons.create") }}</button>
           <button type="button" class="btn btn-secondary" @click="cancelCreate">
-            Cancelar
+            {{ $t("buttons.cancel") }}
           </button>
         </form>
       </div>
@@ -68,18 +68,14 @@ export default {
         .post("http://127.0.0.1:8000/api/raw-materials", this.form)
         .then(() => {
           Swal.fire(
-            "Creado",
-            "La materia prima ha sido creada correctamente.",
+            this.$t("alerts.created"),
+            this.$t("rawMaterials.createdSuccess"),
             "success"
           );
           this.$router.push({ name: "RawMaterials" });
         })
-        .catch((error) => {
-          if (error.response && error.response.status === 400) {
-            Swal.fire("Error", error.response.data.msg, "error");
-          } else {
-            Swal.fire("Error", "No se pudo crear la materia prima.", "error");
-          }
+        .catch(() => {
+          Swal.fire(this.$t("alerts.error"), this.$t("rawMaterials.createError"), "error");
         });
     },
     cancelCreate() {
