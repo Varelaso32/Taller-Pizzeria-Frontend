@@ -61,7 +61,6 @@ const routes = [
     path: "/users",
     name: "Users",
     component: Users,
-    meta: { requiresAdmin: true },
   },
   {
     path: "/users/new",
@@ -230,7 +229,7 @@ const routes = [
     component: NewRawMaterials,
   },
   {
-    path: "/RawMaterials/edit",
+    path: "/RawMaterials/:id/edit",
     name: "EditRawMaterials",
     component: EditRawMaterials,
   },
