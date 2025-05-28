@@ -254,6 +254,33 @@ export default {
     cancel: "Cancelar",
     noOrders: "No hay órdenes registradas.",
   },
+  clients: {
+    title: "Listado de Clientes",
+    new: "Nuevo Cliente",
+    edit: "Editar Cliente",
+    user: "Usuario",
+    address: "Dirección",
+    phone: "Teléfono",
+    role: "Rol",
+    name: "Nombre",
+    email: "Email",
+    actions: "Acciones",
+    no_clients: "No hay clientes registrados.",
+    select_user: "Selecciona un usuario",
+    save: "Guardar",
+    cancel: "Cancelar",
+    created_success: "Cliente creado correctamente",
+    updated_success: "Cliente actualizado correctamente",
+    deleted_success: "El cliente ha sido eliminado.",
+    delete_confirm_title: "¿Deseas eliminar el cliente con ID {id}?",
+    delete_confirm_button: "Eliminar",
+    delete_cancel_button: "Cancelar",
+    delete_error: "No se pudo eliminar el cliente.",
+    load_error: "No se pudo cargar el cliente.",
+    create_error: "No se pudo crear el cliente.",
+    update_error: "No se pudo actualizar el cliente.",
+    form_title: "Datos del Cliente"
+  },
 
 
 

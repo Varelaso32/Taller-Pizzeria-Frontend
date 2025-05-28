@@ -242,6 +242,32 @@ export default {
     cancel: "Cancel",
     noOrders: "No orders found.",
   },
-  
+   clients: {
+    title: "Client List",
+    new: "New Client",
+    edit: "Edit Client",
+    user: "User",
+    address: "Address",
+    phone: "Phone",
+    role: "Role",
+    name: "Name",
+    email: "Email",
+    actions: "Actions",
+    no_clients: "No clients registered.",
+    select_user: "Select a user",
+    save: "Save",
+    cancel: "Cancel",
+    created_success: "Client created successfully",
+    updated_success: "Client updated successfully",
+    deleted_success: "Client has been deleted.",
+    delete_confirm_title: "Do you want to delete client with ID {id}?",
+    delete_confirm_button: "Delete",
+    delete_cancel_button: "Cancel",
+    delete_error: "Could not delete the client.",
+    load_error: "Could not load the client.",
+    create_error: "Could not create the client.",
+    update_error: "Could not update the client.",
+    form_title: "Client Information"
+  },
   
 };
