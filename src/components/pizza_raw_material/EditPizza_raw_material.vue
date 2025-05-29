@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     cancel() {
-      this.$router.push({ name: "PizzaRawMaterialList" });
+      this.$router.push({ name: "PizzaRawMaterial" });
     },
     async updatePizzaRawMaterial() {
       const id = this.$route.params.id;
@@ -100,7 +100,7 @@ export default {
           showConfirmButton: false,
           position: "top-end",
         });
-        this.$router.push({ name: "PizzaRawMaterials" });
+        this.$router.push({ name: "PizzaRawMaterial" });
       } catch (error) {
         Swal.fire({
           icon: "error",
