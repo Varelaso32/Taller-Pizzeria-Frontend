@@ -18,6 +18,10 @@ import Employees from "../views/Employees.vue";
 import NewEmploye from "@/components/employees/NewEmploye.vue";
 import EditEmploye from "@/components/employees/EditEmploye.vue";
 
+import Pizza_raw_material from "@/views/pizza_raw_material.vue";
+import NewPizza_raw_material from "@/components/pizza_raw_material/NewPizza_raw_material.vue";
+import Editpizza_raw_material from "@/components/pizza_raw_material/EditPizza_raw_material.vue";
+
 
 const routes = [
   {
@@ -74,6 +78,22 @@ const routes = [
     path: "/employees/:id/edit",
     name: "EditarEmpleado",
     component: EditEmploye,
+  },
+  //Ruta Pizza_Raw_Materials
+    {
+    path: "/pizza-raw-materials",
+    name: "PizzaRawMaterial",
+    component: Pizza_raw_material,
+  },
+  {
+    path: "/pizza-raw-material/new",
+    name: "NuevaMateriaPrima",
+    component: NewPizza_raw_material,
+  },
+  {
+    path: "/pizza-raw-material/:id/edit",
+    name: "EditarMateriaPrima",
+    component: Editpizza_raw_material,
   },
 
 

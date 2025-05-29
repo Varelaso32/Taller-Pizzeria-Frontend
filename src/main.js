@@ -22,6 +22,7 @@ import {
   faTags,
   faLock,
   faUserTag,
+  faPizzaSlice, // ✅ Ícono añadido
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -33,15 +34,17 @@ import { createI18n } from "vue-i18n";
 import i18nEs from "./i18n-es";
 import i18nEn from "./i18n-en";
 
+// Configuración de i18n (idiomas)
 const i18n = createI18n({
-    messages: {
+  messages: {
     es: i18nEs,
     en: i18nEn,
   },
   fallbackFormat: "en",
-  locale:navigator.language.startsWith("es") ? "es" : "en",
+  locale: navigator.language.startsWith("es") ? "es" : "en",
 });
 
+// Agregar íconos a la biblioteca
 library.add(
   faUser,
   faIdCard,
@@ -61,9 +64,11 @@ library.add(
   faBoxes,
   faTags,
   faLock,
-  faUserTag
+  faUserTag,
+  faPizzaSlice // ✅ ¡Aquí está el ícono que faltaba!
 );
 
+// Crear y montar la app
 createApp(App)
   .component("font-awesome-icon", FontAwesomeIcon)
   .use(router)
