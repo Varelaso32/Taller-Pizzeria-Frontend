@@ -106,7 +106,6 @@ const routes = [
     name: "EditarEmpleado",
     component: EditEmploye,
   },
-  
 
   // Ruta About
   {
