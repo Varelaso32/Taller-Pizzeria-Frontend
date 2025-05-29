@@ -1,13 +1,13 @@
 <template>
   <div class="container text-start">
-    <h1 class="text-danger fw-bold">Editar Compra</h1>
+    <h1 class="text-danger fw-bold">{{ $t("purchase.editTitle") }}</h1>
     <div class="card">
-      <div class="card-header fw-bold">Formulario de Edición</div>
+      <div class="card-header fw-bold">{{ $t("purchase.editFormTitle") }}</div>
       <div class="card-body">
         <form @submit.prevent="updatePurchase">
           <!-- Proveedor -->
           <div class="mb-3">
-            <label for="supplier" class="form-label">Proveedor</label>
+            <label for="supplier" class="form-label">{{ $t("purchase.supplier") }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="truck" />
@@ -18,7 +18,7 @@
                 class="form-select"
                 required
               >
-                <option disabled value="">Seleccione un proveedor</option>
+                <option disabled value="">{{ $t("purchase.selectSupplier") }}</option>
                 <option
                   v-for="supplier in suppliers"
                   :key="supplier.id"
@@ -32,7 +32,7 @@
 
           <!-- Materia Prima -->
           <div class="mb-3">
-            <label for="raw_material" class="form-label">Materia Prima</label>
+            <label for="raw_material" class="form-label">{{ $t("purchase.rawMaterial") }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="leaf" />
@@ -43,7 +43,7 @@
                 class="form-select"
                 required
               >
-                <option disabled value="">Seleccione materia prima</option>
+                <option disabled value="">{{ $t("purchase.selectRawMaterial") }}</option>
                 <option
                   v-for="material in rawMaterials"
                   :key="material.id"
@@ -57,7 +57,7 @@
 
           <!-- Cantidad -->
           <div class="mb-3">
-            <label for="quantity" class="form-label">Cantidad</label>
+            <label for="quantity" class="form-label">{{ $t("purchase.quantity") }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="sort-numeric-up" />
@@ -66,16 +66,17 @@
                 type="number"
                 step="0.01"
                 id="quantity"
-                v-model="purchase.quantity"
+                v-model.number="purchase.quantity"
                 class="form-control"
                 required
+                min="0.01"
               />
             </div>
           </div>
 
           <!-- Precio de Compra -->
           <div class="mb-3">
-            <label for="price" class="form-label">Precio de Compra</label>
+            <label for="price" class="form-label">{{ $t("purchase.purchasePrice") }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="dollar-sign" />
@@ -84,16 +85,17 @@
                 type="number"
                 step="0.01"
                 id="price"
-                v-model="purchase.purchase_price"
+                v-model.number="purchase.purchase_price"
                 class="form-control"
                 required
+                min="0"
               />
             </div>
           </div>
 
           <!-- Fecha de Compra -->
           <div class="mb-3">
-            <label for="date" class="form-label">Fecha de Compra</label>
+            <label for="date" class="form-label">{{ $t("purchase.purchaseDate") }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="calendar-alt" />
@@ -112,11 +114,13 @@
             type="submit"
             class="btn text-white"
             style="background-color: #c1121f"
+            :disabled="loading"
           >
-            Guardar Cambios
+            <span v-if="loading" class="spinner-border spinner-border-sm me-1"></span>
+            {{ loading ? $t("purchase.saving") : $t("purchase.saveChanges") }}
           </button>
-          <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            Cancelar
+          <button type="button" class="btn btn-secondary ms-2" @click="cancel" :disabled="loading">
+            {{ $t("purchase.cancel") }}
           </button>
         </form>
       </div>
@@ -145,6 +149,7 @@ export default {
       },
       suppliers: [],
       rawMaterials: [],
+      loading: false,
     };
   },
   methods: {
@@ -152,47 +157,77 @@ export default {
       this.$router.push({ name: "Purchases" });
     },
     async updatePurchase() {
+      this.loading = true;
       try {
         await axios.put(
           `http://127.0.0.1:8000/api/purchases/${this.$route.params.id}`,
           this.purchase
         );
         Swal.fire(
-          "Actualizado",
-          "La compra fue actualizada correctamente.",
+          this.$t("purchase.updatedTitle"),
+          this.$t("purchase.updatedText"),
           "success"
         );
         this.$router.push({ name: "Purchases" });
       } catch (error) {
-        console.error(error);
-        Swal.fire("Error", "No se pudo actualizar la compra.", "error");
+        Swal.fire(
+          this.$t("purchase.errorTitle"),
+          this.$t("purchase.updateError"),
+          "error"
+        );
+      } finally {
+        this.loading = false;
       }
     },
-    async fetchData() {
+    async fetchSuppliers() {
       try {
-        const [purchaseRes, suppliersRes, materialsRes] = await Promise.all([
-          axios.get(
-            `http://127.0.0.1:8000/api/purchases/${this.$route.params.id}`
-          ),
-          axios.get("http://127.0.0.1:8000/api/suppliers"),
-          axios.get("http://127.0.0.1:8000/api/raw-materials"),
-        ]);
-
-        const purchase = purchaseRes.data;
-        if (purchase.purchase_date) {
-          purchase.purchase_date = purchase.purchase_date.slice(0, 10);
-        }
-
-        this.purchase = purchase;
-        this.suppliers = suppliersRes.data;
-        this.rawMaterials = materialsRes.data;
+        const response = await axios.get("http://127.0.0.1:8000/api/suppliers");
+        this.suppliers = response.data;
       } catch (error) {
-        Swal.fire("Error", "No se pudo cargar la información.", "error");
+        console.error(this.$t("purchase.fetchErrorSuppliers"), error);
+      }
+    },
+    async fetchRawMaterials() {
+      try {
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/raw-materials"
+        );
+        this.rawMaterials = response.data;
+      } catch (error) {
+        console.error(this.$t("purchase.fetchErrorMaterials"), error);
+      }
+    },
+    async fetchPurchase() {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:8000/api/purchases/${this.$route.params.id}`
+        );
+        this.purchase = response.data;
+        // Format date to yyyy-mm-dd if needed
+        if (this.purchase.purchase_date) {
+          this.purchase.purchase_date = this.purchase.purchase_date.substr(0, 10);
+        }
+      } catch (error) {
+        Swal.fire(
+          this.$t("purchase.errorTitle"),
+          this.$t("purchase.fetchErrorPurchase"),
+          "error"
+        );
+        this.$router.push({ name: "Purchases" });
       }
     },
   },
   mounted() {
-    this.fetchData();
+    this.fetchSuppliers();
+    this.fetchRawMaterials();
+    this.fetchPurchase();
   },
 };
 </script>
+
+<style scoped>
+.card {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+</style>

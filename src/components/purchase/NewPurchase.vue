@@ -1,24 +1,24 @@
 <template>
   <div class="container text-start">
-    <h1 class="text-danger fw-bold">Nueva Compra</h1>
+    <h1 class="text-danger fw-bold">{{ $t("purchase.newTitle") }}</h1>
     <div class="card">
-      <div class="card-header fw-bold">Formulario de Registro</div>
+      <div class="card-header fw-bold">{{ $t("purchase.newFormTitle") }}</div>
       <div class="card-body">
-        <form @submit.prevent="savePurchase">
+        <form @submit.prevent="createPurchase">
           <!-- Proveedor -->
           <div class="mb-3">
-            <label for="supplier_id" class="form-label">Proveedor</label>
+            <label for="supplier" class="form-label">{{ $t("purchase.supplier") }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="truck" />
               </span>
               <select
-                id="supplier_id"
+                id="supplier"
                 v-model="purchase.supplier_id"
                 class="form-select"
                 required
               >
-                <option value="" disabled>Seleccione un proveedor</option>
+                <option disabled value="">{{ $t("purchase.selectSupplier") }}</option>
                 <option
                   v-for="supplier in suppliers"
                   :key="supplier.id"
@@ -32,20 +32,18 @@
 
           <!-- Materia Prima -->
           <div class="mb-3">
-            <label for="raw_material_id" class="form-label"
-              >Materia Prima</label
-            >
+            <label for="raw_material" class="form-label">{{ $t("purchase.rawMaterial") }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="leaf" />
               </span>
               <select
-                id="raw_material_id"
+                id="raw_material"
                 v-model="purchase.raw_material_id"
                 class="form-select"
                 required
               >
-                <option value="" disabled>Seleccione materia prima</option>
+                <option disabled value="">{{ $t("purchase.selectRawMaterial") }}</option>
                 <option
                   v-for="material in rawMaterials"
                   :key="material.id"
@@ -59,55 +57,70 @@
 
           <!-- Cantidad -->
           <div class="mb-3">
-            <label for="quantity" class="form-label">Cantidad</label>
-            <input
-              type="number"
-              id="quantity"
-              v-model.number="purchase.quantity"
-              class="form-control"
-              required
-              min="1"
-            />
+            <label for="quantity" class="form-label">{{ $t("purchase.quantity") }}</label>
+            <div class="input-group">
+              <span class="input-group-text">
+                <font-awesome-icon icon="sort-numeric-up" />
+              </span>
+              <input
+                type="number"
+                step="0.01"
+                id="quantity"
+                v-model.number="purchase.quantity"
+                class="form-control"
+                required
+                min="0.01"
+              />
+            </div>
           </div>
 
-          <!-- Precio Total -->
+          <!-- Precio de Compra -->
           <div class="mb-3">
-            <label for="total_price" class="form-label">Precio Total</label>
-            <input
-              type="number"
-              id="purchase_price"
-              v-model.number="purchase.purchase_price"
-              class="form-control"
-              required
-              step="0.01"
-              min="0"
-            />
+            <label for="price" class="form-label">{{ $t("purchase.purchasePrice") }}</label>
+            <div class="input-group">
+              <span class="input-group-text">
+                <font-awesome-icon icon="dollar-sign" />
+              </span>
+              <input
+                type="number"
+                step="0.01"
+                id="price"
+                v-model.number="purchase.purchase_price"
+                class="form-control"
+                required
+                min="0"
+              />
+            </div>
           </div>
 
-          <!-- Fecha -->
+          <!-- Fecha de Compra -->
           <div class="mb-3">
-            <label for="purchase_date" class="form-label"
-              >Fecha de Compra</label
-            >
-            <input
-              type="date"
-              id="purchase_date"
-              v-model="purchase.purchase_date"
-              class="form-control"
-              required
-            />
+            <label for="date" class="form-label">{{ $t("purchase.purchaseDate") }}</label>
+            <div class="input-group">
+              <span class="input-group-text">
+                <font-awesome-icon icon="calendar-alt" />
+              </span>
+              <input
+                type="date"
+                id="date"
+                v-model="purchase.purchase_date"
+                class="form-control"
+                required
+              />
+            </div>
           </div>
 
-          <!-- Botones -->
           <button
             type="submit"
             class="btn text-white"
             style="background-color: #c1121f"
+            :disabled="loading"
           >
-            Guardar
+            <span v-if="loading" class="spinner-border spinner-border-sm me-1"></span>
+            {{ loading ? $t("purchase.saving") : $t("purchase.saveNew") }}
           </button>
-          <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            Cancelar
+          <button type="button" class="btn btn-secondary ms-2" @click="cancel" :disabled="loading">
+            {{ $t("purchase.cancel") }}
           </button>
         </form>
       </div>
@@ -136,47 +149,49 @@ export default {
       },
       suppliers: [],
       rawMaterials: [],
+      loading: false,
     };
   },
   methods: {
     cancel() {
       this.$router.push({ name: "Purchases" });
     },
-    async savePurchase() {
+    async createPurchase() {
+      this.loading = true;
       try {
-          console.log("Datos enviados:", this.purchase);
         await axios.post("http://127.0.0.1:8000/api/purchases", this.purchase);
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Compra registrada correctamente",
-          showConfirmButton: false,
-          timer: 2000,
-        });
+        Swal.fire(
+          this.$t("purchase.createdTitle"),
+          this.$t("purchase.createdText"),
+          "success"
+        );
         this.$router.push({ name: "Purchases" });
       } catch (error) {
-        console.error("Error al guardar compra:", error);
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: error.response?.data?.msg || "No se pudo guardar la compra.",
-        });
+        Swal.fire(
+          this.$t("purchase.errorTitle"),
+          this.$t("purchase.createError"),
+          "error"
+        );
+      } finally {
+        this.loading = false;
       }
     },
     async fetchSuppliers() {
       try {
-        const res = await axios.get("http://127.0.0.1:8000/api/suppliers");
-        this.suppliers = res.data;
+        const response = await axios.get("http://127.0.0.1:8000/api/suppliers");
+        this.suppliers = response.data;
       } catch (error) {
-        console.error("Error al cargar proveedores:", error);
+        console.error(this.$t("purchase.fetchErrorSuppliers"), error);
       }
     },
     async fetchRawMaterials() {
       try {
-        const res = await axios.get("http://127.0.0.1:8000/api/raw-materials");
-        this.rawMaterials = res.data;
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/raw-materials"
+        );
+        this.rawMaterials = response.data;
       } catch (error) {
-        console.error("Error al cargar materias primas:", error);
+        console.error(this.$t("purchase.fetchErrorMaterials"), error);
       }
     },
   },
@@ -186,3 +201,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.card {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+</style>
