@@ -55,6 +55,10 @@ import Pizza_raw_material from "@/views/pizza_raw_material.vue";
 import NewPizza_raw_material from "@/components/pizza_raw_material/NewPizza_raw_material.vue";
 import Editpizza_raw_material from "@/components/pizza_raw_material/EditPizza_raw_material.vue";
 
+import PurchasesView from "@/views/PurchasesView .vue";
+import NewPurchase from "@/components/purchase/NewPurchase.vue";
+import EditPurchase from "@/components/purchase/EditPurchase.vue";
+
 const routes = [
   {
     path: "/",
@@ -267,6 +271,22 @@ const routes = [
     path: "/pizza-raw-material/:id/edit",
     name: "EditarMateriaPrima",
     component: Editpizza_raw_material,
+  },
+
+  {
+    path: "/purchases",
+    name: "Purchases",
+    component: PurchasesView,
+  },
+  {
+    path: "/purchases/new",
+    name: "NewPurchase",
+    component: NewPurchase,
+  },
+  {
+    path: "/purchases/:id/edit",
+    name: "EditPurchase",
+    component: EditPurchase,
   },
 ];
 
