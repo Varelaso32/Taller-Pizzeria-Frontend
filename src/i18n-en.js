@@ -26,6 +26,7 @@ export default {
     about: "About",
   },
   extraIng: "Extra Ingredients",
+  branchs: "Branchs",
   users: {
     title: "User List",
     new: "New User",

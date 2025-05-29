@@ -100,10 +100,10 @@
             data-bs-parent="#sidebarAccordion"
           >
             <div class="accordion-body p-0">
-              <router-link class="nav-link ps-4 py-2" to="/pizza-ingredients"
+              <router-link class="nav-link ps-4 py-2" to="/pizza-raw-materials"
                 >⚙ {{ $t("sidebar.pizzaRawMaterials") }}</router-link
               >
-              <router-link class="nav-link ps-4 py-2" to="/pizza-raw-materials"
+              <router-link class="nav-link ps-4 py-2" to="/pizza-ingredients"
                 >🍽 {{ $t("sidebar.pizzaIngredients") }}</router-link
               >
             </div>
@@ -141,6 +141,9 @@
               >
               <router-link class="nav-link ps-4 py-2" to="/purchases"
                 >🧾 {{ $t("sidebar.purchases") }}</router-link
+              >
+              <router-link class="nav-link ps-4 py-2" to="/branchs"
+                >🏢 {{ $t("branchs") }}</router-link
               >
             </div>
           </div>

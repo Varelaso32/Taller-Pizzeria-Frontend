@@ -27,6 +27,7 @@ export default {
     extraIng: "Extra Ingredientes",
   },
   extraIng: "Extra Ingredientes",
+  branchs: "Sucursales",
   users: {
     title: "Listado de Usuarios",
     new: "Nuevo Usuario",
