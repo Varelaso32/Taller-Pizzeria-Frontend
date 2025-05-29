@@ -2,11 +2,12 @@
   <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="h3 text-danger">
-        <font-awesome-icon icon="user-tie" class="me-2" /> Listado de Empleados
+        <font-awesome-icon icon="user-tie" class="me-2" />
+        {{ $t("employees.list_title") }}
       </h1>
       <button @click="newEmployee" class="btn btn-danger d-flex align-items-center">
         <font-awesome-icon icon="plus" class="me-2" />
-        Nuevo Empleado
+        {{ $t("employees.new_employee") }}
       </button>
     </div>
 
@@ -15,14 +16,14 @@
         <thead class="table-dark text-white">
           <tr>
             <th>#</th>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Rol</th>
-            <th>Cargo</th>
-            <th>Identificación</th>
-            <th>Salario</th>
-            <th>Fecha de Contratación</th>
-            <th class="text-center">Acciones</th>
+            <th>{{ $t("employees.name") }}</th>
+            <th>{{ $t("employees.email") }}</th>
+            <th>{{ $t("employees.role") }}</th>
+            <th>{{ $t("employees.position") }}</th>
+            <th>{{ $t("employees.identification_number") }}</th>
+            <th>{{ $t("employees.salary") }}</th>
+            <th>{{ $t("employees.hire_date") }}</th>
+            <th class="text-center">{{ $t("employees.actions") }}</th>
           </tr>
         </thead>
         <tbody>
@@ -36,23 +37,17 @@
             <td>${{ Number(employee.salary).toFixed(2) }}</td>
             <td>{{ formatDate(employee.hire_date) }}</td>
             <td class="text-center">
-              <button
-                @click="editEmployee(employee.id)"
-                class="btn btn-sm btn-warning me-2"
-              >
+              <button @click="editEmployee(employee.id)" class="btn btn-sm btn-warning me-2" :title="$t('buttons.update')">
                 <font-awesome-icon icon="pencil" />
               </button>
-              <button
-                @click="deleteEmployee(employee.id)"
-                class="btn btn-sm btn-danger"
-              >
+              <button @click="deleteEmployee(employee.id)" class="btn btn-sm btn-danger" :title="$t('buttons.delete')">
                 <font-awesome-icon icon="trash" />
               </button>
             </td>
           </tr>
           <tr v-if="employees.length === 0">
             <td colspan="9" class="text-center py-4 text-muted">
-              No hay empleados registrados.
+              {{ $t("employees.no_employees") }}
             </td>
           </tr>
         </tbody>
@@ -85,11 +80,11 @@ export default {
     },
     deleteEmployee(id) {
       Swal.fire({
-        title: `¿Deseas eliminar al empleado con ID ${id}?`,
+        title: this.$t("employees.delete_confirm", { id }),
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Eliminar",
-        cancelButtonText: "Cancelar",
+        confirmButtonText: this.$t("buttons.delete"),
+        cancelButtonText: this.$t("buttons.cancel"),
         confirmButtonColor: "#c1121f",
       }).then((result) => {
         if (result.isConfirmed) {
@@ -97,15 +92,15 @@ export default {
             .delete(`http://127.0.0.1:8000/api/employees/${id}`)
             .then((response) => {
               Swal.fire(
-                "¡Eliminado!",
-                "El empleado ha sido eliminado.",
+                this.$t("employees.deleted_title"),
+                this.$t("employees.deleted_message"),
                 "success"
               );
               this.employees = response.data;
             })
             .catch((error) => {
               console.error("Error deleting employee:", error);
-              Swal.fire("Error", "No se pudo eliminar el empleado.", "error");
+              Swal.fire(this.$t("alerts.error"), this.$t("employees.delete_error"), "error");
             });
         }
       });
@@ -118,7 +113,7 @@ export default {
     },
     formatDate(dateStr) {
       const options = { year: "numeric", month: "2-digit", day: "2-digit" };
-      return new Date(dateStr).toLocaleDateString("es-ES", options);
+      return new Date(dateStr).toLocaleDateString(this.$i18n.locale, options);
     },
   },
   mounted() {

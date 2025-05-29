@@ -147,7 +147,7 @@ const routes = [
   },
   {
     path: "/ingredients/new",
-    name: "Nuew Ingredients",
+    name: "New Ingredients",
     component: NewIngredientes,
   },
   {

@@ -1,13 +1,13 @@
 <template>
   <div class="container text-start">
-    <h1 class="text-danger fw-bold">Editar Ingrediente</h1>
+    <h1 class="text-danger fw-bold">{{ $t("ingredients.edit") }}</h1>
     <div class="card">
-      <div class="card-header fw-bold">Formulario de Edición</div>
+      <div class="card-header fw-bold">{{ $t("ingredients.form_edit_title") }}</div>
       <div class="card-body">
         <form @submit.prevent="updateIngredient">
           <!-- Nombre -->
           <div class="mb-3">
-            <label for="name" class="form-label">Nombre</label>
+            <label for="name" class="form-label">{{ $t("ingredients.name") }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="tags" />
@@ -28,10 +28,10 @@
             class="btn text-white"
             style="background-color: #c1121f"
           >
-            Guardar Cambios
+            {{ $t("ingredients.save_changes") }}
           </button>
           <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            Cancelar
+            {{ $t("ingredients.cancel") }}
           </button>
         </form>
       </div>
@@ -70,7 +70,7 @@ export default {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Ingrediente actualizado correctamente",
+          title: this.$t("ingredients.updated_success"),
           showConfirmButton: false,
           timer: 2000,
         });
@@ -79,10 +79,10 @@ export default {
         console.error("Error al actualizar ingrediente:", error);
         Swal.fire({
           icon: "error",
-          title: "Error",
+          title: this.$t("alerts.error"),
           text:
             error.response?.data?.msg ||
-            "No se pudo actualizar el ingrediente.",
+            this.$t("ingredients.update_error"),
         });
       }
     },
@@ -97,8 +97,8 @@ export default {
       .catch((error) => {
         Swal.fire({
           icon: "error",
-          title: "Error",
-          text: "No se pudo cargar el ingrediente.",
+          title: this.$t("alerts.error"),
+          text: this.$t("ingredients.load_error"),
         });
       });
   },
