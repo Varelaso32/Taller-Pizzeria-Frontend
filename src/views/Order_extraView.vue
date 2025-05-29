@@ -1,13 +1,13 @@
 <template>
   <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="h3 text-primary">
-        <font-awesome-icon icon="utensils" class="me-2" />
+      <h1 class="h3 text-danger">
+        <font-awesome-icon icon="pepper-hot" class="me-2" />
         Ingredientes Extra por Orden
       </h1>
       <button
         @click="newOrderExtra"
-        class="btn btn-primary d-flex align-items-center"
+        class="btn btn-danger d-flex align-items-center"
       >
         <font-awesome-icon icon="plus" class="me-2" />
         Nuevo Ingrediente Extra
@@ -18,11 +18,10 @@
       <table class="table table-striped align-middle mb-0">
         <thead class="table-dark text-white">
           <tr>
-            <th>#</th>
+            <th>Orden</th>
             <th>Cliente</th>
             <th>Ingrediente Extra</th>
             <th>Cantidad</th>
-            <th>ID Orden</th>
             <th class="text-center">Acciones</th>
           </tr>
         </thead>
@@ -32,7 +31,6 @@
             <td>{{ item.client_name }}</td>
             <td>{{ item.extra_ingredient_name }}</td>
             <td>{{ item.quantity }}</td>
-            <td>{{ item.order_id }}</td>
             <td class="text-center">
               <button
                 @click="editOrderExtra(item.id)"
@@ -64,7 +62,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export default {
-  name: "OrderExtraView",
+  name: "Order_extra",
   data() {
     return {
       orderExtras: [],
@@ -73,7 +71,7 @@ export default {
   methods: {
     fetchOrderExtras() {
       axios
-        .get("http://127.0.0.1:8000/api/order-extra-ingredients")
+        .get("http://127.0.0.1:8000/api/order_extra_ingredients")
         .then((response) => {
           this.orderExtras = response.data;
         })
@@ -88,11 +86,11 @@ export default {
         showCancelButton: true,
         confirmButtonText: "Eliminar",
         cancelButtonText: "Cancelar",
-        confirmButtonColor: "#dc3545",
+        confirmButtonColor: "#c1121f",
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete(`http://127.0.0.1:8000/api/order-extra-ingredients/${id}`)
+            .delete(`http://127.0.0.1:8000/api/order_extra_ingredients/${id}`)
             .then((response) => {
               Swal.fire(
                 "¡Eliminado!",
@@ -109,7 +107,7 @@ export default {
       });
     },
     editOrderExtra(id) {
-      this.$router.push({ name: "EditarOrderExtra", params: { id: `${id}` } });
+      this.$router.push({ name: "Order_extraEdit", params: { id: `${id}` } });
     },
     newOrderExtra() {
       this.$router.push({ name: "Order_extraNew" });

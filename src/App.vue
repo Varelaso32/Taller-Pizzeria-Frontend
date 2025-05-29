@@ -42,6 +42,8 @@
                 }}</router-link>
                 <router-link class="nav-link ps-4 py-2" to="/RawMaterials">🧂 {{ $t("sidebar.rawMaterials")
                 }}</router-link>
+                <router-link class="nav-link ps-4 py-2" to="/order_extra">➕ {{ $t("sidebar.extras") }}</router-link>
+                <router-link class="nav-link ps-4 py-2" to="/purchases">🧾 {{ $t("sidebar.purchases") }}</router-link>
               </div>
             </div>
           </div>

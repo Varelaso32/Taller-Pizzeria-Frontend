@@ -165,7 +165,7 @@ const routes = [
     component: NewOrder_extra,
   },
   {
-    path: "/order_extra/edit/:id",
+    path: "/order_extra/:id/edit/",
     name: "Order_extraEdit",
     component: EditOrder_extra,
   },
