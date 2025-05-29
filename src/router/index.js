@@ -77,6 +77,7 @@ import EditPurchase from "@/components/purchase/EditPurchase.vue";
 import OrderPizzaView from "@/views/OrderPizzaView.vue";
 import NewOrderPizza from "@/components/orders_pizza/NewOrderPizza.vue";
 import EditOrderPizza from "@/components/orders_pizza/EditOrderPizza.vue";
+import RegisterView from "@/views/RegisterView.vue";
 
 const routes = [
   {
@@ -356,42 +357,40 @@ const routes = [
     name: "EditPurchase",
     component: EditPurchase,
   },
+  { path: "/register", name: "register", component: RegisterView },
 ];
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
-const publicPages = ['/login']; // rutas públicas
-router.beforeEach((to, from, next) => {
-  const loggedIn = !!localStorage.getItem('user');
-
-  if (!loggedIn && !publicPages.includes(to.path)) {
-    return next('/login');
-  }
-
-  next();
-});
 
 router.beforeEach((to, from, next) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const isAuthenticated = !!user;
 
-  const publicPages = ["login", "about"];
-  const authRequired = !publicPages.includes(to.name);
+  // Rutas públicas que no requieren login
+  const publicPaths = ["/login", "/register", "/about"];
+  const isPublic = publicPaths.includes(to.path);
+  const isLoginOrRegister = ["login", "register"].includes(to.name);
 
-  if (authRequired && !isAuthenticated) {
-    return next({ name: "login" });
+  // Si no está autenticado y la ruta no es pública → redirigir al login
+  if (!isAuthenticated && !isPublic) {
+    return next("/login");
   }
 
+  // Si está autenticado y va a login o register → redirigir al home
+  if (isAuthenticated && isLoginOrRegister) {
+    return next("/");
+  }
+
+  // Si se requiere admin y el usuario no lo es → redirigir al home
   if (to.meta.requiresAdmin && (!user || !user.isAdmin)) {
-    return next({ name: "home" });
+    return next("/");
   }
 
-  if (to.name === "login" && isAuthenticated) {
-    return next({ name: "home" });
-  }
-
+  // Continuar navegación
   next();
 });
+
 export default router;

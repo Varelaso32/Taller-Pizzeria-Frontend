@@ -78,7 +78,7 @@ export default {
       try {
         await axios.post("http://127.0.0.1:8000/api/pizza-sizes", this.form);
         Swal.fire(this.$t("pizzaSizes.created"), this.$t("pizzaSizes.createdMsg"), "success");
-        this.$router.push({ name: "PizzaSizes" });
+        this.$router.push({ name: "Pizza-Sizes" });
       } catch (err) {
         console.error("Error creating pizza size:", err);
         Swal.fire(this.$t("alerts.error"), this.$t("pizzaSizes.createError"), "error");
