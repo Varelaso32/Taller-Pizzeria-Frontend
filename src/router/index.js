@@ -58,6 +58,10 @@ import Editpizza_raw_material from "@/components/pizza_raw_material/EditPizza_ra
 import PizzaIngredient from "@/views/PizzaIngredient.vue";
 import NewPizzaIngredient from "@/components/pizzaIngredient/NewPizzaIngredient.vue";
 import EditPizzaIngredient from "@/components/pizzaIngredient/EditPizzaIngredient.vue";
+//ExtraIngredients
+import ExtraIngredient from "@/views/ExtraIngredient.vue";
+import NewExtraIngredient from "@/components/extraIngredient/NewExtraIngredient.vue";
+import EditExtraIngredient from "@/components/extraIngredient/EditExtraIngredient.vue";
 
 const routes = [
   {
@@ -127,22 +131,40 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
-    // Rutas PizzaIngredient
-{
-  path: "/pizza-ingredients",
-  name: "PizzaIngredients",
-  component: PizzaIngredient,
-},
-{
-  path: "/pizza-ingredients/new",
-  name: "NuevoPizzaIngrediente",
-  component: NewPizzaIngredient,
-},
-{
-  path: "/pizza-ingredients/:id/edit",
-  name: "EditarPizzaIngrediente",
-  component: EditPizzaIngredient,
-},
+ // Rutas PizzaIngredient
+  {
+    path: "/pizza-ingredients",
+    name: "PizzaIngredients",
+    component: PizzaIngredient,
+  },
+  {
+    path: "/pizza-ingredients/new",
+    name: "NuevoPizzaIngrediente",
+    component: NewPizzaIngredient,
+  },
+  {
+    path: "/pizza-ingredients/:id/edit",
+    name: "EditarPizzaIngrediente",
+    component: EditPizzaIngredient,
+  },
+  
+  // Rutas ExtraIngredients
+  {
+    path: "/extra-ingredients",
+    name: "ExtraIngredients",
+    component: ExtraIngredient,
+  },
+  {
+    path: "/extra-ingredients/new",
+    name: "NewExtraIngredient",
+    component: NewExtraIngredient,
+  },
+  {
+    path: "/extra-ingredients/:id/edit",
+    name: "EditExtraIngredient",
+    component: EditExtraIngredient,
+  },
+
 
   {
     path: "/branchs",
