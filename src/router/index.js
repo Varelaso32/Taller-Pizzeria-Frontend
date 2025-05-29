@@ -54,6 +54,10 @@ import EditSupliders from "@/components/supliders/EditSupliders.vue";
 import Pizza_raw_material from "@/views/pizza_raw_material.vue";
 import NewPizza_raw_material from "@/components/pizza_raw_material/NewPizza_raw_material.vue";
 import Editpizza_raw_material from "@/components/pizza_raw_material/EditPizza_raw_material.vue";
+//PizzaIngredient
+import PizzaIngredient from "@/views/PizzaIngredient.vue";
+import NewPizzaIngredient from "@/components/pizzaIngredient/NewPizzaIngredient.vue";
+import EditPizzaIngredient from "@/components/pizzaIngredient/EditPizzaIngredient.vue";
 
 import PurchasesView from "@/views/PurchasesView .vue";
 import NewPurchase from "@/components/purchase/NewPurchase.vue";
@@ -127,6 +131,23 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
+    // Rutas PizzaIngredient
+{
+  path: "/pizza-ingredients",
+  name: "PizzaIngredients",
+  component: PizzaIngredient,
+},
+{
+  path: "/pizza-ingredients/new",
+  name: "NuevoPizzaIngrediente",
+  component: NewPizzaIngredient,
+},
+{
+  path: "/pizza-ingredients/:id/edit",
+  name: "EditarPizzaIngrediente",
+  component: EditPizzaIngredient,
+},
+
   {
     path: "/branchs",
     name: "Branchs",
@@ -151,7 +172,7 @@ const routes = [
   },
   {
     path: "/ingredients/new",
-    name: "Nuew Ingredients",
+    name: "New Ingredients",
     component: NewIngredientes,
   },
   {
@@ -288,6 +309,7 @@ const routes = [
     name: "EditPurchase",
     component: EditPurchase,
   },
+  },  
 ];
 
 const router = createRouter({

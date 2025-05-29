@@ -3,14 +3,14 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="h3 text-danger">
         <font-awesome-icon icon="pepper-hot" class="me-2" />
-        Ingredientes
+        {{ $t("ingredients.title") }}
       </h1>
       <button
         @click="newIngredient"
         class="btn btn-danger d-flex align-items-center"
       >
         <font-awesome-icon icon="plus" class="me-2" />
-        Nuevo Ingrediente
+        {{ $t("ingredients.new") }}
       </button>
     </div>
 
@@ -19,8 +19,8 @@
         <thead class="table-dark text-white">
           <tr>
             <th>#</th>
-            <th>Nombre</th>
-            <th class="text-center">Acciones</th>
+            <th>{{ $t("ingredients.name") }}</th>
+            <th class="text-center">{{ $t("ingredients.actions") }}</th>
           </tr>
         </thead>
         <tbody>
@@ -31,12 +31,14 @@
               <button
                 @click="editIngredient(ingredient.id)"
                 class="btn btn-sm btn-warning me-2"
+                :title="$t('ingredients.edit')"
               >
                 <font-awesome-icon icon="pencil" />
               </button>
               <button
                 @click="deleteIngredient(ingredient.id)"
                 class="btn btn-sm btn-danger"
+                :title="$t('ingredients.delete_confirm_button')"
               >
                 <font-awesome-icon icon="trash" />
               </button>
@@ -44,7 +46,7 @@
           </tr>
           <tr v-if="ingredients.length === 0">
             <td colspan="3" class="text-center py-4 text-muted">
-              No hay ingredientes registrados.
+              {{ $t("ingredients.no_ingredients") }}
             </td>
           </tr>
         </tbody>
@@ -73,16 +75,16 @@ export default {
         const res = await axios.get("http://127.0.0.1:8000/api/ingredients");
         this.ingredients = res.data;
       } catch (e) {
-        this.error = "No se pudieron cargar los ingredientes.";
+        this.error = this.$t("ingredients.load_error");
       }
     },
     deleteIngredient(id) {
       Swal.fire({
-        title: `¿Deseas eliminar el ingrediente con ID ${id}?`,
+        title: this.$t("ingredients.delete_confirm_title", { id }),
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Eliminar",
-        cancelButtonText: "Cancelar",
+        confirmButtonText: this.$t("ingredients.delete_confirm_button"),
+        cancelButtonText: this.$t("ingredients.delete_cancel_button"),
         confirmButtonColor: "#c1121f",
       }).then((result) => {
         if (result.isConfirmed) {
@@ -90,15 +92,15 @@ export default {
             .delete(`http://127.0.0.1:8000/api/ingredients/${id}`)
             .then(() => {
               Swal.fire(
-                "¡Eliminado!",
-                "El ingrediente ha sido eliminado.",
+                this.$t("ingredients.deleted_success"),
+                "",
                 "success"
               );
               this.getIngredients();
             })
             .catch(() => {
-              this.error = "Error eliminando ingrediente.";
-              Swal.fire("Error", this.error, "error");
+              this.error = this.$t("ingredients.delete_error");
+              Swal.fire(this.$t("ingredients.delete_error"), "", "error");
             });
         }
       });
@@ -107,7 +109,7 @@ export default {
       this.$router.push({ name: "Edit Ingredients", params: { id: `${id}` } });
     },
     newIngredient() {
-      this.$router.push({ name: "Nuew Ingredients" });
+      this.$router.push({ name: "New Ingredients" });
     },
   },
   mounted() {

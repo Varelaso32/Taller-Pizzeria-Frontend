@@ -1,29 +1,18 @@
 <template>
   <div class="container text-start">
-    <h1 class="text-danger fw-bold">Nuevo Cliente</h1>
+    <h1 class="text-danger fw-bold">{{ $t('clients.new') }}</h1>
     <div class="card">
-      <div class="card-header fw-bold">Datos del Cliente</div>
+      <div class="card-header fw-bold">{{ $t('clients.form_title') }}</div>
       <div class="card-body">
         <form @submit.prevent="saveClient">
           <!-- Usuario -->
           <div class="mb-3">
-            <label for="user_id" class="form-label">Usuario:</label>
+            <label for="user_id" class="form-label">{{ $t('clients.user') }}:</label>
             <div class="input-group">
-              <span class="input-group-text">
-                <font-awesome-icon icon="user" />
-              </span>
-              <select
-                id="user_id"
-                v-model="client.user_id"
-                class="form-select"
-                required
-              >
-                <option value="" disabled>Selecciona un usuario</option>
-                <option
-                  v-for="user in users"
-                  :key="user.id"
-                  :value="user.id"
-                >
+              <span class="input-group-text"><font-awesome-icon icon="user" /></span>
+              <select id="user_id" v-model="client.user_id" class="form-select" required>
+                <option value="" disabled>{{ $t('clients.select_user') }}</option>
+                <option v-for="user in users" :key="user.id" :value="user.id">
                   {{ user.name }} - {{ user.email }}
                 </option>
               </select>
@@ -32,48 +21,28 @@
 
           <!-- Dirección -->
           <div class="mb-3">
-            <label for="address" class="form-label">Dirección:</label>
+            <label for="address" class="form-label">{{ $t('clients.address') }}:</label>
             <div class="input-group">
-              <span class="input-group-text">
-                <font-awesome-icon icon="map-marker-alt" />
-              </span>
-              <input
-                type="text"
-                id="address"
-                v-model="client.address"
-                class="form-control"
-                required
-              />
+              <span class="input-group-text"><font-awesome-icon icon="map-marker-alt" /></span>
+              <input type="text" id="address" v-model="client.address" class="form-control" required />
             </div>
           </div>
 
           <!-- Teléfono -->
           <div class="mb-3">
-            <label for="phone" class="form-label">Teléfono:</label>
+            <label for="phone" class="form-label">{{ $t('clients.phone') }}:</label>
             <div class="input-group">
-              <span class="input-group-text">
-                <font-awesome-icon icon="phone" />
-              </span>
-              <input
-                type="text"
-                id="phone"
-                v-model="client.phone"
-                class="form-control"
-                required
-              />
+              <span class="input-group-text"><font-awesome-icon icon="phone" /></span>
+              <input type="text" id="phone" v-model="client.phone" class="form-control" required />
             </div>
           </div>
 
           <!-- Botones -->
-          <button
-            type="submit"
-            class="btn text-white"
-            style="background-color: #c1121f"
-          >
-            Guardar
+          <button type="submit" class="btn text-white" style="background-color: #c1121f">
+            {{ $t('clients.save') }}
           </button>
           <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            Cancelar
+            {{ $t('clients.cancel') }}
           </button>
         </form>
       </div>
@@ -84,13 +53,9 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 export default {
   name: "NewClient",
-  components: {
-    FontAwesomeIcon,
-  },
   data() {
     return {
       users: [],
@@ -103,7 +68,7 @@ export default {
   },
   methods: {
     cancel() {
-      this.$router.push({ name: "Clients" }); // Cambia según el nombre de la ruta lista clientes
+      this.$router.push({ name: "Clients" });
     },
     async fetchUsers() {
       try {
@@ -119,22 +84,14 @@ export default {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Cliente creado correctamente",
+          title: this.$t('clients.created_success'),
           showConfirmButton: false,
           timer: 2000,
         });
         this.$router.push({ name: "Clients" });
       } catch (error) {
-        console.error("Error al crear cliente:", error);
-        let msg = "No se pudo crear el cliente.";
-        if (error.response?.data?.msg) {
-          msg = error.response.data.msg;
-        }
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: msg,
-        });
+        const msg = error.response?.data?.msg || this.$t('clients.create_error');
+        Swal.fire({ icon: "error", title: "Error", text: msg });
       }
     },
   },
