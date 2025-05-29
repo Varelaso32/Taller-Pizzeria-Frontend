@@ -51,6 +51,10 @@ import SuppliersView from "@/views/SuppliersView.vue";
 import NewSupliders from "@/components/supliders/NewSupliders.vue";
 import EditSupliders from "@/components/supliders/EditSupliders.vue";
 
+import Pizza_raw_material from "@/views/pizza_raw_material.vue";
+import NewPizza_raw_material from "@/components/pizza_raw_material/NewPizza_raw_material.vue";
+import Editpizza_raw_material from "@/components/pizza_raw_material/EditPizza_raw_material.vue";
+
 const routes = [
   {
     path: "/",
@@ -106,7 +110,6 @@ const routes = [
     name: "EditarEmpleado",
     component: EditEmploye,
   },
-  
 
   // Ruta About
   {
@@ -120,7 +123,6 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
-//////////////jose///////////////////////////////////////////////////
   {
     path: "/branchs",
     name: "Branchs",
@@ -248,6 +250,23 @@ const routes = [
     path: "/supliders/:id/edit",
     name: "EditSuppliers",
     component: EditSupliders,
+  },
+
+  //Ruta Pizza_Raw_Materials
+  {
+    path: "/pizza-raw-materials",
+    name: "PizzaRawMaterial",
+    component: Pizza_raw_material,
+  },
+  {
+    path: "/pizza-raw-material/new",
+    name: "NuevaMateriaPrima",
+    component: NewPizza_raw_material,
+  },
+  {
+    path: "/pizza-raw-material/:id/edit",
+    name: "EditarMateriaPrima",
+    component: Editpizza_raw_material,
   },
 ];
 
