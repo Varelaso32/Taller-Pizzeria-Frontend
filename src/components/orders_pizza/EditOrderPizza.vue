@@ -1,81 +1,47 @@
 <template>
   <div class="container py-4">
-    <h1 class="text-danger fw-bold mb-4">
-      <font-awesome-icon icon="pencil" class="me-2" />
-      Editar Pizza en Orden
+    <h1 class="h3 mb-4 text-danger">
+      <font-awesome-icon icon="pizza-slice" class="me-2" />
+      {{ $t("orderPizza.editTitle") }}
     </h1>
 
-    <div class="card">
-      <div class="card-header fw-bold bg-danger text-white">
-        Formulario de Edición
-      </div>
+    <div class="card shadow-sm">
+      <div class="card-header fw-bold">{{ $t("orderPizza.formRegister") }}</div>
       <div class="card-body">
         <form @submit.prevent="updateOrderPizza">
-          <!-- Orden -->
           <div class="mb-3">
-            <label for="order_id" class="form-label">Orden</label>
-            <select
-              v-model="orderPizza.order_id"
-              id="order_id"
-              class="form-select"
-              required
-            >
-              <option disabled value="">Seleccione una orden</option>
+            <label for="order_id" class="form-label">{{ $t("orderPizza.order") }}</label>
+            <select id="order_id" v-model="form.order_id" class="form-select" required>
+              <option value="">{{ $t("orderPizza.selectOrder") }}</option>
               <option v-for="order in orders" :key="order.id" :value="order.id">
-                Orden #{{ order.id }}
+                {{ order.id }}
               </option>
             </select>
           </div>
 
-          <!-- Tamaño de Pizza -->
           <div class="mb-3">
-            <label for="pizza_size_id" class="form-label"
-              >Tamaño de Pizza</label
-            >
-            <select
-              v-model="orderPizza.pizza_size_id"
-              id="pizza_size_id"
-              class="form-select"
-              required
-            >
-              <option disabled value="">Seleccione un tamaño</option>
-              <option
-                v-for="size in pizzaSizes"
-                :key="size.id"
-                :value="size.id"
-              >
-                {{ size.name }} - ${{ Number(size.price).toFixed(2) }}
-              </option>
+            <label for="pizza_size_price" class="form-label">{{ $t("orderPizza.size") }}</label>
+            <select id="pizza_size_price" v-model="form.pizza_size_price" class="form-select" required>
+              <option value="">{{ $t("orderPizza.selectSize") }}</option>
+              <option value="6.99">Pequeña - $6.99</option>
+              <option value="8.99">Mediana - $8.99</option>
+              <option value="10.99">Grande - $10.99</option>
             </select>
           </div>
 
-          <!-- Cantidad -->
           <div class="mb-3">
-            <label for="quantity" class="form-label">Cantidad</label>
-            <input
-              type="number"
-              id="quantity"
-              class="form-control"
-              v-model="orderPizza.quantity"
-              min="1"
-              required
-            />
+            <label for="quantity" class="form-label">{{ $t("orderPizza.quantity") }}</label>
+            <input type="number" min="1" class="form-control" id="quantity" v-model="form.quantity" required />
           </div>
 
-          <!-- Botones -->
           <div class="d-flex justify-content-end">
-            <button type="submit" class="btn btn-warning me-2 text-white">
-              <font-awesome-icon icon="save" class="me-1" />
-              Actualizar
+            <button type="submit" class="btn btn-danger me-2">
+              <font-awesome-icon icon="save" class="me-2" />
+              {{ $t("orderPizza.save") }}
             </button>
-            <button
-              type="button"
-              class="btn btn-secondary"
-              @click="$router.back()"
-            >
-              <font-awesome-icon icon="arrow-left" class="me-1" />
-              Cancelar
-            </button>
+            <router-link to="/order-pizza" class="btn btn-secondary">
+              {{ $t("orderPizza.back") }}
+            </router-link>
           </div>
         </form>
       </div>
@@ -87,72 +53,53 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faSave,
-  faArrowLeft,
-  faPencil,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPizzaSlice, faSave } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faSave, faArrowLeft, faPencil);
+library.add(faPizzaSlice, faSave);
 
 export default {
   name: "EditOrderPizza",
   data() {
     return {
-      orderPizza: {
+      orders: [],
+      form: {
         order_id: "",
-        pizza_size_id: "",
+        pizza_size_price: "",
         quantity: 1,
       },
-      orders: [],
-      pizzaSizes: [],
     };
   },
   methods: {
-    fetchOrders() {
-      axios.get("http://127.0.0.1:8000/api/orders").then((res) => {
-        this.orders = res.data;
-      });
+    getOrders() {
+      axios.get("http://127.0.0.1:8000/api/orders")
+        .then(res => (this.orders = res.data))
+        .catch(err => console.error("Error al obtener órdenes:", err));
     },
-    fetchPizzaSizes() {
-      axios.get("http://127.0.0.1:8000/api/pizza-sizes").then((res) => {
-        this.pizzaSizes = res.data;
-      });
-    },
-    fetchOrderPizza() {
-      axios
-        .get(`http://127.0.0.1:8000/api/order_pizzas/${this.$route.params.id}`)
-        .then((res) => {
-          this.orderPizza = res.data;
+    getOrderPizza() {
+      const id = this.$route.params.id;
+      axios.get(`http://127.0.0.1:8000/api/order_pizzas/${id}`)
+        .then(res => {
+          this.form = {
+            order_id: res.data.order_id,
+            pizza_size_price: res.data.pizza_size_price,
+            quantity: res.data.quantity,
+          };
         })
-        .catch((err) => {
-          console.error("Error al cargar la pizza por orden:", err);
-        });
+        .catch(err => console.error("Error al obtener pizza por orden:", err));
     },
     updateOrderPizza() {
-      axios
-        .put(
-          `http://127.0.0.1:8000/api/order_pizzas/${this.$route.params.id}`,
-          this.orderPizza
-        )
+      const id = this.$route.params.id;
+      axios.put(`http://127.0.0.1:8000/api/order_pizzas/${id}`, this.form)
         .then(() => {
-          Swal.fire(
-            "Actualizado",
-            "La pizza fue actualizada correctamente",
-            "success"
-          );
-          this.$router.push({ name: "OrderPizza" });
+          Swal.fire(this.$t("orderPizza.updated"), "", "success");
+          this.$router.push("/order-pizza");
         })
-        .catch((err) => {
-          console.error("Error al actualizar:", err);
-          Swal.fire("Error", "No se pudo actualizar la pizza", "error");
-        });
+        .catch(() => Swal.fire("Error", this.$t("orderPizza.updateError"), "error"));
     },
   },
   mounted() {
-    this.fetchOrders();
-    this.fetchPizzaSizes();
-    this.fetchOrderPizza();
+    this.getOrders();
+    this.getOrderPizza();
   },
 };
 </script>

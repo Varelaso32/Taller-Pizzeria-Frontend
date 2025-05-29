@@ -5,7 +5,6 @@
       <div class="card-header fw-bold">{{ $t("extraIngredient.header") }}</div>
       <div class="card-body">
         <form @submit.prevent="saveExtraIngredient">
-          <!-- Nombre del ingrediente extra -->
           <div class="mb-3">
             <label for="name" class="form-label">{{ $t("extraIngredient.name") }}</label>
             <div class="input-group">
@@ -22,7 +21,6 @@
             </div>
           </div>
 
-          <!-- Precio -->
           <div class="mb-3">
             <label for="price" class="form-label">{{ $t("extraIngredient.price") }}</label>
             <div class="input-group">
@@ -40,7 +38,6 @@
             </div>
           </div>
 
-          <!-- Botones -->
           <button
             type="submit"
             class="btn text-white"
@@ -89,20 +86,19 @@ export default {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Ingrediente extra creado correctamente",
+          title: this.$t("extraIngredient.saveSuccess"),
           showConfirmButton: false,
           timer: 2000,
         });
         this.$router.push({ name: "ExtraIngredients" });
       } catch (error) {
-        console.error("Error al crear ingrediente extra:", error);
-        let msg = "No se pudo crear el ingrediente extra.";
+        let msg = this.$t("extraIngredient.createError");
         if (error.response?.data?.msg) {
           msg = error.response.data.msg;
         }
         Swal.fire({
           icon: "error",
-          title: "Error",
+          title: this.$t("extraIngredient.createError"),
           text: msg,
         });
       }

@@ -362,6 +362,16 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
+const publicPages = ['/login']; // rutas públicas
+router.beforeEach((to, from, next) => {
+  const loggedIn = !!localStorage.getItem('user');
+
+  if (!loggedIn && !publicPages.includes(to.path)) {
+    return next('/login');
+  }
+
+  next();
+});
 
 router.beforeEach((to, from, next) => {
   const user = JSON.parse(localStorage.getItem("user"));

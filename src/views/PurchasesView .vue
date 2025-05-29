@@ -3,14 +3,11 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="h3 text-danger">
         <font-awesome-icon icon="cart-plus" class="me-2" />
-        Compras de Materia Prima
+        {{ $t("purchase.title") }}
       </h1>
-      <button
-        @click="newPurchase"
-        class="btn btn-danger d-flex align-items-center"
-      >
+      <button @click="newPurchase" class="btn btn-danger d-flex align-items-center">
         <font-awesome-icon icon="plus" class="me-2" />
-        Nueva Compra
+        {{ $t("purchase.newButton") }}
       </button>
     </div>
 
@@ -18,15 +15,15 @@
       <table class="table table-striped align-middle mb-0">
         <thead class="table-dark text-white">
           <tr>
-            <th>ID</th>
-            <th>Proveedor</th>
-            <th>Materia Prima</th>
-            <th>Cantidad</th>
-            <th>Precio de Compra</th>
-            <th>Fecha de Compra</th>
-            <th>Creado</th>
-            <th>Actualizado</th>
-            <th class="text-center">Acciones</th>
+            <th>{{ $t("purchase.id") }}</th>
+            <th>{{ $t("purchase.supplier") }}</th>
+            <th>{{ $t("purchase.rawMaterial") }}</th>
+            <th>{{ $t("purchase.quantity") }}</th>
+            <th>{{ $t("purchase.purchasePrice") }}</th>
+            <th>{{ $t("purchase.purchaseDate") }}</th>
+            <th>{{ $t("purchase.createdAt") }}</th>
+            <th>{{ $t("purchase.updatedAt") }}</th>
+            <th class="text-center">{{ $t("purchase.actions") }}</th>
           </tr>
         </thead>
         <tbody>
@@ -40,23 +37,17 @@
             <td>{{ formatDate(purchase.created_at) }}</td>
             <td>{{ formatDate(purchase.updated_at) }}</td>
             <td class="text-center">
-              <button
-                @click="editPurchase(purchase.id)"
-                class="btn btn-sm btn-warning me-2"
-              >
+              <button @click="editPurchase(purchase.id)" class="btn btn-sm btn-warning me-2" :title="$t('purchase.edit')">
                 <font-awesome-icon icon="pencil" />
               </button>
-              <button
-                @click="deletePurchase(purchase.id)"
-                class="btn btn-sm btn-danger"
-              >
+              <button @click="deletePurchase(purchase.id)" class="btn btn-sm btn-danger" :title="$t('purchase.delete')">
                 <font-awesome-icon icon="trash" />
               </button>
             </td>
           </tr>
           <tr v-if="purchases.length === 0">
             <td colspan="9" class="text-center py-4 text-muted">
-              No hay compras registradas.
+              {{ $t("purchase.noRecords") }}
             </td>
           </tr>
         </tbody>
@@ -84,16 +75,16 @@ export default {
           this.purchases = response.data;
         })
         .catch((error) => {
-          console.error("Error al cargar las compras:", error);
+          console.error(this.$t("purchase.fetchError"), error);
         });
     },
     deletePurchase(id) {
       Swal.fire({
-        title: `¿Eliminar la compra con ID ${id}?`,
+        title: this.$t("purchase.confirmDelete", { id }),
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Eliminar",
-        cancelButtonText: "Cancelar",
+        confirmButtonText: this.$t("purchase.delete"),
+        cancelButtonText: this.$t("purchase.cancel"),
         confirmButtonColor: "#c1121f",
       }).then((result) => {
         if (result.isConfirmed) {
@@ -102,13 +93,13 @@ export default {
             .then((response) => {
               this.purchases = response.data;
               Swal.fire(
-                "¡Eliminado!",
-                "La compra ha sido eliminada.",
+                this.$t("purchase.deletedTitle"),
+                this.$t("purchase.deletedText"),
                 "success"
               );
             })
             .catch(() => {
-              Swal.fire("Error", "No se pudo eliminar la compra.", "error");
+              Swal.fire(this.$t("purchase.errorTitle"), this.$t("purchase.deleteError"), "error");
             });
         }
       });
@@ -120,7 +111,7 @@ export default {
       this.$router.push({ name: "NewPurchase" });
     },
     formatDate(date) {
-      return new Date(date).toLocaleString("es-CO", {
+      return new Date(date).toLocaleString(this.$i18n.locale === "es" ? "es-CO" : "en-US", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",

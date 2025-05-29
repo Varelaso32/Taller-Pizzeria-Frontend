@@ -8,7 +8,8 @@
           <!-- Pizza -->
           <div class="mb-3">
             <label for="pizza" class="form-label">{{ $t("editPizzaIngredient.pizza") }}</label>
-            <select v-model="pizzaIngredient.pizza_id" class="form-select" required>
+            <select v-model="pizzaIngredient.pizza_id" id="pizza" class="form-select" required>
+              <option value="" disabled>{{ $t("editPizzaIngredient.selectPizza") }}</option>
               <option v-for="pizza in pizzas" :key="pizza.id" :value="pizza.id">
                 {{ pizza.name }}
               </option>
@@ -18,7 +19,8 @@
           <!-- Ingrediente -->
           <div class="mb-3">
             <label for="ingredient" class="form-label">{{ $t("editPizzaIngredient.ingredient") }}</label>
-            <select v-model="pizzaIngredient.ingredient_id" class="form-select" required>
+            <select v-model="pizzaIngredient.ingredient_id" id="ingredient" class="form-select" required>
+              <option value="" disabled>{{ $t("editPizzaIngredient.selectIngredient") }}</option>
               <option v-for="ingredient in ingredients" :key="ingredient.id" :value="ingredient.id">
                 {{ ingredient.name }}
               </option>
@@ -27,10 +29,10 @@
 
           <!-- Botones -->
           <button type="submit" class="btn text-white" style="background-color: #c1121f">
-            {{ $t("editPizzaIngredient.save") }}
+            {{ $t("buttons.save") }}
           </button>
           <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            {{ $t("editPizzaIngredient.cancel") }}
+            {{ $t("buttons.cancel") }}
           </button>
         </form>
       </div>
@@ -68,7 +70,7 @@ export default {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Relación actualizada correctamente",
+          title: this.$t("editPizzaIngredient.success"),
           showConfirmButton: false,
           timer: 2000,
         });
@@ -78,10 +80,8 @@ export default {
         console.error("Error al actualizar relación:", error);
         Swal.fire({
           icon: "error",
-          title: "Error",
-          text:
-            error.response?.data?.msg ||
-            "No se pudo actualizar la relación pizza-ingrediente.",
+          title: this.$t("error.title"),
+          text: error.response?.data?.msg || this.$t("editPizzaIngredient.updateError"),
         });
       }
     },
@@ -96,8 +96,8 @@ export default {
       } catch (err) {
         Swal.fire({
           icon: "error",
-          title: "Error",
-          text: "No se pudieron cargar pizzas o ingredientes.",
+          title: this.$t("error.title"),
+          text: this.$t("editPizzaIngredient.loadError"),
         });
       }
     },
@@ -111,8 +111,8 @@ export default {
       } catch (err) {
         Swal.fire({
           icon: "error",
-          title: "Error",
-          text: "No se pudo cargar la relación.",
+          title: this.$t("error.title"),
+          text: this.$t("editPizzaIngredient.loadRelationError"),
         });
       }
     },

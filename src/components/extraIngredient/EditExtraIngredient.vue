@@ -1,13 +1,12 @@
 <template>
   <div class="container text-start">
-    <h1 class="text-danger fw-bold">Editar Ingrediente Extra</h1>
+    <h1 class="text-danger fw-bold">{{ $t("extraIngredient.editTitle") }}</h1>
     <div class="card">
-      <div class="card-header fw-bold">Formulario de Edición</div>
+      <div class="card-header fw-bold">{{ $t("extraIngredient.editHeader") }}</div>
       <div class="card-body">
         <form @submit.prevent="updateExtraIngredient">
-          <!-- Nombre -->
           <div class="mb-3">
-            <label for="name" class="form-label">Nombre</label>
+            <label for="name" class="form-label">{{ $t("extraIngredient.name") }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="cheese" />
@@ -22,9 +21,8 @@
             </div>
           </div>
 
-          <!-- Precio -->
           <div class="mb-3">
-            <label for="price" class="form-label">Precio</label>
+            <label for="price" class="form-label">{{ $t("extraIngredient.price") }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="dollar-sign" />
@@ -41,16 +39,15 @@
             </div>
           </div>
 
-          <!-- Botones -->
           <button
             type="submit"
             class="btn text-white"
             style="background-color: #c1121f"
           >
-            Guardar Cambios
+            {{ $t("extraIngredient.editSaveButton") }}
           </button>
           <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            Cancelar
+            {{ $t("buttons.cancel") }}
           </button>
         </form>
       </div>
@@ -90,17 +87,16 @@ export default {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Ingrediente extra actualizado correctamente",
+          title: this.$t("extraIngredient.updateSuccess"),
           showConfirmButton: false,
           timer: 2000,
         });
         this.$router.push({ name: "ExtraIngredients" });
-      } catch (error) {
-        console.error("Error al actualizar el ingrediente extra:", error);
+      } catch {
         Swal.fire({
           icon: "error",
-          title: "Error",
-          text: "No se pudo actualizar el ingrediente extra.",
+          title: this.$t("extraIngredient.updateError"),
+          text: this.$t("extraIngredient.updateError"),
         });
       }
     },
@@ -115,8 +111,8 @@ export default {
       .catch(() => {
         Swal.fire({
           icon: "error",
-          title: "Error",
-          text: "No se pudo cargar el ingrediente extra.",
+          title: this.$t("extraIngredient.loadError"),
+          text: this.$t("extraIngredient.loadError"),
         });
       });
   },

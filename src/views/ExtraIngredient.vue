@@ -70,34 +70,44 @@ export default {
   methods: {
     fetchExtraIngredients() {
       axios
-        .get("http://127.0.0.1:8000/api/extra_ingredients") 
+        .get("http://127.0.0.1:8000/api/extra_ingredients")
         .then((response) => {
           this.extraIngredients = response.data;
         })
-        .catch((error) => {
-          console.error("Error fetching extra ingredients:", error);
-          Swal.fire("Error", "No se pudieron cargar los ingredientes extra.", "error");
+        .catch(() => {
+          Swal.fire(
+            this.$t("extraIngredient.loadError"),
+            this.$t("extraIngredient.loadError"),
+            "error"
+          );
         });
     },
     deleteExtraIngredient(id) {
       Swal.fire({
-        title: `¿Deseas eliminar el ingrediente extra con ID ${id}?`,
+        title: this.$t("extraIngredient.deleteConfirm", { id }),
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Eliminar",
-        cancelButtonText: "Cancelar",
+        confirmButtonText: this.$t("extraIngredient.buttons.delete"),
+        cancelButtonText: this.$t("extraIngredient.buttons.cancel"),
         confirmButtonColor: "#c1121f",
       }).then((result) => {
         if (result.isConfirmed) {
           axios
             .delete(`http://127.0.0.1:8000/api/extra_ingredients/${id}`)
             .then(() => {
-              Swal.fire("¡Eliminado!", "El ingrediente extra ha sido eliminado.", "success");
+              Swal.fire(
+                this.$t("extraIngredient.deleteSuccess"),
+                "",
+                "success"
+              );
               this.fetchExtraIngredients();
             })
-            .catch((error) => {
-              console.error("Error deleting extra ingredient:", error);
-              Swal.fire("Error", "No se pudo eliminar el ingrediente extra.", "error");
+            .catch(() => {
+              Swal.fire(
+                this.$t("extraIngredient.deleteError"),
+                "",
+                "error"
+              );
             });
         }
       });
