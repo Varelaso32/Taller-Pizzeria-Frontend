@@ -25,6 +25,11 @@ export default {
     home: "Home",
     about: "About",
   },
+  logout: "Log out",
+  logoutConfirm: "Are you sure you want to log out?",
+  yesLogout: "Yes, log out",
+  cancel: "Cancel",
+  loggedOut: "Successfully logged out",
   extraIng: "Extra Ingredients",
   branchs: "Branchs",
   users: {
@@ -406,7 +411,7 @@ export default {
       errorUpdate: "Failed to update the pizza",
     },
   },
-   orderPizza: {
+  orderPizza: {
     title: "Order Pizzas",
     create: "Create Order Pizza",
     id: "ID",
@@ -470,7 +475,7 @@ export default {
     createSuccess: "Extra ingredient created successfully",
     createError: "Could not create the extra ingredient.",
   },
-   purchase: {
+  purchase: {
     title: "Purchases",
     newButton: "New Purchase",
     id: "ID",
@@ -517,7 +522,7 @@ export default {
     selectSupplier: "Select a supplier",
     selectRawMaterial: "Select a raw material",
   },
-    pizzaIngredients: {
+  pizzaIngredients: {
     title: "Pizza Ingredients",
     pizza: "Pizza",
     ingredient: "Ingredient",
@@ -562,31 +567,31 @@ export default {
     title: "Error",
   },
   extraIngredient: {
-  title: "Extra Ingredients",
-  new: "New Extra Ingredient",
-  name: "Name",
-  price: "Price",
-  actions: "Actions",
-  noExtraIngredients: "No extra ingredients available.",
-  header: "New Extra Ingredient Form",
-  saveSuccess: "Extra ingredient created successfully",
-  updateSuccess: "Extra ingredient updated successfully",
-  deleteConfirm: "Do you want to delete the extra ingredient with ID {id}?",
-  deleteSuccess: "The extra ingredient has been deleted.",
-  deleteError: "Could not delete the extra ingredient.",
-  createError: "Could not create the extra ingredient.",
-  updateError: "Could not update the extra ingredient.",
-  loadError: "Could not load the extra ingredient.",
-  buttons: {
-    save: "Save",
-    cancel: "Cancel",
-    delete: "Delete",
+    title: "Extra Ingredients",
+    new: "New Extra Ingredient",
+    name: "Name",
+    price: "Price",
+    actions: "Actions",
+    noExtraIngredients: "No extra ingredients available.",
+    header: "New Extra Ingredient Form",
+    saveSuccess: "Extra ingredient created successfully",
+    updateSuccess: "Extra ingredient updated successfully",
+    deleteConfirm: "Do you want to delete the extra ingredient with ID {id}?",
+    deleteSuccess: "The extra ingredient has been deleted.",
+    deleteError: "Could not delete the extra ingredient.",
+    createError: "Could not create the extra ingredient.",
+    updateError: "Could not update the extra ingredient.",
+    loadError: "Could not load the extra ingredient.",
+    buttons: {
+      save: "Save",
+      cancel: "Cancel",
+      delete: "Delete",
+    },
+    editTitle: "Edit Extra Ingredient",
+    editHeader: "Edit Form",
+    editSaveButton: "Save Changes"
   },
-  editTitle: "Edit Extra Ingredient",
-  editHeader: "Edit Form",
-  editSaveButton: "Save Changes"
-},
-branches: {
+  branches: {
     title: "Branches",
     actions: "Actions",
     no_records: "No branches registered.",

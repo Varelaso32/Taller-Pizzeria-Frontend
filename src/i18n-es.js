@@ -26,6 +26,11 @@ export default {
     about: "Acerca",
     extraIng: "Extra Ingredientes",
   },
+  logout: "Cerrar sesión",
+  logoutConfirm: "¿Estás seguro de que deseas cerrar sesión?",
+  yesLogout: "Sí, cerrar sesión",
+  cancel: "Cancelar",
+  loggedOut: "Sesión cerrada exitosamente",
   extraIng: "Extra Ingredientes",
   branchs: "Sucursales",
   users: {
@@ -385,7 +390,7 @@ export default {
       load_error: "Error al cargar los datos.",
     },
   },
-   orderPizza: {
+  orderPizza: {
     title: "Pizzas por Orden",
     create: "Crear Pizza por Orden",
     id: "ID",
@@ -417,7 +422,7 @@ export default {
     deleteError: "No se pudo eliminar la pizza por orden.",
     confirmDelete: "¿Estás seguro de que deseas eliminar esta pizza por orden?",
   },
-   orderExtra: {
+  orderExtra: {
     title: "Ingredientes Extra por Orden",
     newButton: "Nuevo Ingrediente Extra",
     table: {
@@ -449,7 +454,7 @@ export default {
     createSuccess: "Ingrediente extra creado correctamente",
     createError: "No se pudo crear el ingrediente extra.",
   },
-   purchase: {
+  purchase: {
     title: "Compras",
     newButton: "Nueva Compra",
     id: "ID",
@@ -541,31 +546,31 @@ export default {
     title: "Error",
   },
   extraIngredient: {
-  title: "Ingredientes Extras",
-  new: "Nuevo Ingrediente Extra",
-  name: "Nombre",
-  price: "Precio",
-  actions: "Acciones",
-  noExtraIngredients: "No hay ingredientes extras disponibles.",
-  header: "Formulario de Nuevo Ingrediente Extra",
-  saveSuccess: "Ingrediente extra creado correctamente",
-  updateSuccess: "Ingrediente extra actualizado correctamente",
-  deleteConfirm: "¿Deseas eliminar el ingrediente extra con ID {id}?",
-  deleteSuccess: "El ingrediente extra ha sido eliminado.",
-  deleteError: "No se pudo eliminar el ingrediente extra.",
-  createError: "No se pudo crear el ingrediente extra.",
-  updateError: "No se pudo actualizar el ingrediente extra.",
-  loadError: "No se pudo cargar el ingrediente extra.",
-  buttons: {
-    save: "Guardar",
-    cancel: "Cancelar",
-    delete: "Eliminar",
+    title: "Ingredientes Extras",
+    new: "Nuevo Ingrediente Extra",
+    name: "Nombre",
+    price: "Precio",
+    actions: "Acciones",
+    noExtraIngredients: "No hay ingredientes extras disponibles.",
+    header: "Formulario de Nuevo Ingrediente Extra",
+    saveSuccess: "Ingrediente extra creado correctamente",
+    updateSuccess: "Ingrediente extra actualizado correctamente",
+    deleteConfirm: "¿Deseas eliminar el ingrediente extra con ID {id}?",
+    deleteSuccess: "El ingrediente extra ha sido eliminado.",
+    deleteError: "No se pudo eliminar el ingrediente extra.",
+    createError: "No se pudo crear el ingrediente extra.",
+    updateError: "No se pudo actualizar el ingrediente extra.",
+    loadError: "No se pudo cargar el ingrediente extra.",
+    buttons: {
+      save: "Guardar",
+      cancel: "Cancelar",
+      delete: "Eliminar",
+    },
+    editTitle: "Editar Ingrediente Extra",
+    editHeader: "Formulario de Edición",
+    editSaveButton: "Guardar Cambios"
   },
-  editTitle: "Editar Ingrediente Extra",
-  editHeader: "Formulario de Edición",
-  editSaveButton: "Guardar Cambios"
-},
-branches: {
+  branches: {
     title: "Sucursales",
     actions: "Acciones",
     no_records: "No hay sucursales registradas.",
