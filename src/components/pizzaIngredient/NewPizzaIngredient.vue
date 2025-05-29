@@ -18,6 +18,7 @@
                 class="form-select"
                 required
               >
+                <option value="" disabled>{{ $t("newPizzaIngredient.selectPizza") }}</option>
                 <option v-for="pizza in pizzas" :key="pizza.id" :value="pizza.id">
                   {{ pizza.name }}
                 </option>
@@ -38,6 +39,7 @@
                 class="form-select"
                 required
               >
+                <option value="" disabled>{{ $t("newPizzaIngredient.selectIngredient") }}</option>
                 <option v-for="ingredient in ingredients" :key="ingredient.id" :value="ingredient.id">
                   {{ ingredient.name }}
                 </option>
@@ -88,24 +90,24 @@ export default {
     },
     async savePizzaIngredient() {
       try {
-        const res = await axios.post("http://127.0.0.1:8000/api/pizza_ingredients", this.relation);
+        await axios.post("http://127.0.0.1:8000/api/pizza_ingredients", this.relation);
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Ingrediente agregado a la pizza correctamente",
+          title: this.$t("newPizzaIngredient.success"),
           showConfirmButton: false,
           timer: 2000,
         });
         this.$router.push({ name: "PizzaIngredients" });
       } catch (error) {
         console.error("Error al guardar relación pizza-ingrediente:", error);
-        let msg = "No se pudo guardar la relación.";
+        let msg = this.$t("newPizzaIngredient.saveError");
         if (error.response?.data?.msg) {
           msg = error.response.data.msg;
         }
         Swal.fire({
           icon: "error",
-          title: "Error",
+          title: this.$t("error.title"),
           text: msg,
         });
       }
@@ -122,8 +124,8 @@ export default {
         console.error("Error al cargar pizzas o ingredientes:", error);
         Swal.fire({
           icon: "error",
-          title: "Error",
-          text: "No se pudieron cargar los datos.",
+          title: this.$t("error.title"),
+          text: this.$t("newPizzaIngredient.loadError"),
         });
       }
     },
