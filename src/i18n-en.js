@@ -333,5 +333,41 @@ ingredients: {
   update_error: "Could not update the ingredient.",
   save_changes: "Save Changes"
 },
-  
+  pizza_raw_material: {
+    title: "Pizza Ingredients",
+    new: "New Ingredient",
+    no_data: "No ingredients registered.",
+    table: {
+      number: "#",
+      pizza: "Pizza",
+      raw_material: "Raw Material",
+      quantity: "Quantity",
+      actions: "Actions",
+      edit: "Edit",
+      delete: "Delete"
+    },
+    form: {
+      add_title: "Add Ingredient to Pizza",
+      edit_title: "Edit Pizza Ingredient",
+      ingredient_info: "Ingredient Information",
+      pizza: "Pizza",
+      select_pizza: "Select a pizza",
+      raw_material: "Raw Material",
+      select_raw_material: "Select a raw material",
+      quantity: "Quantity (in grams)",
+      save: "Save",
+      cancel: "Cancel"
+    },
+    messages: {
+      confirm_delete: "Do you want to delete the ingredient with ID {id}?",
+      deleted: "Deleted!",
+      deleted_success: "The ingredient has been deleted.",
+      delete_error: "Could not delete the ingredient.",
+      added_success: "Ingredient added successfully",
+      add_error: "Could not add the ingredient.",
+      updated_success: "The ingredient was updated successfully",
+      update_error: "Error updating the ingredient.",
+      load_error: "Error loading data."
+    }
+  }
 };

@@ -345,6 +345,44 @@ ingredients: {
   update_error: "No se pudo actualizar el ingrediente.",
   save_changes: "Guardar Cambios"
 },
+pizza_raw_material: {
+    title: "Ingredientes de Pizzas",
+    new: "Nuevo Ingrediente",
+    no_data: "No hay ingredientes registrados.",
+    table: {
+      number: "#",
+      pizza: "Pizza",
+      raw_material: "Materia Prima",
+      quantity: "Cantidad",
+      actions: "Acciones",
+      edit: "Editar",
+      delete: "Eliminar"
+    },
+    form: {
+      add_title: "Agregar Ingrediente a Pizza",
+      edit_title: "Editar Ingrediente de Pizza",
+      ingredient_info: "Información del Ingrediente",
+      pizza: "Pizza",
+      select_pizza: "Seleccione una pizza",
+      raw_material: "Materia Prima",
+      select_raw_material: "Seleccione una materia prima",
+      quantity: "Cantidad (en gramos)",
+      save: "Guardar",
+      cancel: "Cancelar"
+    },
+    messages: {
+      confirm_delete: "¿Deseas eliminar el ingrediente con ID {id}?",
+      deleted: "¡Eliminado!",
+      deleted_success: "El ingrediente ha sido eliminado.",
+      delete_error: "No se pudo eliminar el ingrediente.",
+      added_success: "Ingrediente agregado correctamente",
+      add_error: "No se pudo agregar el ingrediente.",
+      updated_success: "El ingrediente fue actualizado correctamente",
+      update_error: "Error al actualizar el ingrediente.",
+      load_error: "Error al cargar los datos."
+    }
+  }
+
   
 
 

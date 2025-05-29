@@ -2,11 +2,12 @@
   <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="h3 text-danger">
-        <font-awesome-icon icon="pizza-slice" class="me-2" /> Ingredientes de Pizzas
+        <font-awesome-icon icon="pizza-slice" class="me-2" />
+        {{ $t("pizza_raw_material.title") }}
       </h1>
       <button @click="newIngredient" class="btn btn-danger d-flex align-items-center">
         <font-awesome-icon icon="plus" class="me-2" />
-        Nuevo Ingrediente
+        {{ $t("pizza_raw_material.new") }}
       </button>
     </div>
 
@@ -14,11 +15,11 @@
       <table class="table table-striped align-middle mb-0">
         <thead class="table-dark text-white">
           <tr>
-            <th>#</th>
-            <th>Pizza</th>
-            <th>Materia Prima</th>
-            <th>Cantidad</th>
-            <th class="text-center">Acciones</th>
+            <th>{{ $t("pizza_raw_material.table.number") }}</th>
+            <th>{{ $t("pizza_raw_material.table.pizza") }}</th>
+            <th>{{ $t("pizza_raw_material.table.raw_material") }}</th>
+            <th>{{ $t("pizza_raw_material.table.quantity") }}</th>
+            <th class="text-center">{{ $t("pizza_raw_material.table.actions") }}</th>
           </tr>
         </thead>
         <tbody>
@@ -28,23 +29,17 @@
             <td>{{ item.raw_material_name }}</td>
             <td>{{ item.quantity }}</td>
             <td class="text-center">
-              <button
-                @click="editIngredient(item.id)"
-                class="btn btn-sm btn-warning me-2"
-              >
+              <button @click="editIngredient(item.id)" class="btn btn-sm btn-warning me-2">
                 <font-awesome-icon icon="pencil" />
               </button>
-              <button
-                @click="deleteIngredient(item.id)"
-                class="btn btn-sm btn-danger"
-              >
+              <button @click="deleteIngredient(item.id)" class="btn btn-sm btn-danger">
                 <font-awesome-icon icon="trash" />
               </button>
             </td>
           </tr>
           <tr v-if="ingredients.length === 0">
             <td colspan="5" class="text-center py-4 text-muted">
-              No hay ingredientes registrados.
+              {{ $t("pizza_raw_material.no_data") }}
             </td>
           </tr>
         </tbody>
@@ -72,28 +67,28 @@ export default {
           this.ingredients = response.data;
         })
         .catch((error) => {
-          console.error("Error al obtener los ingredientes:", error);
+          console.error(error);
         });
     },
     deleteIngredient(id) {
       Swal.fire({
-        title: `¿Deseas eliminar el ingrediente con ID ${id}?`,
+        title: this.$t("pizza_raw_material.messages.confirm_delete", { id }),
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Eliminar",
-        cancelButtonText: "Cancelar",
+        confirmButtonText: this.$t("pizza_raw_material.table.delete"),
+        cancelButtonText: this.$t("pizza_raw_material.form.cancel"),
         confirmButtonColor: "#c1121f",
       }).then((result) => {
         if (result.isConfirmed) {
           axios
             .delete(`http://127.0.0.1:8000/api/pizza-raw-materials/${id}`)
             .then((response) => {
-              Swal.fire("¡Eliminado!", "El ingrediente ha sido eliminado.", "success");
+              Swal.fire(this.$t("pizza_raw_material.messages.deleted"), this.$t("pizza_raw_material.messages.deleted_success"), "success");
               this.ingredients = response.data;
             })
             .catch((error) => {
-              console.error("Error al eliminar:", error);
-              Swal.fire("Error", "No se pudo eliminar el ingrediente.", "error");
+              console.error(error);
+              Swal.fire("Error", this.$t("pizza_raw_material.messages.delete_error"), "error");
             });
         }
       });
@@ -110,5 +105,3 @@ export default {
   },
 };
 </script>
-
-
