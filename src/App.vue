@@ -73,6 +73,9 @@
               <router-link class="nav-link ps-4 py-2" to="/RawMaterials"
                 >🧂 {{ $t("sidebar.rawMaterials") }}</router-link
               >
+              <router-link class="nav-link ps-4 py-2" to="/extra-ingredients"
+                >🌶 {{ $t("extraIng") }}</router-link
+              >
             </div>
           </div>
         </div>
@@ -130,7 +133,7 @@
               <router-link class="nav-link ps-4 py-2" to="/orders"
                 >📦 {{ $t("sidebar.orders") }}</router-link
               >
-              <router-link class="nav-link ps-4 py-2" to="/order-pizzas"
+              <router-link class="nav-link ps-4 py-2" to="/order-pizza"
                 >🍕 {{ $t("sidebar.orderPizzas") }}</router-link
               >
               <router-link class="nav-link ps-4 py-2" to="/order_extra"

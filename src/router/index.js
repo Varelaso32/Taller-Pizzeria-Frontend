@@ -12,7 +12,6 @@ import Clients from "../views/Clients.vue";
 import NewClient from "@/components/clients/NewClient.vue";
 import EditClient from "@/components/clients/EditClient.vue";
 
-// Empleados
 // Employees
 import Employees from "../views/Employees.vue";
 import NewEmploye from "@/components/employees/NewEmploye.vue";
@@ -22,30 +21,37 @@ import EditEmploye from "@/components/employees/EditEmploye.vue";
 import BranchsView from "@/views/BranchsView.vue";
 import NewBranchs from "@/components/branchs/NewBranchs.vue";
 import EditBranchs from "@/components/branchs/EditBranchs.vue";
+
 //Ingredients
 import IngredientsView from "@/views/IngredientsView.vue";
 import NewIngredientes from "@/components/ingredients/NewIngredientes.vue";
 import EditIngredientes from "@/components/ingredients/EditIngredientes.vue";
+
 //Order_extra
 import Order_extraView from "@/views/Order_extraView.vue";
 import EditOrder_extra from "@/components/order_extras/EditOrder_extra.vue";
 import NewOrder_extra from "@/components/order_extras/NewOrder_extra.vue";
+
 //Orders
 import OrdersView from "@/views/OrdersView.vue";
 import EditOrder from "@/components/orders/EditOrder.vue";
 import NewOrder from "@/components/orders/NewOrder.vue";
+
 //PizzasSisez
 import PizzaSizesView from "@/views/Pizza-sizesView.vue";
 import NewPizzaSize from "@/components/pizas-sizes/NewPizza-size.vue";
 import EditPizzaSize from "@/components/pizas-sizes/EditPizza-size.vue";
+
 //Pizzas
 import PizzasView from "@/views/PizzasView.vue";
 import NewPizzas from "@/components/pizzas/NewPizzas.vue";
 import EditPizzas from "@/components/pizzas/EditPizzas.vue";
+
 //RawMaterials
 import RawMaterialsView from "@/views/RawMaterialsView.vue";
 import EditRawMaterials from "@/components/rawMaterials/EditRawMaterials.vue";
 import NewRawMaterials from "@/components/rawMaterials/NewRawMaterials.vue";
+
 //Sipplider
 import SuppliersView from "@/views/SuppliersView.vue";
 import NewSupliders from "@/components/supliders/NewSupliders.vue";
@@ -54,10 +60,12 @@ import EditSupliders from "@/components/supliders/EditSupliders.vue";
 import Pizza_raw_material from "@/views/pizza_raw_material.vue";
 import NewPizza_raw_material from "@/components/pizza_raw_material/NewPizza_raw_material.vue";
 import Editpizza_raw_material from "@/components/pizza_raw_material/EditPizza_raw_material.vue";
+
 //PizzaIngredient
 import PizzaIngredient from "@/views/PizzaIngredient.vue";
 import NewPizzaIngredient from "@/components/pizzaIngredient/NewPizzaIngredient.vue";
 import EditPizzaIngredient from "@/components/pizzaIngredient/EditPizzaIngredient.vue";
+
 //ExtraIngredients
 import ExtraIngredient from "@/views/ExtraIngredient.vue";
 import NewExtraIngredient from "@/components/extraIngredient/NewExtraIngredient.vue";
@@ -66,6 +74,9 @@ import EditExtraIngredient from "@/components/extraIngredient/EditExtraIngredien
 import PurchasesView from "@/views/PurchasesView .vue";
 import NewPurchase from "@/components/purchase/NewPurchase.vue";
 import EditPurchase from "@/components/purchase/EditPurchase.vue";
+import OrderPizzaView from "@/views/OrderPizzaView.vue";
+import NewOrderPizza from "@/components/orders_pizza/NewOrderPizza.vue";
+import EditOrderPizza from "@/components/orders_pizza/EditOrderPizza.vue";
 
 const routes = [
   {
@@ -135,7 +146,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
- // Rutas PizzaIngredient
+  // Rutas PizzaIngredient
   {
     path: "/pizza-ingredients",
     name: "PizzaIngredients",
@@ -151,7 +162,23 @@ const routes = [
     name: "EditarPizzaIngrediente",
     component: EditPizzaIngredient,
   },
-  
+
+  {
+    path: "/order-pizza",
+    name: "OrderPizza",
+    component: OrderPizzaView,
+  },
+  {
+    path: "/order-pizza/new",
+    name: "NewOrderPizza",
+    component: NewOrderPizza,
+  },
+  {
+    path: "/order-pizza/edit/:id",
+    name: "EditOrderPizza",
+    component: EditOrderPizza,
+  },
+
   // Rutas ExtraIngredients
   {
     path: "/extra-ingredients",
@@ -168,7 +195,6 @@ const routes = [
     name: "EditExtraIngredient",
     component: EditExtraIngredient,
   },
-
 
   {
     path: "/branchs",
@@ -331,7 +357,6 @@ const routes = [
     name: "EditPurchase",
     component: EditPurchase,
   },
-  },  
 ];
 
 const router = createRouter({
@@ -343,7 +368,6 @@ router.beforeEach((to, from, next) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const isAuthenticated = !!user;
 
-  // Rutas públicas (login, etc)
   const publicPages = ["login", "about"];
   const authRequired = !publicPages.includes(to.name);
 
@@ -351,9 +375,8 @@ router.beforeEach((to, from, next) => {
     return next({ name: "login" });
   }
 
-  // Ejemplo rol (si tienes rol en user)
   if (to.meta.requiresAdmin && (!user || !user.isAdmin)) {
-    return next({ name: "home" }); // o página "no autorizado"
+    return next({ name: "home" });
   }
 
   if (to.name === "login" && isAuthenticated) {
