@@ -3,14 +3,11 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="h3 text-danger">
         <font-awesome-icon icon="pizza-slice" class="me-2" />
-        Listado de Pizzas
+        {{ $t("pizzas.title") }}
       </h1>
-      <button
-        @click="newPizza"
-        class="btn btn-danger d-flex align-items-center"
-      >
+      <button @click="newPizza" class="btn btn-danger d-flex align-items-center">
         <font-awesome-icon icon="plus" class="me-2" />
-        Nueva Pizza
+        {{ $t("pizzas.new") }}
       </button>
     </div>
 
@@ -19,10 +16,10 @@
         <thead class="table-dark text-white">
           <tr>
             <th>#</th>
-            <th>Nombre</th>
-            <th>Creado</th>
-            <th>Actualizado</th>
-            <th class="text-center">Acciones</th>
+            <th>{{ $t("pizzas.name") }}</th>
+            <th>{{ $t("pizzas.created") }}</th>
+            <th>{{ $t("pizzas.updated") }}</th>
+            <th class="text-center">{{ $t("pizzas.actions") }}</th>
           </tr>
         </thead>
         <tbody>
@@ -32,23 +29,17 @@
             <td>{{ formatDate(pizza.created_at) }}</td>
             <td>{{ formatDate(pizza.updated_at) }}</td>
             <td class="text-center">
-              <button
-                @click="editPizza(pizza.id)"
-                class="btn btn-sm btn-warning me-2"
-              >
+              <button @click="editPizza(pizza.id)" class="btn btn-sm btn-warning me-2">
                 <font-awesome-icon icon="pencil" />
               </button>
-              <button
-                @click="deletePizza(pizza.id)"
-                class="btn btn-sm btn-danger"
-              >
+              <button @click="deletePizza(pizza.id)" class="btn btn-sm btn-danger">
                 <font-awesome-icon icon="trash" />
               </button>
             </td>
           </tr>
           <tr v-if="pizzas.length === 0">
             <td colspan="5" class="text-center py-4 text-muted">
-              No hay pizzas registradas.
+              {{ $t("pizzas.noPizzas") }}
             </td>
           </tr>
         </tbody>
@@ -76,7 +67,7 @@ export default {
           this.pizzas = response.data;
         })
         .catch((error) => {
-          console.error("Error al cargar las pizzas:", error);
+          console.error(this.$t("pizzas.errorLoad"), error);
         });
     },
     formatDate(date) {
@@ -87,15 +78,15 @@ export default {
       this.$router.push({ name: "NewPizzas" });
     },
     editPizza(id) {
-      this.$router.push({ name: "EditPizzas", params: { id: `${id}` } });
+      this.$router.push({ name: "EditPizzas", params: { id } });
     },
     deletePizza(id) {
       Swal.fire({
-        title: `¿Deseas eliminar la pizza con ID ${id}?`,
+        title: this.$t("pizzas.deleteTitle", { id }),
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Eliminar",
-        cancelButtonText: "Cancelar",
+        confirmButtonText: this.$t("pizzas.deleteConfirm"),
+        cancelButtonText: this.$t("pizzas.deleteCancel"),
         confirmButtonColor: "#c1121f",
       }).then((result) => {
         if (result.isConfirmed) {
@@ -103,15 +94,15 @@ export default {
             .delete(`http://127.0.0.1:8000/api/pizzas/${id}`)
             .then(() => {
               Swal.fire(
-                "¡Eliminado!",
-                "La pizza ha sido eliminada.",
+                this.$t("pizzas.deleted"),
+                this.$t("pizzas.deletedMsg"),
                 "success"
               );
               this.fetchPizzas();
             })
             .catch((error) => {
-              console.error("Error al eliminar pizza:", error);
-              Swal.fire("Error", "No se pudo eliminar la pizza.", "error");
+              console.error(this.$t("pizzas.deleteError"), error);
+              Swal.fire(this.$t("alerts.error"), this.$t("pizzas.deleteError"), "error");
             });
         }
       });

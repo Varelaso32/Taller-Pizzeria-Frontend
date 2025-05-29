@@ -3,14 +3,11 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="h3 text-danger">
         <font-awesome-icon icon="truck" class="me-2" />
-        Listado de Proveedores
+        {{ $t("suppliers.title") }}
       </h1>
-      <button
-        @click="newSupplier"
-        class="btn btn-danger d-flex align-items-center"
-      >
+      <button @click="newSupplier" class="btn btn-danger d-flex align-items-center">
         <font-awesome-icon icon="plus" class="me-2" />
-        Nuevo Proveedor
+        {{ $t("suppliers.new") }}
       </button>
     </div>
 
@@ -19,11 +16,11 @@
         <thead class="table-dark text-white">
           <tr>
             <th>#</th>
-            <th>Nombre</th>
-            <th>Contacto</th>
-            <th>Creado</th>
-            <th>Actualizado</th>
-            <th class="text-center">Acciones</th>
+            <th>{{ $t("suppliers.name") }}</th>
+            <th>{{ $t("suppliers.contact") }}</th>
+            <th>{{ $t("suppliers.created") }}</th>
+            <th>{{ $t("suppliers.updated") }}</th>
+            <th class="text-center">{{ $t("suppliers.actions") }}</th>
           </tr>
         </thead>
         <tbody>
@@ -34,23 +31,17 @@
             <td>{{ formatDate(supplier.created_at) }}</td>
             <td>{{ formatDate(supplier.updated_at) }}</td>
             <td class="text-center">
-              <button
-                @click="editSupplier(supplier.id)"
-                class="btn btn-sm btn-warning me-2"
-              >
+              <button @click="editSupplier(supplier.id)" class="btn btn-sm btn-warning me-2">
                 <font-awesome-icon icon="pencil" />
               </button>
-              <button
-                @click="deleteSupplier(supplier.id)"
-                class="btn btn-sm btn-danger"
-              >
+              <button @click="deleteSupplier(supplier.id)" class="btn btn-sm btn-danger">
                 <font-awesome-icon icon="trash" />
               </button>
             </td>
           </tr>
           <tr v-if="suppliers.length === 0">
             <td colspan="6" class="text-center py-4 text-muted">
-              No hay proveedores registrados.
+              {{ $t("suppliers.noSuppliers") }}
             </td>
           </tr>
         </tbody>
@@ -64,7 +55,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export default {
-  name: "SuppliersView",
+  name: "SuppliersList",
   data() {
     return {
       suppliers: [],
@@ -78,18 +69,8 @@ export default {
           this.suppliers = response.data;
         })
         .catch((error) => {
-          console.error("Error al cargar los proveedores:", error);
+          console.error("Error fetching suppliers:", error);
         });
-    },
-    formatDate(date) {
-      if (!date) return "";
-      return new Date(date).toLocaleString();
-    },
-    newSupplier() {
-      this.$router.push({ name: "NewSuppliers" });
-    },
-    editSupplier(id) {
-      this.$router.push({ name: "EditSuppliers", params: { id: `${id}` } });
     },
     deleteSupplier(id) {
       Swal.fire({
@@ -103,20 +84,26 @@ export default {
         if (result.isConfirmed) {
           axios
             .delete(`http://127.0.0.1:8000/api/suppliers/${id}`)
-            .then(() => {
-              Swal.fire(
-                "¡Eliminado!",
-                "El proveedor ha sido eliminado.",
-                "success"
-              );
-              this.fetchSuppliers();
+            .then((response) => {
+              Swal.fire("¡Eliminado!", "El proveedor ha sido eliminado.", "success");
+              this.suppliers = response.data;
             })
             .catch((error) => {
-              console.error("Error al eliminar proveedor:", error);
+              console.error("Error deleting supplier:", error);
               Swal.fire("Error", "No se pudo eliminar el proveedor.", "error");
             });
         }
       });
+    },
+    editSupplier(id) {
+      this.$router.push({ name: "EditSuppliers", params: { id: `${id}` } });
+    },
+    newSupplier() {
+      this.$router.push({ name: "NewSuppliers" });
+    },
+    formatDate(date) {
+      if (!date) return "";
+      return new Date(date).toLocaleString();
     },
   },
   mounted() {

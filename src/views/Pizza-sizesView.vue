@@ -3,11 +3,11 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="h3 text-danger">
         <font-awesome-icon icon="pizza-slice" class="me-2" />
-        Listado de Tamaños de Pizza
+        {{ $t("pizzaSizes.title") }}
       </h1>
       <button @click="newPizzaSize" class="btn btn-danger d-flex align-items-center">
         <font-awesome-icon icon="plus" class="me-2" />
-        Nuevo Tamaño
+        {{ $t("pizzaSizes.new") }}
       </button>
     </div>
 
@@ -16,10 +16,10 @@
         <thead class="table-dark text-white">
           <tr>
             <th>#</th>
-            <th>Pizza</th>
-            <th>Tamaño</th>
-            <th>Precio</th>
-            <th class="text-center">Acciones</th>
+            <th>{{ $t("pizzaSizes.pizza") }}</th>
+            <th>{{ $t("pizzaSizes.size") }}</th>
+            <th>{{ $t("pizzaSizes.price") }}</th>
+            <th class="text-center">{{ $t("pizzaSizes.actions") }}</th>
           </tr>
         </thead>
         <tbody>
@@ -39,7 +39,7 @@
           </tr>
           <tr v-if="pizzaSizes.length === 0">
             <td colspan="5" class="text-center py-4 text-muted">
-              No hay tamaños de pizza registrados.
+              {{ $t("pizzaSizes.noItems") }}
             </td>
           </tr>
         </tbody>
@@ -53,7 +53,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export default {
-  name: "PizzaSizeView",
+  name: "PizzaSize",
   data() {
     return {
       pizzaSizes: [],
@@ -67,28 +67,29 @@ export default {
           this.pizzaSizes = response.data;
         })
         .catch((error) => {
-          console.error("Error al cargar los tamaños de pizza:", error);
+          console.error("Error loading pizza sizes:", error);
+          Swal.fire(this.$t("alerts.error"), this.$t("pizzaSizes.errorLoad"), "error");
         });
     },
     deletePizzaSize(id) {
       Swal.fire({
-        title: `¿Deseas eliminar el tamaño de pizza con ID ${id}?`,
+        title: this.$t("pizzaSizes.deleteTitle", { id }),
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Eliminar",
-        cancelButtonText: "Cancelar",
+        confirmButtonText: this.$t("pizzaSizes.deleteConfirm"),
+        cancelButtonText: this.$t("pizzaSizes.deleteCancel"),
         confirmButtonColor: "#c1121f",
       }).then((result) => {
         if (result.isConfirmed) {
           axios
             .delete(`http://127.0.0.1:8000/api/pizza-sizes/${id}`)
             .then(() => {
-              Swal.fire("¡Eliminado!", "El tamaño ha sido eliminado.", "success");
+              Swal.fire(this.$t("pizzaSizes.deleted"), this.$t("pizzaSizes.deletedMsg"), "success");
               this.fetchPizzaSizes();
             })
             .catch((error) => {
-              console.error("Error al eliminar tamaño:", error);
-              Swal.fire("Error", "No se pudo eliminar el tamaño.", "error");
+              console.error("Error deleting pizza size:", error);
+              Swal.fire(this.$t("alerts.error"), this.$t("pizzaSizes.deleteError"), "error");
             });
         }
       });

@@ -1,70 +1,66 @@
 <template>
-  <div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h1 class="h3 text-danger">
-        <font-awesome-icon icon="plus" class="me-2" />
-        Nuevo Ingrediente Extra
-      </h1>
-      <button class="btn btn-danger" @click="cancel" :disabled="loading">
-        <font-awesome-icon icon="arrow-left" class="me-2" />
-        Volver
-      </button>
-    </div>
-    <div class="card shadow-sm rounded">
+  <div class="container text-start py-4">
+    <h1 class="h3 text-danger fw-bold mb-4">
+      {{ $t("orderExtra.newTitle") }}
+    </h1>
+    <div class="card shadow rounded">
+      <div class="card-header fw-bold">{{ $t("orderExtra.newFormTitle") }}</div>
       <div class="card-body">
         <form @submit.prevent="createOrderExtra">
           <div class="mb-3">
-            <label for="order_id" class="form-label">Orden</label>
+            <label for="order_id" class="form-label">{{ $t("orderExtra.orderLabel") }}</label>
             <select
               id="order_id"
               v-model="orderExtra.order_id"
               class="form-select"
               required
             >
-              <option value="" disabled>Selecciona una orden</option>
+              <option value="" disabled selected>-- {{ $t("orderExtra.orderLabel") }} --</option>
               <option v-for="order in orders" :key="order.id" :value="order.id">
-                {{ order.id }}
+                {{ order.id }} - Cliente: {{ order.client_name || order.id }}
               </option>
             </select>
           </div>
+
           <div class="mb-3">
-            <label for="extra_ingredient_id" class="form-label"
-              >Ingrediente extra</label
-            >
+            <label for="extra_ingredient_id" class="form-label">{{ $t("orderExtra.extraIngredientLabel") }}</label>
             <select
               id="extra_ingredient_id"
               v-model="orderExtra.extra_ingredient_id"
               class="form-select"
               required
             >
-              <option value="" disabled>Selecciona un ingrediente</option>
+              <option value="" disabled selected>-- {{ $t("orderExtra.extraIngredientLabel") }} --</option>
               <option v-for="extra in extras" :key="extra.id" :value="extra.id">
                 {{ extra.name }}
               </option>
             </select>
           </div>
+
           <div class="mb-3">
-            <label for="quantity" class="form-label">Cantidad</label>
+            <label for="quantity" class="form-label">{{ $t("orderExtra.quantityLabel") }}</label>
             <input
               type="number"
               id="quantity"
-              v-model="orderExtra.quantity"
+              v-model.number="orderExtra.quantity"
               class="form-control"
               min="1"
               required
             />
           </div>
-          <div class="d-flex justify-content-end">
+
+          <div class="d-flex justify-content-start mt-4">
             <button
               type="submit"
-              class="btn btn-primary me-2"
+              class="btn text-white me-2"
+              style="background-color: #c1121f"
               :disabled="loading"
             >
               <span
                 v-if="loading"
                 class="spinner-border spinner-border-sm me-1"
               ></span>
-              Guardar
+              {{ loading ? $t("orderExtra.saving") : $t("orderExtra.save") }}
             </button>
             <button
               type="button"
@@ -72,7 +68,7 @@
               @click="cancel"
               :disabled="loading"
             >
-              Cancelar
+              {{ $t("orderExtra.cancel") }}
             </button>
           </div>
         </form>
@@ -99,14 +95,13 @@ export default {
       loading: false,
     };
   },
-  created() {
-    this.fetchOrders();
-    this.fetchExtras();
-  },
   methods: {
+    cancel() {
+      this.$router.push({ name: "Order_extra" });
+    },
     async fetchOrders() {
       try {
-        const res = await axios.get("/api/orders");
+        const res = await axios.get("http://127.0.0.1:8000/api/orders");
         this.orders = res.data;
       } catch {
         this.orders = [];
@@ -114,41 +109,42 @@ export default {
     },
     async fetchExtras() {
       try {
-        const res = await axios.get("/api/extra-ingredients");
+        const res = await axios.get("http://127.0.0.1:8000/api/extra_ingredients");
         this.extras = res.data;
       } catch {
         this.extras = [];
       }
     },
-    cancel() {
-      this.$router.push({ name: "Order_extra" });
-    },
     async createOrderExtra() {
       this.loading = true;
       try {
-        await axios.post("/api/order-extra-ingredients", this.orderExtra);
+        await axios.post("http://127.0.0.1:8000/api/order_extra_ingredients", this.orderExtra);
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Ingrediente extra creado correctamente",
+          title: this.$t("orderExtra.createSuccess"),
           showConfirmButton: false,
           timer: 2000,
         });
-        this.$router.push({ name: "Order_extraView" }); // Ajusta el nombre según tu router
+        this.$router.push({ name: "Order_extra" });
       } catch (error) {
-        let errorMsg = "No se pudo crear el ingrediente extra.";
+        let errorMsg = this.$t("orderExtra.createError");
         if (error.response?.data?.msg) {
           errorMsg = error.response.data.msg;
         }
         Swal.fire({
           icon: "error",
-          title: "Error",
+          title: this.$t("orderExtra.newTitle"),
           text: errorMsg,
         });
       } finally {
         this.loading = false;
       }
     },
+  },
+  mounted() {
+    this.fetchOrders();
+    this.fetchExtras();
   },
 };
 </script>

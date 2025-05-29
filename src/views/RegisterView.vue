@@ -1,9 +1,20 @@
 <template>
   <div class="login-wrapper">
     <div class="container" style="max-width: 400px">
-      <h2 class="text-center mb-4">Iniciar Sesión</h2>
+      <h2 class="text-center mb-4">Crear Cuenta</h2>
 
-      <form @submit.prevent="login">
+      <form @submit.prevent="register">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            v-model="name"
+            required
+          />
+        </div>
+
         <div class="mb-3">
           <label for="email" class="form-label">Correo electrónico</label>
           <input
@@ -26,20 +37,16 @@
           />
         </div>
 
-        <div v-if="error" class="alert alert-danger">
-          {{ error }}
-        </div>
+        <div v-if="error" class="alert alert-danger">{{ error }}</div>
 
-        <button type="submit" class="btn btn-danger w-100">Entrar</button>
+        <button type="submit" class="btn btn-danger w-100">Registrarse</button>
+        <button
+          class="btn btn-outline-secondary w-100 mt-2"
+          @click="$router.push('/login')"
+        >
+          Volver
+        </button>
       </form>
-
-      <!-- 🔻 Link estilizado como botón -->
-      <router-link
-        to="/register"
-        class="btn btn-outline-secondary w-100 mt-2 text-center"
-      >
-        Crear cuenta nueva
-      </router-link>
     </div>
   </div>
 </template>
@@ -48,29 +55,28 @@
 import axios from "axios";
 
 export default {
-  name: "LoginView",
+  name: "RegisterView",
   data() {
     return {
+      name: "",
       email: "",
       password: "",
       error: "",
     };
   },
   methods: {
-    async login() {
+    async register() {
       try {
-        const response = await axios.post("http://127.0.0.1:8000/api/login", {
-          email: this.email.trim(),
+        await axios.post("http://127.0.0.1:8000/api/users", {
+          name: this.name,
+          email: this.email,
           password: this.password,
+          role: "cliente",
         });
 
-        const user = response.data.user;
-        localStorage.setItem("user", JSON.stringify(user));
-
-        this.$router.push("/pizzas"); // o "/home" si así se llama tu ruta
+        this.$router.push("/login");
       } catch (error) {
-        console.error("Error en login:", error);
-        this.error = error.response?.data?.msg || "Error al iniciar sesión";
+        this.error = error.response?.data?.msg || "Error al registrar usuario";
       }
     },
   },

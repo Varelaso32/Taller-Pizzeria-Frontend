@@ -12,7 +12,6 @@ import Clients from "../views/Clients.vue";
 import NewClient from "@/components/clients/NewClient.vue";
 import EditClient from "@/components/clients/EditClient.vue";
 
-// Empleados
 // Employees
 import Employees from "../views/Employees.vue";
 import NewEmploye from "@/components/employees/NewEmploye.vue";
@@ -22,34 +21,63 @@ import EditEmploye from "@/components/employees/EditEmploye.vue";
 import BranchsView from "@/views/BranchsView.vue";
 import NewBranchs from "@/components/branchs/NewBranchs.vue";
 import EditBranchs from "@/components/branchs/EditBranchs.vue";
+
 //Ingredients
 import IngredientsView from "@/views/IngredientsView.vue";
 import NewIngredientes from "@/components/ingredients/NewIngredientes.vue";
 import EditIngredientes from "@/components/ingredients/EditIngredientes.vue";
+
 //Order_extra
 import Order_extraView from "@/views/Order_extraView.vue";
 import EditOrder_extra from "@/components/order_extras/EditOrder_extra.vue";
 import NewOrder_extra from "@/components/order_extras/NewOrder_extra.vue";
+
 //Orders
 import OrdersView from "@/views/OrdersView.vue";
 import EditOrder from "@/components/orders/EditOrder.vue";
 import NewOrder from "@/components/orders/NewOrder.vue";
+
 //PizzasSisez
 import PizzaSizesView from "@/views/Pizza-sizesView.vue";
 import NewPizzaSize from "@/components/pizas-sizes/NewPizza-size.vue";
 import EditPizzaSize from "@/components/pizas-sizes/EditPizza-size.vue";
+
 //Pizzas
 import PizzasView from "@/views/PizzasView.vue";
 import NewPizzas from "@/components/pizzas/NewPizzas.vue";
 import EditPizzas from "@/components/pizzas/EditPizzas.vue";
+
 //RawMaterials
 import RawMaterialsView from "@/views/RawMaterialsView.vue";
 import EditRawMaterials from "@/components/rawMaterials/EditRawMaterials.vue";
 import NewRawMaterials from "@/components/rawMaterials/NewRawMaterials.vue";
+
 //Sipplider
 import SuppliersView from "@/views/SuppliersView.vue";
 import NewSupliders from "@/components/supliders/NewSupliders.vue";
 import EditSupliders from "@/components/supliders/EditSupliders.vue";
+
+import Pizza_raw_material from "@/views/pizza_raw_material.vue";
+import NewPizza_raw_material from "@/components/pizza_raw_material/NewPizza_raw_material.vue";
+import Editpizza_raw_material from "@/components/pizza_raw_material/EditPizza_raw_material.vue";
+
+//PizzaIngredient
+import PizzaIngredient from "@/views/PizzaIngredient.vue";
+import NewPizzaIngredient from "@/components/pizzaIngredient/NewPizzaIngredient.vue";
+import EditPizzaIngredient from "@/components/pizzaIngredient/EditPizzaIngredient.vue";
+
+//ExtraIngredients
+import ExtraIngredient from "@/views/ExtraIngredient.vue";
+import NewExtraIngredient from "@/components/extraIngredient/NewExtraIngredient.vue";
+import EditExtraIngredient from "@/components/extraIngredient/EditExtraIngredient.vue";
+
+import PurchasesView from "@/views/PurchasesView .vue";
+import NewPurchase from "@/components/purchase/NewPurchase.vue";
+import EditPurchase from "@/components/purchase/EditPurchase.vue";
+import OrderPizzaView from "@/views/OrderPizzaView.vue";
+import NewOrderPizza from "@/components/orders_pizza/NewOrderPizza.vue";
+import EditOrderPizza from "@/components/orders_pizza/EditOrderPizza.vue";
+import RegisterView from "@/views/RegisterView.vue";
 
 const routes = [
   {
@@ -106,7 +134,6 @@ const routes = [
     name: "EditarEmpleado",
     component: EditEmploye,
   },
-  
 
   // Ruta About
   {
@@ -120,21 +147,69 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
-//////////////jose///////////////////////////////////////////////////
+  // Rutas PizzaIngredient
+  {
+    path: "/pizza-ingredients",
+    name: "PizzaIngredients",
+    component: PizzaIngredient,
+  },
+  {
+    path: "/pizza-ingredients/new",
+    name: "NuevoPizzaIngrediente",
+    component: NewPizzaIngredient,
+  },
+  {
+    path: "/pizza-ingredients/:id/edit",
+    name: "EditarPizzaIngrediente",
+    component: EditPizzaIngredient,
+  },
+
+  {
+    path: "/order-pizza",
+    name: "OrderPizza",
+    component: OrderPizzaView,
+  },
+  {
+    path: "/order-pizza/new",
+    name: "NewOrderPizza",
+    component: NewOrderPizza,
+  },
+  {
+    path: "/order-pizza/edit/:id",
+    name: "EditOrderPizza",
+    component: EditOrderPizza,
+  },
+
+  // Rutas ExtraIngredients
+  {
+    path: "/extra-ingredients",
+    name: "ExtraIngredients",
+    component: ExtraIngredient,
+  },
+  {
+    path: "/extra-ingredients/new",
+    name: "NewExtraIngredient",
+    component: NewExtraIngredient,
+  },
+  {
+    path: "/extra-ingredients/:id/edit",
+    name: "EditExtraIngredient",
+    component: EditExtraIngredient,
+  },
+
   {
     path: "/branchs",
     name: "Branchs",
     component: BranchsView,
   },
-
   {
     path: "/branchs/new",
     name: "BranchsNew",
     component: NewBranchs,
   },
   {
-    path: "/branchs/edit",
-    name: "BranchsEdit",
+    path: "/branchs/:id/edit",
+    name: "EditarBranch",
     component: EditBranchs,
   },
 
@@ -145,7 +220,7 @@ const routes = [
   },
   {
     path: "/ingredients/new",
-    name: "Nuew Ingredients",
+    name: "New Ingredients",
     component: NewIngredientes,
   },
   {
@@ -165,7 +240,7 @@ const routes = [
     component: NewOrder_extra,
   },
   {
-    path: "/order_extra/edit/:id",
+    path: "/order_extra/:id/edit/",
     name: "Order_extraEdit",
     component: EditOrder_extra,
   },
@@ -249,6 +324,40 @@ const routes = [
     name: "EditSuppliers",
     component: EditSupliders,
   },
+
+  //Ruta Pizza_Raw_Materials
+  {
+    path: "/pizza-raw-materials",
+    name: "PizzaRawMaterial",
+    component: Pizza_raw_material,
+  },
+  {
+    path: "/pizza-raw-material/new",
+    name: "NuevaMateriaPrima",
+    component: NewPizza_raw_material,
+  },
+  {
+    path: "/pizza-raw-material/:id/edit",
+    name: "EditarMateriaPrima",
+    component: Editpizza_raw_material,
+  },
+
+  {
+    path: "/purchases",
+    name: "Purchases",
+    component: PurchasesView,
+  },
+  {
+    path: "/purchases/new",
+    name: "NewPurchase",
+    component: NewPurchase,
+  },
+  {
+    path: "/purchases/:id/edit",
+    name: "EditPurchase",
+    component: EditPurchase,
+  },
+  { path: "/register", name: "register", component: RegisterView },
 ];
 
 const router = createRouter({
@@ -260,23 +369,28 @@ router.beforeEach((to, from, next) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const isAuthenticated = !!user;
 
-  // Rutas públicas (login, etc)
-  const publicPages = ["login", "about"];
-  const authRequired = !publicPages.includes(to.name);
+  // Rutas públicas que no requieren login
+  const publicPaths = ["/login", "/register", "/about"];
+  const isPublic = publicPaths.includes(to.path);
+  const isLoginOrRegister = ["login", "register"].includes(to.name);
 
-  if (authRequired && !isAuthenticated) {
-    return next({ name: "login" });
+  // Si no está autenticado y la ruta no es pública → redirigir al login
+  if (!isAuthenticated && !isPublic) {
+    return next("/login");
   }
 
-  // Ejemplo rol (si tienes rol en user)
+  // Si está autenticado y va a login o register → redirigir al home
+  if (isAuthenticated && isLoginOrRegister) {
+    return next("/");
+  }
+
+  // Si se requiere admin y el usuario no lo es → redirigir al home
   if (to.meta.requiresAdmin && (!user || !user.isAdmin)) {
-    return next({ name: "home" }); // o página "no autorizado"
+    return next("/");
   }
 
-  if (to.name === "login" && isAuthenticated) {
-    return next({ name: "home" });
-  }
-
+  // Continuar navegación
   next();
 });
+
 export default router;

@@ -1,13 +1,13 @@
 <template>
   <div class="container text-start">
-    <h1 class="text-danger fw-bold">Nuevo Ingrediente</h1>
+    <h1 class="text-danger fw-bold">{{ $t("ingredients.new") }}</h1>
     <div class="card">
-      <div class="card-header fw-bold">Formulario de Registro</div>
+      <div class="card-header fw-bold">{{ $t("ingredients.form_register_title") }}</div>
       <div class="card-body">
         <form @submit.prevent="saveIngredient">
           <!-- Nombre del Ingrediente -->
           <div class="mb-3">
-            <label for="name" class="form-label">Nombre</label>
+            <label for="name" class="form-label">{{ $t("ingredients.name") }}</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="tags" />
@@ -37,10 +37,10 @@
               v-if="loading"
               class="spinner-border spinner-border-sm me-1"
             ></span>
-            {{ loading ? "Guardando..." : "Guardar" }}
+            {{ loading ? $t("ingredients.saving") : $t("ingredients.save") }}
           </button>
           <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            Cancelar
+            {{ $t("ingredients.cancel") }}
           </button>
         </form>
       </div>
@@ -84,7 +84,7 @@ export default {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Ingrediente creado correctamente",
+          title: this.$t("ingredients.created_success"),
           showConfirmButton: false,
           timer: 2000,
         });
@@ -95,8 +95,8 @@ export default {
         } else {
           Swal.fire({
             icon: "error",
-            title: "Error",
-            text: "No se pudo crear el ingrediente.",
+            title: this.$t("alerts.error"),
+            text: this.$t("ingredients.create_error"),
           });
           console.error("Error creating ingredient:", error);
         }

@@ -1,37 +1,27 @@
 <template>
   <div class="container py-4">
-    <h1 class="text-danger fw-bold mb-4">Editar Pizza</h1>
+    <h1 class="text-danger fw-bold mb-4">{{ $t("pizzas.editTitle") }}</h1>
     <div class="card shadow-sm rounded">
-      <div class="card-header fw-bold">Datos de la Pizza</div>
+      <div class="card-header fw-bold">{{ $t("pizzas.dataTitle") }}</div>
       <div class="card-body">
         <form @submit.prevent="updatePizza">
-          <!-- Nombre -->
           <div class="mb-3">
-            <label for="name" class="form-label">Nombre de la Pizza</label>
+            <label for="name" class="form-label">{{ $t("pizzas.name") }}</label>
             <input
               type="text"
               id="name"
               v-model="form.name"
               class="form-control"
               required
-              placeholder="Ingrese el nuevo nombre de la pizza"
+              :placeholder="$t('pizzas.namePlaceholder')"
             />
           </div>
 
-          <!-- Botones -->
-          <button
-            type="submit"
-            class="btn text-white"
-            style="background-color: #c1121f"
-          >
-            Actualizar
+          <button type="submit" class="btn btn-danger">
+            {{ $t("buttons.update") }}
           </button>
-          <button
-            type="button"
-            class="btn btn-secondary ms-2"
-            @click="cancelEdit"
-          >
-            Cancelar
+          <button type="button" class="btn btn-secondary ms-2" @click="cancelEdit">
+            {{ $t("buttons.cancel") }}
           </button>
         </form>
       </div>
@@ -52,6 +42,9 @@ export default {
       },
     };
   },
+  mounted() {
+    this.fetchPizza();
+  },
   methods: {
     fetchPizza() {
       const id = this.$route.params.id;
@@ -61,7 +54,7 @@ export default {
           this.form.name = response.data.name;
         })
         .catch(() => {
-          Swal.fire("Error", "Pizza no encontrada", "error");
+          Swal.fire(this.$t("alerts.error"), this.$t("pizzas.loadError"), "error");
           this.$router.push({ name: "Pizzas" });
         });
     },
@@ -70,31 +63,20 @@ export default {
       axios
         .put(`http://127.0.0.1:8000/api/pizzas/${id}`, this.form)
         .then(() => {
-          Swal.fire(
-            "Actualizado",
-            "La pizza se ha actualizado correctamente.",
-            "success"
-          );
+          Swal.fire(this.$t("alerts.updated"), this.$t("pizzas.updatedSuccess"), "success");
           this.$router.push({ name: "Pizzas" });
         })
         .catch((error) => {
           if (error.response && error.response.status === 400) {
-            Swal.fire(
-              "Error",
-              "El nombre ya está en uso o es inválido.",
-              "error"
-            );
+            Swal.fire(this.$t("alerts.error"), this.$t("pizzas.errorNameInvalid"), "error");
           } else {
-            Swal.fire("Error", "Error al actualizar la pizza.", "error");
+            Swal.fire(this.$t("alerts.error"), this.$t("pizzas.updateError"), "error");
           }
         });
     },
     cancelEdit() {
       this.$router.push({ name: "Pizzas" });
     },
-  },
-  mounted() {
-    this.fetchPizza();
   },
 };
 </script>
