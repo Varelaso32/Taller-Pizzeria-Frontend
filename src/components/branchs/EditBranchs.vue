@@ -5,11 +5,8 @@
       <div class="card-header fw-bold">{{ $t("branches.form_title") }}</div>
       <div class="card-body">
         <form @submit.prevent="updateBranch">
-          <!-- Nombre -->
           <div class="mb-3">
-            <label for="name" class="form-label"
-              >{{ $t("branches.name") }}:</label
-            >
+            <label for="name" class="form-label">{{ $t("branches.name") }}:</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="building" />
@@ -24,11 +21,8 @@
             </div>
           </div>
 
-          <!-- Dirección -->
           <div class="mb-3">
-            <label for="address" class="form-label"
-              >{{ $t("branches.address") }}:</label
-            >
+            <label for="address" class="form-label">{{ $t("branches.address") }}:</label>
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="map-marker-alt" />
@@ -43,12 +37,7 @@
             </div>
           </div>
 
-          <!-- Botones -->
-          <button
-            type="submit"
-            class="btn text-white"
-            style="background-color: #c1121f"
-          >
+          <button type="submit" class="btn text-white" style="background-color: #c1121f">
             {{ $t("branches.save") }}
           </button>
           <button type="button" class="btn btn-secondary ms-2" @click="cancel">
@@ -80,7 +69,7 @@ export default {
       try {
         const res = await axios.get(`http://127.0.0.1:8000/api/branchs/${id}`);
         this.branch = res.data;
-      } catch (error) {
+      } catch {
         Swal.fire({
           icon: "error",
           title: "Error",
@@ -102,8 +91,7 @@ export default {
         });
         this.$router.push({ name: "Branchs" });
       } catch (error) {
-        const msg =
-          error.response?.data?.msg || this.$t("branches.update_error");
+        const msg = error.response?.data?.msg || this.$t("branches.update_error");
         Swal.fire({
           icon: "error",
           title: "Error",

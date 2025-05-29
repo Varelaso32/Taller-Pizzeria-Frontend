@@ -565,4 +565,22 @@ export default {
   editHeader: "Formulario de Edición",
   editSaveButton: "Guardar Cambios"
 },
+branches: {
+    title: "Sucursales",
+    actions: "Acciones",
+    no_records: "No hay sucursales registradas.",
+    edit: "Editar Sucursal",
+    new: "Nueva Sucursal",
+    form_title: "Formulario de Sucursal",
+    name: "Nombre",
+    address: "Dirección",
+    save: "Guardar",
+    cancel: "Cancelar",
+    load_error: "Error al cargar la sucursal.",
+    updated_success: "Sucursal actualizada correctamente.",
+    update_error: "Error al actualizar la sucursal.",
+    created_success: "Sucursal creada correctamente.",
+    create_error: "Error al crear la sucursal.",
+  },
+
 };

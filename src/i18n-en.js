@@ -585,5 +585,22 @@ export default {
   editTitle: "Edit Extra Ingredient",
   editHeader: "Edit Form",
   editSaveButton: "Save Changes"
-}
+},
+branches: {
+    title: "Branches",
+    actions: "Actions",
+    no_records: "No branches registered.",
+    edit: "Edit Branch",
+    new: "New Branch",
+    form_title: "Branch Form",
+    name: "Name",
+    address: "Address",
+    save: "Save",
+    cancel: "Cancel",
+    load_error: "Failed to load branch.",
+    updated_success: "Branch updated successfully.",
+    update_error: "Error updating branch.",
+    created_success: "Branch created successfully.",
+    create_error: "Error creating branch.",
+  },
 };
