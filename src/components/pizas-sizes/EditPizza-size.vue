@@ -74,7 +74,7 @@ export default {
       } catch (error) {
         console.error("Error loading pizza size:", error);
         Swal.fire(this.$t("alerts.error"), this.$t("pizzaSizes.loadError"), "error");
-        this.$router.push({ name: "PizzaSizes" });
+        this.$router.push({ name: "Pizza-Sizes" });
       }
     },
     async fetchPizzas() {
@@ -91,14 +91,14 @@ export default {
       try {
         await axios.put(`http://127.0.0.1:8000/api/pizza-sizes/${id}`, this.form);
         Swal.fire(this.$t("pizzaSizes.updated"), this.$t("pizzaSizes.updatedMsg"), "success");
-        this.$router.push({ name: "PizzaSizes" });
+        this.$router.push({ name: "Pizza-Sizes" });
       } catch (error) {
         console.error("Error updating pizza size:", error);
         Swal.fire(this.$t("alerts.error"), this.$t("pizzaSizes.updateError"), "error");
       }
     },
     cancelEdit() {
-      this.$router.push({ name: "PizzaSizes" });
+      this.$router.push({ name: "Pizza-Sizes" });
     },
   },
   mounted() {
