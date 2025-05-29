@@ -1,15 +1,14 @@
 <template>
   <div class="container text-start py-4">
     <h1 class="h3 text-danger fw-bold mb-4">
-      Editar Ingrediente Extra por Orden
+      {{ $t("orderExtra.editTitle") }}
     </h1>
     <div class="card shadow rounded">
-      <div class="card-header fw-bold">Formulario de Edición</div>
+      <div class="card-header fw-bold">{{ $t("orderExtra.editFormTitle") }}</div>
       <div class="card-body">
         <form @submit.prevent="updateOrderExtra">
-          <!-- Orden -->
           <div class="mb-3">
-            <label for="order_id" class="form-label">Orden</label>
+            <label for="order_id" class="form-label">{{ $t("orderExtra.orderLabel") }}</label>
             <select
               id="order_id"
               v-model="orderExtra.order_id"
@@ -22,11 +21,8 @@
             </select>
           </div>
 
-          <!-- Ingrediente Extra -->
           <div class="mb-3">
-            <label for="extra_ingredient_id" class="form-label"
-              >Ingrediente Extra</label
-            >
+            <label for="extra_ingredient_id" class="form-label">{{ $t("orderExtra.extraIngredientLabel") }}</label>
             <select
               id="extra_ingredient_id"
               v-model="orderExtra.extra_ingredient_id"
@@ -39,9 +35,8 @@
             </select>
           </div>
 
-          <!-- Cantidad -->
           <div class="mb-3">
-            <label for="quantity" class="form-label">Cantidad</label>
+            <label for="quantity" class="form-label">{{ $t("orderExtra.quantityLabel") }}</label>
             <input
               type="number"
               id="quantity"
@@ -52,7 +47,6 @@
             />
           </div>
 
-          <!-- Botones -->
           <div class="d-flex justify-content-start mt-4">
             <button
               type="submit"
@@ -64,7 +58,7 @@
                 v-if="loading"
                 class="spinner-border spinner-border-sm me-1"
               ></span>
-              {{ loading ? "Guardando..." : "Guardar Cambios" }}
+              {{ loading ? $t("orderExtra.saving") : $t("orderExtra.saveChanges") }}
             </button>
             <button
               type="button"
@@ -72,7 +66,7 @@
               @click="cancel"
               :disabled="loading"
             >
-              Cancelar
+              {{ $t("orderExtra.cancel") }}
             </button>
           </div>
         </form>
@@ -107,34 +101,28 @@ export default {
       try {
         const res = await axios.get("http://127.0.0.1:8000/api/orders");
         this.orders = res.data;
-      } catch (error) {
-        console.error("Error al obtener órdenes:", error);
+      } catch {
         this.orders = [];
       }
     },
     async fetchExtras() {
       try {
-        const res = await axios.get(
-          "http://127.0.0.1:8000/api/extra_ingredients"
-        );
+        const res = await axios.get("http://127.0.0.1:8000/api/extra_ingredients");
         this.extras = res.data;
-      } catch (error) {
-        console.error("Error al obtener ingredientes extra:", error);
+      } catch {
         this.extras = [];
       }
     },
     async fetchOrderExtra() {
       const id = this.$route.params.id;
       try {
-        const res = await axios.get(
-          `http://127.0.0.1:8000/api/order_extra_ingredients/${id}`
-        );
+        const res = await axios.get(`http://127.0.0.1:8000/api/order_extra_ingredients/${id}`);
         this.orderExtra = res.data;
-      } catch (error) {
+      } catch {
         Swal.fire({
           icon: "error",
-          title: "Error",
-          text: "No se pudo cargar el ingrediente extra.",
+          title: this.$t("orderExtra.editTitle"),
+          text: this.$t("orderExtra.updateError"),
         });
         this.$router.push({ name: "Order_extra" });
       }
@@ -143,26 +131,23 @@ export default {
       this.loading = true;
       const id = this.$route.params.id;
       try {
-        await axios.put(
-          `http://127.0.0.1:8000/api/order_extra_ingredients/${id}`,
-          this.orderExtra
-        );
+        await axios.put(`http://127.0.0.1:8000/api/order_extra_ingredients/${id}`, this.orderExtra);
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Ingrediente extra actualizado correctamente",
+          title: this.$t("orderExtra.updateSuccess"),
           showConfirmButton: false,
           timer: 2000,
         });
         this.$router.push({ name: "Order_extra" });
       } catch (error) {
-        let errorMsg = "No se pudo actualizar el ingrediente extra.";
+        let errorMsg = this.$t("orderExtra.updateError");
         if (error.response?.data?.msg) {
           errorMsg = error.response.data.msg;
         }
         Swal.fire({
           icon: "error",
-          title: "Error",
+          title: this.$t("orderExtra.editTitle"),
           text: errorMsg,
         });
       } finally {
