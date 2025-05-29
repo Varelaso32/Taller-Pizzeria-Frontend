@@ -416,5 +416,37 @@ export default {
     deleted: "Pizza por orden eliminada exitosamente.",
     deleteError: "No se pudo eliminar la pizza por orden.",
     confirmDelete: "¿Estás seguro de que deseas eliminar esta pizza por orden?",
-  }
+  },
+   orderExtra: {
+    title: "Ingredientes Extra por Orden",
+    newButton: "Nuevo Ingrediente Extra",
+    table: {
+      order: "Orden",
+      client: "Cliente",
+      extraIngredient: "Ingrediente Extra",
+      quantity: "Cantidad",
+      actions: "Acciones",
+      noRecords: "No hay ingredientes extra registrados.",
+    },
+    confirmDeleteTitle: "¿Deseas eliminar el ingrediente extra con ID {id}?",
+    deletedSuccess: "¡Eliminado! El ingrediente extra fue eliminado.",
+    deleteError: "No se pudo eliminar el registro.",
+
+    editTitle: "Editar Ingrediente Extra por Orden",
+    editFormTitle: "Formulario de Edición",
+    orderLabel: "Orden",
+    extraIngredientLabel: "Ingrediente Extra",
+    quantityLabel: "Cantidad",
+    saveChanges: "Guardar Cambios",
+    saving: "Guardando...",
+    cancel: "Cancelar",
+    updateSuccess: "Ingrediente extra actualizado correctamente",
+    updateError: "No se pudo actualizar el ingrediente extra.",
+
+    newTitle: "Nuevo Ingrediente Extra por Orden",
+    newFormTitle: "Formulario de Registro",
+    save: "Guardar",
+    createSuccess: "Ingrediente extra creado correctamente",
+    createError: "No se pudo crear el ingrediente extra.",
+  },
 };

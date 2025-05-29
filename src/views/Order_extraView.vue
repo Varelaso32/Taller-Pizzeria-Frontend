@@ -3,14 +3,14 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="h3 text-danger">
         <font-awesome-icon icon="pepper-hot" class="me-2" />
-        Ingredientes Extra por Orden
+        {{ $t("orderExtra.title") }}
       </h1>
       <button
         @click="newOrderExtra"
         class="btn btn-danger d-flex align-items-center"
       >
         <font-awesome-icon icon="plus" class="me-2" />
-        Nuevo Ingrediente Extra
+        {{ $t("orderExtra.newButton") }}
       </button>
     </div>
 
@@ -18,11 +18,11 @@
       <table class="table table-striped align-middle mb-0">
         <thead class="table-dark text-white">
           <tr>
-            <th>Orden</th>
-            <th>Cliente</th>
-            <th>Ingrediente Extra</th>
-            <th>Cantidad</th>
-            <th class="text-center">Acciones</th>
+            <th>{{ $t("orderExtra.table.order") }}</th>
+            <th>{{ $t("orderExtra.table.client") }}</th>
+            <th>{{ $t("orderExtra.table.extraIngredient") }}</th>
+            <th>{{ $t("orderExtra.table.quantity") }}</th>
+            <th class="text-center">{{ $t("orderExtra.table.actions") }}</th>
           </tr>
         </thead>
         <tbody>
@@ -48,7 +48,7 @@
           </tr>
           <tr v-if="orderExtras.length === 0">
             <td colspan="6" class="text-center py-4 text-muted">
-              No hay ingredientes extra registrados.
+              {{ $t("orderExtra.table.noRecords") }}
             </td>
           </tr>
         </tbody>
@@ -62,7 +62,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export default {
-  name: "Order_extra",
+  name: "OrderExtra",
   data() {
     return {
       orderExtras: [],
@@ -81,27 +81,26 @@ export default {
     },
     deleteOrderExtra(id) {
       Swal.fire({
-        title: `¿Deseas eliminar el ingrediente extra con ID ${id}?`,
+        title: this.$t("orderExtra.confirmDeleteTitle", { id }),
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Eliminar",
-        cancelButtonText: "Cancelar",
+        confirmButtonText: this.$t("orderExtra.table.actions").toLowerCase() === 'eliminar' ? 'Eliminar' : 'Delete',
+        cancelButtonText: this.$t("orderExtra.cancel"),
         confirmButtonColor: "#c1121f",
       }).then((result) => {
         if (result.isConfirmed) {
           axios
             .delete(`http://127.0.0.1:8000/api/order_extra_ingredients/${id}`)
-            .then((response) => {
+            .then(() => {
               Swal.fire(
-                "¡Eliminado!",
-                "El ingrediente extra fue eliminado.",
+                this.$t("orderExtra.deletedSuccess"),
+                "",
                 "success"
               );
-              this.orderExtras = response.data;
+              this.fetchOrderExtras();
             })
-            .catch((error) => {
-              console.error("Error al eliminar:", error);
-              Swal.fire("Error", "No se pudo eliminar el registro.", "error");
+            .catch(() => {
+              Swal.fire("Error", this.$t("orderExtra.deleteError"), "error");
             });
         }
       });

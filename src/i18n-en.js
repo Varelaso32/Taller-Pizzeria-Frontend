@@ -437,5 +437,37 @@ export default {
     deleted: "Order pizza successfully deleted.",
     deleteError: "Failed to delete order pizza.",
     confirmDelete: "Are you sure you want to delete this order pizza?",
-  }
+  },
+  orderExtra: {
+    title: "Extra Ingredients per Order",
+    newButton: "New Extra Ingredient",
+    table: {
+      order: "Order",
+      client: "Client",
+      extraIngredient: "Extra Ingredient",
+      quantity: "Quantity",
+      actions: "Actions",
+      noRecords: "No extra ingredients registered.",
+    },
+    confirmDeleteTitle: "Do you want to delete the extra ingredient with ID {id}?",
+    deletedSuccess: "Deleted! The extra ingredient was removed.",
+    deleteError: "Could not delete the record.",
+
+    editTitle: "Edit Extra Ingredient per Order",
+    editFormTitle: "Edit Form",
+    orderLabel: "Order",
+    extraIngredientLabel: "Extra Ingredient",
+    quantityLabel: "Quantity",
+    saveChanges: "Save Changes",
+    saving: "Saving...",
+    cancel: "Cancel",
+    updateSuccess: "Extra ingredient updated successfully",
+    updateError: "Could not update the extra ingredient.",
+
+    newTitle: "New Extra Ingredient per Order",
+    newFormTitle: "Registration Form",
+    save: "Save",
+    createSuccess: "Extra ingredient created successfully",
+    createError: "Could not create the extra ingredient.",
+  },
 };
