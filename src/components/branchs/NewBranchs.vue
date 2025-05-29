@@ -1,13 +1,15 @@
 <template>
   <div class="container text-start">
-    <h1 class="text-success fw-bold mb-4">Nueva Sucursal</h1>
+    <h1 class="text-success fw-bold">{{ $t("branches.new") }}</h1>
     <div class="card">
-      <div class="card-header fw-bold">Datos de la Sucursal</div>
+      <div class="card-header fw-bold">{{ $t("branches.form_title") }}</div>
       <div class="card-body">
         <form @submit.prevent="createBranch">
           <!-- Nombre -->
           <div class="mb-3">
-            <label for="name" class="form-label">Nombre:</label>
+            <label for="name" class="form-label"
+              >{{ $t("branches.name") }}:</label
+            >
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="building" />
@@ -24,7 +26,9 @@
 
           <!-- Dirección -->
           <div class="mb-3">
-            <label for="address" class="form-label">Dirección:</label>
+            <label for="address" class="form-label"
+              >{{ $t("branches.address") }}:</label
+            >
             <div class="input-group">
               <span class="input-group-text">
                 <font-awesome-icon icon="map-marker-alt" />
@@ -45,10 +49,10 @@
             class="btn text-white"
             style="background-color: #2b9348"
           >
-            Guardar
+            {{ $t("branches.save") }}
           </button>
           <button type="button" class="btn btn-secondary ms-2" @click="cancel">
-            Cancelar
+            {{ $t("branches.cancel") }}
           </button>
         </form>
       </div>
@@ -59,13 +63,9 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 export default {
   name: "CrearBranch",
-  components: {
-    FontAwesomeIcon,
-  },
   data() {
     return {
       branch: {
@@ -77,20 +77,18 @@ export default {
   methods: {
     async createBranch() {
       try {
-        await axios.post("http://127.0.0.1:8000/api/branches", this.branch);
+        await axios.post("http://127.0.0.1:8000/api/branchs", this.branch);
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Sucursal creada exitosamente",
+          title: this.$t("branches.created_success"),
           showConfirmButton: false,
           timer: 2000,
         });
-        this.$router.push({ name: "Branches" });
+        this.$router.push({ name: "Branchs" });
       } catch (error) {
-        let msg = "Error al crear la sucursal.";
-        if (error.response?.data?.msg) {
-          msg = error.response.data.msg;
-        }
+        const msg =
+          error.response?.data?.msg || this.$t("branches.create_error");
         Swal.fire({
           icon: "error",
           title: "Error",
@@ -99,7 +97,7 @@ export default {
       }
     },
     cancel() {
-      this.$router.push({ name: "Branches" });
+      this.$router.push({ name: "Branchs" });
     },
   },
 };

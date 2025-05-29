@@ -201,15 +201,14 @@ const routes = [
     name: "Branchs",
     component: BranchsView,
   },
-
   {
     path: "/branchs/new",
     name: "BranchsNew",
     component: NewBranchs,
   },
   {
-    path: "/branchs/edit",
-    name: "BranchsEdit",
+    path: "/branchs/:id/edit",
+    name: "EditarBranch",
     component: EditBranchs,
   },
 
