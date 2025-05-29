@@ -3,56 +3,45 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="h3 text-danger">
         <font-awesome-icon icon="pizza-slice" class="me-2" />
-        Pizzas por Orden
+        {{ $t("orderPizza.title") }}
       </h1>
-      <button
-        @click="newOrderPizza"
-        class="btn btn-danger d-flex align-items-center"
-      >
+      <button @click="newOrderPizza" class="btn btn-danger d-flex align-items-center">
         <font-awesome-icon icon="plus" class="me-2" />
-        Agregar Pizza a Orden
+        {{ $t("orderPizza.create") }}
       </button>
     </div>
 
     <div class="table-responsive shadow-sm rounded bg-white">
-      <table class="table table-bordered align-middle mb-0">
+      <table class="table table-striped align-middle mb-0">
         <thead class="table-dark text-white">
           <tr>
             <th>ID</th>
-            <th>Orden</th>
-            <th>Precio Unitario</th>
-            <th>Cantidad</th>
-            <th>Fecha de creación</th>
-            <th class="text-center">Acciones</th>
+            <th>{{ $t("orderPizza.order") }}</th>
+            <th>{{ $t("orderPizza.unitPrice") }}</th>
+            <th>{{ $t("orderPizza.quantity") }}</th>
+            <th>{{ $t("orderPizza.createdAt") }}</th>
+            <th class="text-center">{{ $t("orderPizza.actions") }}</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in orderPizzas" :key="item.id">
-            <td>{{ item.id }}</td>
-            <td>{{ item.order_id }}</td>
-            <td>${{ Number(item.pizza_size_price).toFixed(2) }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.created_at }}</td>
+          <tr v-for="pizza in pizzas" :key="pizza.id">
+            <th scope="row">{{ pizza.id }}</th>
+            <td>{{ pizza.order_id }}</td>
+            <td>{{ pizza.pizza_size_price }}</td>
+            <td>{{ pizza.quantity }}</td>
+            <td>{{ pizza.created_at }}</td>
             <td class="text-center">
-              <button
-                @click="editOrderPizza(item.id)"
-                class="btn btn-sm btn-warning me-2"
-                title="Editar"
-              >
+              <button @click="editOrderPizza(pizza.id)" class="btn btn-sm btn-warning me-2">
                 <font-awesome-icon icon="pencil" />
               </button>
-              <button
-                @click="deleteOrderPizza(item.id)"
-                class="btn btn-sm btn-danger"
-                title="Eliminar"
-              >
+              <button @click="deleteOrderPizza(pizza.id)" class="btn btn-sm btn-danger">
                 <font-awesome-icon icon="trash" />
               </button>
             </td>
           </tr>
-          <tr v-if="orderPizzas.length === 0">
+          <tr v-if="pizzas.length === 0">
             <td colspan="6" class="text-center py-4 text-muted">
-              No hay registros de pizzas en órdenes.
+              {{ $t("orderPizza.noData") }}
             </td>
           </tr>
         </tbody>
@@ -64,70 +53,56 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faPizzaSlice,
-  faPlus,
-  faPencil,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
-
-library.add(faPizzaSlice, faPlus, faPencil, faTrash);
 
 export default {
   name: "OrderPizzaView",
   data() {
     return {
-      orderPizzas: [],
+      pizzas: [],
     };
   },
   methods: {
-    fetchOrderPizzas() {
+    fetchPizzas() {
       axios
         .get("http://127.0.0.1:8000/api/order_pizzas")
         .then((res) => {
-          this.orderPizzas = res.data;
+          this.pizzas = res.data;
         })
         .catch((err) => {
-          console.error("Error al obtener las pizzas por orden:", err);
+          console.error("Error loading pizzas:", err);
         });
     },
     deleteOrderPizza(id) {
       Swal.fire({
-        title: `¿Eliminar pizza en orden con ID ${id}?`,
+        title: this.$t("orderPizza.confirmDelete"),
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Eliminar",
-        cancelButtonText: "Cancelar",
+        confirmButtonText: this.$t("orderPizza.delete"),
+        cancelButtonText: this.$t("orderPizza.cancel"),
         confirmButtonColor: "#c1121f",
       }).then((result) => {
         if (result.isConfirmed) {
           axios
             .delete(`http://127.0.0.1:8000/api/order_pizzas/${id}`)
-            .then((res) => {
-              this.orderPizzas = res.data;
-              Swal.fire(
-                "Eliminado",
-                "Pizza eliminada correctamente.",
-                "success"
-              );
+            .then(() => {
+              Swal.fire(this.$t("orderPizza.deleted"), "", "success");
+              this.fetchPizzas();
             })
-            .catch((error) => {
-              console.error("Error al eliminar:", error);
-              Swal.fire("Error", "No se pudo eliminar el registro.", "error");
+            .catch(() => {
+              Swal.fire(this.$t("orderPizza.deleteError"), "", "error");
             });
         }
       });
     },
     editOrderPizza(id) {
-      this.$router.push({ name: "EditOrderPizza", params: { id: `${id}` } });
+      this.$router.push({ name: "EditOrderPizza", params: { id } });
     },
     newOrderPizza() {
       this.$router.push({ name: "NewOrderPizza" });
     },
   },
   mounted() {
-    this.fetchOrderPizzas();
+    this.fetchPizzas();
   },
 };
 </script>
