@@ -540,4 +540,29 @@ export default {
   error: {
     title: "Error",
   },
+  extraIngredient: {
+  title: "Ingredientes Extras",
+  new: "Nuevo Ingrediente Extra",
+  name: "Nombre",
+  price: "Precio",
+  actions: "Acciones",
+  noExtraIngredients: "No hay ingredientes extras disponibles.",
+  header: "Formulario de Nuevo Ingrediente Extra",
+  saveSuccess: "Ingrediente extra creado correctamente",
+  updateSuccess: "Ingrediente extra actualizado correctamente",
+  deleteConfirm: "¿Deseas eliminar el ingrediente extra con ID {id}?",
+  deleteSuccess: "El ingrediente extra ha sido eliminado.",
+  deleteError: "No se pudo eliminar el ingrediente extra.",
+  createError: "No se pudo crear el ingrediente extra.",
+  updateError: "No se pudo actualizar el ingrediente extra.",
+  loadError: "No se pudo cargar el ingrediente extra.",
+  buttons: {
+    save: "Guardar",
+    cancel: "Cancelar",
+    delete: "Eliminar",
+  },
+  editTitle: "Editar Ingrediente Extra",
+  editHeader: "Formulario de Edición",
+  editSaveButton: "Guardar Cambios"
+},
 };

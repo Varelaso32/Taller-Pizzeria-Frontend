@@ -561,4 +561,29 @@ export default {
   error: {
     title: "Error",
   },
+  extraIngredient: {
+  title: "Extra Ingredients",
+  new: "New Extra Ingredient",
+  name: "Name",
+  price: "Price",
+  actions: "Actions",
+  noExtraIngredients: "No extra ingredients available.",
+  header: "New Extra Ingredient Form",
+  saveSuccess: "Extra ingredient created successfully",
+  updateSuccess: "Extra ingredient updated successfully",
+  deleteConfirm: "Do you want to delete the extra ingredient with ID {id}?",
+  deleteSuccess: "The extra ingredient has been deleted.",
+  deleteError: "Could not delete the extra ingredient.",
+  createError: "Could not create the extra ingredient.",
+  updateError: "Could not update the extra ingredient.",
+  loadError: "Could not load the extra ingredient.",
+  buttons: {
+    save: "Save",
+    cancel: "Cancel",
+    delete: "Delete",
+  },
+  editTitle: "Edit Extra Ingredient",
+  editHeader: "Edit Form",
+  editSaveButton: "Save Changes"
+}
 };
