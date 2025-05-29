@@ -28,6 +28,8 @@ export default {
   },
   logout: "Cerrar sesión",
   logoutConfirm: "¿Estás seguro de que deseas cerrar sesión?",
+  branchs: "Sucursales",
+  extraIngre: "Extra Ingredientes",
   yesLogout: "Sí, cerrar sesión",
   cancel: "Cancelar",
   loggedOut: "Sesión cerrada exitosamente",
@@ -568,7 +570,7 @@ export default {
     },
     editTitle: "Editar Ingrediente Extra",
     editHeader: "Formulario de Edición",
-    editSaveButton: "Guardar Cambios"
+    editSaveButton: "Guardar Cambios",
   },
   branches: {
     title: "Sucursales",
@@ -587,5 +589,4 @@ export default {
     created_success: "Sucursal creada correctamente.",
     create_error: "Error al crear la sucursal.",
   },
-
 };

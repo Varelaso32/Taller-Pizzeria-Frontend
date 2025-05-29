@@ -26,6 +26,8 @@ export default {
     about: "About",
   },
   logout: "Log out",
+  extraIngre: "Extra Ingredients",
+  branchs: "Branches",
   logoutConfirm: "Are you sure you want to log out?",
   yesLogout: "Yes, log out",
   cancel: "Cancel",
